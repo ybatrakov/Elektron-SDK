@@ -1,0 +1,31 @@
+cmake_minimum_required (VERSION 3.8)
+
+set( SOURCE_FILES rsslAuthLock.c )
+
+if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+  add_executable( authlock_shared ${SOURCE_FILES} )
+endif()
+add_executable( authlock${STATIC_EXT} ${SOURCE_FILES} )
+
+include_directories( ${ETA_HOME}/Utils/Dacs/Include )
+
+if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
+  find_library( DACS dacs HINTS ${BINARY_PACK_LOCATION_DACS}/Optimized )
+  if ( NOT DACS )
+    message( FATAL_ERROR "library DACS not found " )
+  endif()
+  target_link_libraries( authlock ${DACS} )
+
+elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+  set( CMAKE_FIND_LIBRARY_PREFIXES "lib" )
+  find_library( DACS_DEBUG dacs HINTS ${BINARY_PACK_LOCATION_DACS}/Debug_MDd )
+  find_library( DACS_RELEASE dacs HINTS ${BINARY_PACK_LOCATION_DACS}/Release_MD )
+  if ( NOT DACS_DEBUG )
+    message( FATAL_ERROR "DACS_DEBUG not found" )
+  endif()
+  if ( NOT DACS_RELEASE )
+    message( FATAL_ERROR "DACS_RELEASE not found" )
+  endif()
+  target_link_libraries( authlock_static debug ${DACS_DEBUG} optimized ${DACS_RELEASE} )
+  target_link_libraries( authlock_shared debug ${DACS_DEBUG} optimized ${DACS_RELEASE} )
+endif()
