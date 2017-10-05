@@ -25,6 +25,9 @@ else()
   message( FATAL_ERROR "unsupported CMAKE_SYSTEM_NAME [${CMAKE_SYSTEM_NAME}]" )
 endif()
 
+# no RPATH for Linux
+set( CMAKE_SKIP_RPATH TRUE )
+
 set( EMA_HOME ${ESDK_SOURCE_DIR}/Ema )
 set( ETA_HOME ${ESDK_SOURCE_DIR}/Eta )
 
