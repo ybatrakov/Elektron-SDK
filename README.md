@@ -11,7 +11,7 @@ The branch is essentially a copy of the ESDK1.1.1 release with previous build fi
 	- 12 2013
 	- 11 2012
 	- 10 2010
-4. open Visual Studio and load Cpp-C/ESDK.sln. The build choices are Debug_MDd and Release_MD; both static and shared versions of the libraries and examples are built for each choice.
+4. open Visual Studio, load Cpp-C/ESDK.sln, and build the solution. The build choices are Debug_MDd and Release_MD; both static and shared versions of the libraries and examples are built for each choice.
 
 **To build Cpp/Linux:**
 
