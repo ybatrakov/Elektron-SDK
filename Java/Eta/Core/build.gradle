@@ -1,0 +1,66 @@
+apply plugin: 'net.saliman.cobertura'
+
+def package1 = 'etaj3.1.0.L1.all.rrg'
+def version = 'etaj3.1.0.L1'
+def vendor = 'Thomson Reuters'
+
+def jenkinsBuild = System.getenv("BUILD_NUMBER") ?: "0"
+
+cobertura {
+
+}
+
+dependencies {
+
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.1.2'
+	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.1.2'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient-cache', version: '4.1.2'
+
+	compile group: 'org.mockito', name: 'mockito-all', version: '1.9.0'
+
+	testCompile group: 'org.mockito', name: 'mockito-all', version: '1.9.0'
+}
+
+// ext is used to store project level properties
+// we can use this shared manifest
+ext.sharedManifest = manifest {
+	attributes( 'Sealed': 'true',
+		'Specification-Version': package1,
+		'Specification-Vendor': vendor,
+		'Implementation-Title': 'com.thomsonreuters.upa',
+		'Implementation-Version': version,
+		'Implementation-Vendor': vendor )
+}
+
+// NEED TO ADD THE DATE
+
+jar {
+	doFirst { println 'Creating UPA jar file' }
+
+	manifest { 
+		attributes 'Specification-Title': 'Elektron Transport API (ETA) Java Edition'
+		from sharedManifest 
+	}
+
+	from ('impl') 
+	{
+		include 'com/thomsonreuters/proxy/authentication/kerberos/login.conf'
+	}
+
+	baseName = 'upa'
+}
+
+
+artifacts {
+	archives jar
+}
+
+tasks.withType (Test) {
+        jvmArgs "-enableassertions"
+}
+
+test {
+	// set to tru to see the junit stdoutput
+        testLogging.showStandardStreams = false
+}
+
