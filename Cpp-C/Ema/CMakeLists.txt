@@ -6,7 +6,7 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Ema/executables)
 # windows. Supported builds include Debug_MDd, Release_MD
 # arguments from esdk dev build, except no RDEV args
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set( CMAKE_CXX_FLAGS "/MP /GS /W3 /Zc:wchar_t- /Z7 /Gm- /fp:precise /D WIN32 /D _LIB /D _iso_stdcpp_ /D _WIN32 /D _WIN32_WINNT=0x0501 /D WIN32_LEAN_AND_MEAN /D x86_WindowsNT_5X /D _CRT_SECURE_NO_WARNINGS /D _MBCS /WX- /Zc:forScope /Gd /Oi /EHsc /nologo  /D __EMA_COPY_ON_SET__  /D LIBXML_STATIC /D COMPILE_64BITS" )
+  set( CMAKE_CXX_FLAGS "/MP /GS /W3 /Zc:wchar_t- /Z7 /Gm- /fp:precise /D WIN32 /D _LIB /D _iso_stdcpp_ /D _WIN32 /D WIN32_LEAN_AND_MEAN /D x86_WindowsNT_5X /D _CRT_SECURE_NO_WARNINGS /D _MBCS /WX- /Zc:forScope /Gd /Oi /EHsc /nologo  /D __EMA_COPY_ON_SET__  /D LIBXML_STATIC /D COMPILE_64BITS" )
 
   set( "CMAKE_CXX_FLAGS_DEBUG_MDD" "${CMAKE_CXX_FLAGS} /Od /RTC1 /MDd " )
   set( "CMAKE_CXX_FLAGS_DEBUG_MDD_SHARED" "${CMAKE_CXX_FLAGS_DEBUG_MDD} /Gy- /Zi /D _WINDLL /openmp- /D EMA_LIBRARY_EXPORTS" )
