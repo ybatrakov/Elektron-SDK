@@ -36,8 +36,14 @@ jar {
 		from sharedManifest 
 	}
 
+        destinationDir = file("../Libs/")
         baseName = 'upaValueAddCache'
 }
+
+task cleanJar (type: Delete) {
+        delete "${jar.archivePath}"
+}
+clean.dependsOn cleanJar
 
 artifacts {
 	archives jar

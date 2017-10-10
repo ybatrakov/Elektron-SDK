@@ -47,9 +47,14 @@ jar {
 		include 'com/thomsonreuters/proxy/authentication/kerberos/login.conf'
 	}
 
+	destinationDir = file("../Libs/")
 	baseName = 'upa'
 }
 
+task cleanJar (type: Delete) {
+        delete "${jar.archivePath}"
+}
+clean.dependsOn cleanJar
 
 artifacts {
 	archives jar

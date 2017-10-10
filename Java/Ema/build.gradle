@@ -1,0 +1,3 @@
+// disable creating empty Ema.jar file 
+jar.enabled = false
+

@@ -41,12 +41,19 @@ jar {
 		from sharedManifest 
 	}
 
+        destinationDir = file("../Libs/")
 	baseName = 'ema'
 }
+
+task cleanJar (type: Delete) {
+        delete "${jar.archivePath}"
+}
+clean.dependsOn cleanJar
 
 tasks.withType (Test) {
         jvmArgs "-enableassertions"
 }
+
 
 test {
 	// exclude the utility class and the suite class

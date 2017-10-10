@@ -19,8 +19,14 @@ jar {
 
 	doFirst { println 'Creating ANSI jar file' }
 
+        destinationDir = file("../Libs/")
         baseName = 'ansipage'
 }
+
+task cleanJar (type: Delete) {
+        delete "${jar.archivePath}"
+}
+clean.dependsOn cleanJar
 
 artifacts {
 	archives jar
