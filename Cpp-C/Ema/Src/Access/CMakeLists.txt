@@ -2,13 +2,10 @@ cmake_minimum_required (VERSION 3.8)
 
 include(GenerateExportHeader)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Ema/Libs)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Ema/Libs)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Ema/Libs)
+set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${EMA_LIBS_OUTPUT_DIR} )
+set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${EMA_LIBS_OUTPUT_DIR} )
 
 include( cmake.emaLibraryFiles.txt )
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Ema/Libs)
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   add_library( libema_shared SHARED ${EmaSrcFiles} ${EmaHeaderFiles} )

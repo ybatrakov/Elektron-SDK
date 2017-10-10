@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 # output directory for examples
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Eta/executables)
+set ( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ETA_EXAMPLES_OUTPUT_DIR} )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   set( "CMAKE_SHARED_LINKER_FLAGS_DEBUG_MDD" ${CMAKE_SHARED_LINKER_FLAGS} )

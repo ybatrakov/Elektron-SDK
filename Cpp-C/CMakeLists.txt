@@ -17,6 +17,7 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     message( FATAL_ERROR " invalid build type [${CMAKE_BUILD_TYPE}]; allowed build types are ${CMAKE_CONFIGURATION_TYPES}" )
   endif()
 
+
 # windows build files are generated and will support the following config type
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   set( "CMAKE_CONFIGURATION_TYPES" "Debug_MDd" "Release_MD"  )
@@ -34,7 +35,7 @@ set( ETA_HOME ${ESDK_SOURCE_DIR}/Eta )
 message( STATUS "Cpp-C CMAKE_SYSTEM_NAME ${CMAKE_SYSTEM_NAME}" )
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   STRING( REGEX REPLACE "v" "WIN_64_VS" VSSTR "${CMAKE_VS_PLATFORM_TOOLSET}" )
-  set ( EXPECTED_BINARY_PACK_LOCATION_HINTS ../Elektron-SDK-BinaryPack/Cpp-C/Eta/Libs/${VSSTR} )
+  set( EXPECTED_BINARY_PACK_LOCATION_HINTS ../Elektron-SDK-BinaryPack/Cpp-C/Eta/Libs/${VSSTR} )
   set( EXPECTED_BINARY_PACK_LOCATION_HINTS_DACS ../Elektron-SDK-BinaryPack/Cpp-C/Eta/Utils/Dacs/Libs/${VSSTR} )
 
   # note: we had to look for some path in ${EXPECTED_BINARY_PACK_LOCATION_HINTS} so we selected Debug_MDd
@@ -104,6 +105,30 @@ elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   endif()			# CMAKE_SYSTEM_NAME == Linux
 else()
   message( FATAL_ERROR "need code to find binary pack" )
+endif()
+
+
+# location of Libs, Executables
+if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
+  string( REGEX MATCH "^.*/(.+)" UNUSED ${BINARY_PACK_LOCATION} )
+  set( OS_COMPILER ${CMAKE_MATCH_1} )
+  if ( CMAKE_BUILD_TYPE STREQUAL "OptimizedStatic" )
+    set( TYPE "Optimized" )
+  elseif ( CMAKE_BUILD_TYPE STREQUAL "OptimizedShared" )
+    set(  TYPE "Optimized/Shared" )
+  elseif ( CMAKE_BUILD_TYPE STREQUAL "DebugStatic" )
+    set(  TYPE "Debug" )
+  elseif ( CMAKE_BUILD_TYPE STREQUAL "DebugShared" )
+    set(  TYPE "Debug/Shared" )
+  endif()
+  SET( ETA_LIBS_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Eta/Libs/${OS_COMPILER}/${TYPE}" )
+  SET( ETA_EXAMPLES_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Eta/Executables/${OS_COMPILER}/${TYPE}" )
+  SET( EMA_LIBS_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Ema/Libs/${OS_COMPILER}/${TYPE}" )
+  SET( EMA_EXAMPLES_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Ema/Executables/${OS_COMPILER}/${TYPE}" )
+  message( STATUS "ETA_LIBS_OUTPUT_DIR: ${ETA_LIBS_OUTPUT_DIR}" )
+  message( STATUS "ETA_EXAMPLES_OUTPUT_DIR: ${ETA_EXAMPLES_OUTPUT_DIR}" )
+  message( STATUS "EMA_LIBS_OUTPUT_DIR: ${EMA_LIBS_OUTPUT_DIR}" )
+  message( STATUS "EMA_EXAMPLES_OUTPUT_DIR: ${EMA_EXAMPLES_OUTPUT_DIR}" )
 endif()
 
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )

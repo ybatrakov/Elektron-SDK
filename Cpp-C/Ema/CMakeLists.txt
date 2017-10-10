@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 # output directory for examples
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Ema/executables)
+set ( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR} )
 
 # windows. Supported builds include Debug_MDd, Release_MD
 # arguments from esdk dev build, except no RDEV args
