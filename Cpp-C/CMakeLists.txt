@@ -107,7 +107,6 @@ else()
   message( FATAL_ERROR "need code to find binary pack" )
 endif()
 
-
 # location of Libs, Executables
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   string( REGEX MATCH "^.*/(.+)" UNUSED ${BINARY_PACK_LOCATION} )
@@ -136,10 +135,24 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
       ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic" )
     find_library( RSSL_VACACHE rsslVACache HINTS ${BINARY_PACK_LOCATION}/Optimized )
     find_library( RSSL rssl HINTS ${BINARY_PACK_LOCATION}/Optimized )
+
   elseif ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedShared" OR
       ${CMAKE_BUILD_TYPE} STREQUAL "DebugShared" )
     find_library( RSSL_VACACHE rsslVACache HINTS ${BINARY_PACK_LOCATION}/Optimized/Shared )
     find_library( RSSL rssl HINTS ${BINARY_PACK_LOCATION}/Optimized/Shared )
+
+    # run LinuxSoLink from the binary pack so optimized builds will succeed
+    unset( LNKCMDPATH CACHE )
+    find_file( LNKCMDPATH name "LinuxSoLink" PATHS "${CMAKE_HOME_DIRECTORY}/../Elektron-SDK-BinaryPack/Cpp-C/Eta" NO_DEFAULT_PATH )
+    if ( LNKCMDPATH )
+      get_filename_component( LNKCMDDIR ${LNKCMDPATH} DIRECTORY )
+      execute_process( COMMAND ${LNKCMDPATH} WORKING_DIRECTORY ${LNKCMDDIR} RESULT_VARIABLE result OUTPUT_QUIET ERROR_QUIET )
+      if ( result )
+	message( FATAL_ERROR "script (${LNKCMDPATH}) that creates shared library links failed" )
+      endif()
+    else()
+      message( FATAL_ERROR "LinuxSoLink not found; cannot run script to create shared library links" )
+    endif()
   endif()
 
   set( MISSING_LIBRARIES "" )

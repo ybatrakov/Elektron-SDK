@@ -15,6 +15,12 @@
 **/bin
 **/Ema/Libs/ema*
 **/Eta/Libs
+**/Ema/Executables
+**/Eta/Executables
+**/DebugShared
+**/DebugStatic
+**/OptimizedShared
+**/OptimizedStatic
 **/refman
 
 
