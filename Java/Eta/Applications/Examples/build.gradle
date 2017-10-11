@@ -3,9 +3,10 @@ apply plugin: 'application'
 dependencies {
 	compile project(':Eta:AnsiPage')
 	compile project(':Eta:ValueAdd')
+	compile project(':Eta:ValueAddCache')
 	compile project(':Eta:Applications:Shared')
-	// Adding dependency on the jdacsUpalib.jar and upaValueAddCache.jar
-	compile fileTree(dir: '../../../../Elektron-SDK-BinaryPack/Java/Eta/Libs', include: '*.jar')
+	// Adding dependency on the jdacsUpalib.jar
+	compile fileTree(dir: '../../../../Elektron-SDK-BinaryPack/Java/Eta/Libs', include: 'jdacsUpalib.jar')
 }
 
 mainClassName = 'com.thomsonreuters.upa.examples.provider.Provider'
