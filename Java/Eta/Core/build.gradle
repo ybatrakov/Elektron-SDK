@@ -51,6 +51,26 @@ jar {
 	baseName = 'upa'
 }
 
+javadoc {
+        doFirst {
+                println "Generating javadoc for ETA"
+        }
+
+        destinationDir = new File('Eta/Docs/refman/upaj/')
+        title = "ETA JAVA " +  "${version}"
+
+        exclude '**/*Impl.java'
+        exclude '**/JUnit*.java'
+
+        options.footer ('<a href="http://about.reuters.com/developer" target=_top>Thomson Reuters</a>')
+        options.header ('<a href="http://about.reuters.com/developer" target=_top>Thomson Reuters</a>')
+
+        options.group ('Access', 'com.thomsonreuters.ema.access')
+        options.group ('RDM', 'com.thomsonreuters.ema.rdm')
+
+        options.setWindowTitle ('ETA')
+}
+
 task cleanJar (type: Delete) {
         delete "${jar.archivePath}"
 }
