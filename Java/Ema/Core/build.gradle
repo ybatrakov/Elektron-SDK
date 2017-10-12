@@ -48,6 +48,7 @@ jar {
 task cleanJar (type: Delete) {
         delete "${jar.archivePath}"
 }
+
 clean.dependsOn cleanJar
 
 tasks.withType (Test) {
@@ -68,7 +69,7 @@ javadoc {
 		println "Generating javadoc for EMA"
 	}
 
-	destinationDir = new File('Ema/Docs/refman/emajava/')
+	destinationDir = new File('../Docs/refman/emajava/')
 	title = "EMA JAVA " +  "${version}"
 
 	exclude '**/*Impl.java'
@@ -81,5 +82,16 @@ javadoc {
 	options.group ('RDM', 'com.thomsonreuters.ema.rdm')
 
 	options.setWindowTitle ('EMA')
+}
+
+task javadocJar (type: Jar, dependsOn: this.javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+	destinationDir = jar.destinationDir
+	archiveName = 'ema-javadoc.jar'
+}
+
+artifacts {
+	archives javadocJar
 }
 

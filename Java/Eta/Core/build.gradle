@@ -56,7 +56,7 @@ javadoc {
                 println "Generating javadoc for ETA"
         }
 
-        destinationDir = new File('Eta/Docs/refman/upaj/')
+        destinationDir = new File('../Docs/refman/upaj/')
         title = "ETA JAVA " +  "${version}"
 
         exclude '**/*Impl.java'
