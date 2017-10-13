@@ -87,5 +87,6 @@ tasks.withType (Test) {
 test {
 	// set to tru to see the junit stdoutput
         testLogging.showStandardStreams = false
+	maxParallelForks = Runtime.runtime.availableProcessors()
 }
 
