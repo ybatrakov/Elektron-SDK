@@ -90,3 +90,13 @@ $RECYCLE.BIN/
 
 #Mr Developer
 .mr.developer.cfg
+
+# cmake
+**/cmake_install.cmake
+**/CMakeFiles
+*.vcxproj
+*.vcxproj.filters
+*.sln
+CMakeCache.txt
+**/*_shared.dir
+**/*_static.dir
