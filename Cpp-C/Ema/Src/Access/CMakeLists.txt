@@ -4,6 +4,7 @@ include(GenerateExportHeader)
 
 set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${EMA_LIBS_OUTPUT_DIR} )
 set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${EMA_LIBS_OUTPUT_DIR} )
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${EMA_LIBS_OUTPUT_DIR} )
 
 include( cmake.emaLibraryFiles.txt )
 
@@ -45,13 +46,10 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
 
   add_library( libema_static ${EMA_HOME}/Src/Access/Impl/EmaStaticCombined.cpp )
   target_compile_options( libema_static PUBLIC "/D __EMA_STATIC_BUILD__" )
-  add_dependencies( libema_static librsslRDM librsslReactor librsslVAUtil )
+  add_dependencies( libema_static librsslRDM librsslReactor librsslVAUtil libxml2_static )
   add_custom_command ( TARGET libema_static POST_BUILD COMMAND
     COMMAND
-    if \"$(ConfigurationName)\"==\"Debug_MDd\"
-    ( ${_vs_bin_path}/lib.exe /IGNORE:4006 /OUT:$<TARGET_FILE:libema_static> /LTCG $<TARGET_FILE:libema_only_static> /LIBPATH:${ETA_HOME}/Libs/Debug_MDd librsslRDM.lib librsslReactor.lib librsslVAUtil.lib libxml2_static.lib /LIBPATH:${BINARY_PACK_LOCATION}/Debug_MDd librssl.lib librsslVACache.lib )
-    ELSE
-    ( ${_vs_bin_path}/lib.exe /IGNORE:4006 /OUT:$<TARGET_FILE:libema_static> /LTCG $<TARGET_FILE:libema_only_static> /LIBPATH:${ETA_HOME}/Libs/Release_MD librsslRDM.lib librsslReactor.lib librsslVAUtil.lib libxml2_static.lib /LIBPATH:${BINARY_PACK_LOCATION}/Release_MD librssl.lib librsslVACache.lib )
+    ( ${_vs_bin_path}/lib.exe /IGNORE:4006 /OUT:$<TARGET_FILE:libema_static> /LTCG $<TARGET_FILE:libema_only_static> /LIBPATH:${ETA_LIBS_OUTPUT_DIR}/$(Configuration) librsslRDM.lib librsslReactor.lib librsslVAUtil.lib libxml2_static.lib /LIBPATH:${BINARY_PACK_LOCATION}/$(Configuration) librssl.lib librsslVACache.lib )
   )
 
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )

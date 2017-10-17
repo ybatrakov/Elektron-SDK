@@ -2,6 +2,7 @@ cmake_minimum_required (VERSION 3.8)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ETA_LIBS_OUTPUT_DIR} )
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ETA_LIBS_OUTPUT_DIR} )
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ETA_LIBS_OUTPUT_DIR} )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /D WIN32_LEAN_AND_MEAN /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /Zc:wchar_t- /Gm- /O2 /Ob2 /Ot /wd\"4290\" /Gy /WX- /Gd /Oi /EHsc /nologo" )
@@ -72,8 +73,8 @@ set ( rsslVASrcFiles
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   add_library( librsslVA SHARED ${rsslVASrcFiles} )
+  #  for shared libraries, the .lib and .exp files go to ARCHIVE; the .dll files go to RUNTIME
   target_compile_options( librsslVA PUBLIC "/D RSSL_VA_EXPORTS" )
-
   target_link_libraries( librsslVA debug ${RSSL_DEBUG_SHARED} )
   target_link_libraries( librsslVA optimized ${RSSL_RELEASE_SHARED} )
   target_link_libraries( librsslVA wininet.lib ws2_32.lib )
