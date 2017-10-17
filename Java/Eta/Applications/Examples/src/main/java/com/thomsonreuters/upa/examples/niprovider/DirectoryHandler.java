@@ -111,9 +111,10 @@ public class DirectoryHandler
      * Sends a source directory refresh to a channel. This consists of getting a
      * message buffer, encoding the source directory refresh, sending the source
      * directory refresh to the server.
-     * 
+     *
      * @param chnl The channel to send a source directory refresh to.
      * @param error Populated if an error occurs.
+     * @return the int
      */
     public int sendRefresh(ChannelSession chnl, com.thomsonreuters.upa.transport.Error error)
     {
@@ -287,8 +288,10 @@ public class DirectoryHandler
 
     /**
      * Close the source directory stream.
-     * 
+     *
      * @param chnl The channel to send a source directory close to.
+     * @param error the error
+     * @return the int
      */
     public int closeStream(ChannelSession chnl, com.thomsonreuters.upa.transport.Error error)
     {

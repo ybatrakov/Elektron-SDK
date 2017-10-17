@@ -51,6 +51,12 @@ public class MarketPriceHandler
     protected FieldEntry fieldEntry = CodecFactory.createFieldEntry();
     private EncodeIterator encIter = CodecFactory.createEncodeIterator();
 
+    /**
+     * Instantiates a new market price handler.
+     *
+     * @param watchList the watch list
+     * @param dictionary the dictionary
+     */
     public MarketPriceHandler(StreamIdWatchList watchList, DataDictionary dictionary)
     {
         this(watchList, DomainTypes.MARKET_PRICE, dictionary);
@@ -233,8 +239,10 @@ public class MarketPriceHandler
     
     /**
      * Close all item streams.
-     * 
+     *
      * @param chnl The channel to send a item stream close to.
+     * @param error the error
+     * @return the int
      */
     public int closeStreams(ChannelSession chnl, Error error)
     {

@@ -36,6 +36,11 @@ public class ItemEncoder
     private XmlMsgData                  _xmlMsgData;            // XML file message data
     private Msg                         _tmpMsg;    
 
+	/**
+	 * Instantiates a new item encoder.
+	 *
+	 * @param msgData the msg data
+	 */
 	public ItemEncoder(XmlMsgData msgData)
 	{
 		_xmlMsgData = msgData;
@@ -49,11 +54,11 @@ public class ItemEncoder
 	
 	/**
 	 * Encodes a Post message for an item.
-	 * 
+	 *
 	 * @param channel - channel to encode post message for.
 	 * @param itemInfo - market data item to encode post message for.
 	 * @param msgBuf  - TransportBuffer to encode post message into.
-	 * @param postUserInfo 
+	 * @param postUserInfo the post user info
 	 * @param encodeStartTime - if &gt;0, this is a latency timestamp to be included in the post message.
 	 * @return &lt;0 if encoding fails, 0 otherwise.
 	 */
@@ -118,12 +123,12 @@ public class ItemEncoder
 	
     /**
      * Creates a Post message for an item.
-     * 
+     *
      * @param channel - channel to encode post message for.
      * @param itemInfo - market data item to encode post message for.
      * @param postMsg - PostMsg to create post message into.
      * @param postBuffer - buffer for UpdateMsg in encoded data body.
-     * @param postUserInfo 
+     * @param postUserInfo the post user info
      * @param encodeStartTime - if &gt;0, this is a latency timestamp to be included in the post message.
      * @return &lt;0 if encoding fails, 0 otherwise.
      */
@@ -385,11 +390,11 @@ public class ItemEncoder
     
     /**
      * Encodes a Update message for an item.
-     * 
+     *
      * @param channel - channel to encode update message for.
      * @param itemInfo - market data item to encode update message for.
      * @param msgBuf  - TransportBuffer to encode update message into.
-     * @param postUserInfo 
+     * @param postUserInfo the post user info
      * @param encodeStartTime - if &gt;0, this is a latency timestamp to be included in the update message.
      * @param error - detailed error information in case of encoding failures.
      * @return &lt;0 if encoding fails, 0 otherwise.
@@ -490,16 +495,16 @@ public class ItemEncoder
     
 
 	/**
-     * Encodes a Refresh message for an item.
-     * 
-     * @param channel - channel to encode refresh message for.
-     * @param itemInfo - market data item to encode refresh message for.
-     * @param msgBuf  - TransportBuffer to encode refresh message into.
-     * @param postUserInfo 
-     * @param encodeStartTime - if &gt;0, this is a latency timestamp to be included in the refresh message.
-     * @param error - detailed error information in case of encoding failures.
-     * @return &lt;0 if encoding fails, 0 otherwise.
-     */
+	 * Encodes a Refresh message for an item.
+	 *
+	 * @param channel - channel to encode refresh message for.
+	 * @param itemInfo - market data item to encode refresh message for.
+	 * @param msgBuf  - TransportBuffer to encode refresh message into.
+	 * @param postUserInfo the post user info
+	 * @param encodeStartTime - if &gt;0, this is a latency timestamp to be included in the refresh message.
+	 * @param error - detailed error information in case of encoding failures.
+	 * @return &lt;0 if encoding fails, 0 otherwise.
+	 */
     public int encodeRefresh(Channel channel,
             ItemInfo itemInfo, TransportBuffer msgBuf, PostUserInfo postUserInfo, long encodeStartTime, Error error)
 	{

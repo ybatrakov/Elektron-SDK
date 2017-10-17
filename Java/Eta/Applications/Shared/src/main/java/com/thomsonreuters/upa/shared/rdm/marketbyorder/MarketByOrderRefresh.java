@@ -31,12 +31,18 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
     // used for encoding
     private RefreshMsg refreshMsg = (RefreshMsg)CodecFactory.createMsg();
 
+    /**
+     * Instantiates a new market by order refresh.
+     */
     public MarketByOrderRefresh()
     {
         state = CodecFactory.createState();
         qos = CodecFactory.createQos();
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyorder.MarketByOrderResponseBase#isRefreshType()
+     */
     @Override
     protected boolean isRefreshType()
     {
@@ -56,6 +62,8 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
 
     /**
      * The market by order refresh flags. Populated by {@link MarketPriceRefreshFlags}.
+     *
+     * @return the int
      */
     public int flags()
     {
@@ -64,8 +72,8 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
 
     /**
      * The market by order refresh flags. Populated by {@link MarketPriceRefreshFlags}.
-     * 
-     * @param flags
+     *
+     * @param flags the flags
      */
     public void flags(int flags)
     {
@@ -93,7 +101,8 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
     }
 
     /**
-     * 
+     * Service id.
+     *
      * @return service id
      */
     public int serviceId()
@@ -102,7 +111,9 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
     }
 
     /**
-     * @param serviceId
+     * Service id.
+     *
+     * @param serviceId the service id
      */
     public void serviceId(int serviceId)
     {
@@ -240,6 +251,9 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
         flags |= MarketPriceRefreshFlags.HAS_SERVICE_ID;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#toString()
+     */
     public String toString()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -278,6 +292,9 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
         return stringBuf.toString();
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyorder.MarketByOrderResponseBase#encodeSummaryData(com.thomsonreuters.upa.codec.EncodeIterator, com.thomsonreuters.upa.codec.DataDictionary, com.thomsonreuters.upa.codec.Map)
+     */
     protected int encodeSummaryData(EncodeIterator encodeIter, DataDictionary dictionary, Map map)
     {
         // encode fields for summary data
@@ -336,6 +353,9 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
         return fieldList.encodeComplete(encodeIter, true);
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyorder.MarketByOrderResponseBase#encodeMapEntries(com.thomsonreuters.upa.codec.EncodeIterator, com.thomsonreuters.upa.codec.DataDictionary)
+     */
     protected int encodeMapEntries(EncodeIterator encodeIter, DataDictionary dictionary)
     {
         DictionaryEntry dictionaryEntry;
@@ -498,6 +518,9 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
         return ret;
     }
     
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyorder.MarketByOrderResponseBase#encodeMsg()
+     */
     public Msg encodeMsg()
     {
         refreshMsg.clear();
@@ -556,6 +579,9 @@ public class MarketByOrderRefresh extends MarketByOrderResponseBase
         return refreshMsg;
     }
     
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#domainType()
+     */
     @Override
     public int domainType()
     {

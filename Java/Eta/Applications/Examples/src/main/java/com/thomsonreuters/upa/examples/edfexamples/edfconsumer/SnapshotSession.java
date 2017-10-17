@@ -43,7 +43,10 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service.ServiceSe
 
 public class SnapshotSession implements ResponseCallback
 {
-    /* Session structure */
+    
+    /**
+     *  Session structure.
+     */
     public class SnapshotSessionState 
     {
         static final int SNAPSHOT_STATE_START = 1;
@@ -74,6 +77,11 @@ public class SnapshotSession implements ResponseCallback
     
     private EDFWatchList watchlist;
 
+    /**
+     * Instantiates a new snapshot session.
+     *
+     * @param watchlist the watchlist
+     */
     public SnapshotSession(EDFWatchList watchlist)
     {
         channelInfo = TransportFactory.createChannelInfo();
@@ -99,8 +107,9 @@ public class SnapshotSession implements ResponseCallback
      * It is responsible for: Initializing command line options used by the
      * application. Parsing command line arguments. Initializing connection. Sending
      * login request. Initializing ping handler.
-     * 
-     * @param args
+     *
+     * @param args the args
+     * @param refDataSession the ref data session
      */
     public void init(String[] args, RefDataSession refDataSession)
     {
@@ -506,11 +515,21 @@ public class SnapshotSession implements ResponseCallback
     }
     
     
+    /**
+     * Channel session.
+     *
+     * @return the EDF channel session
+     */
     public EDFChannelSession channelSession()
     {
         return channelSession;
     }
     
+    /**
+     * Symbol list handler.
+     *
+     * @return the EDF symbol list handler
+     */
     public EDFSymbolListHandler symbolListHandler()
     {
         return symbolListHandler;

@@ -26,37 +26,59 @@ public class LatencyRandomArrayOptions
 	
 	/**
 	 * Total messages sent per second.
+	 *
+	 * @return the int
 	 */
 	public int totalMsgsPerSec()
 	{
 		return _totalMsgsPerSec;
 	}
 	
-	/** Total messages sent per second */
+	/**
+	 *  Total messages sent per second.
+	 *
+	 * @param totalMsgsPerSec the total msgs per sec
+	 */
 	public void totalMsgsPerSec(int totalMsgsPerSec)
 	{
 		_totalMsgsPerSec = totalMsgsPerSec;
 	}
 
-	/** Total number of latency messages sent per second */
+	/**
+	 *  Total number of latency messages sent per second.
+	 *
+	 * @return the int
+	 */
 	public int latencyMsgsPerSec()
 	{
 		return _latencyMsgsPerSec;
 	}
 
-	/** Total number of latency messages sent per second */
+	/**
+	 *  Total number of latency messages sent per second.
+	 *
+	 * @param latencyMsgsPerSec the latency msgs per sec
+	 */
 	public void latencyMsgsPerSec(int latencyMsgsPerSec)
 	{
 		_latencyMsgsPerSec = latencyMsgsPerSec;
 	}
 
-	/** Bursts of messages sent per second by the user. */
+	/**
+	 *  Bursts of messages sent per second by the user.
+	 *
+	 * @return the int
+	 */
 	public int ticksPerSec()
 	{
 		return _ticksPerSec;
 	}
 
-	/** Bursts of messages sent per second by the user. */
+	/**
+	 *  Bursts of messages sent per second by the user.
+	 *
+	 * @param ticksPerSec the ticks per sec
+	 */
 	public void ticksPerSec(int ticksPerSec)
 	{
 		_ticksPerSec = ticksPerSec;
@@ -76,11 +98,11 @@ public class LatencyRandomArrayOptions
 
 
 	/**
-     * Sets the number of elements in the array. Increasing this adds more random values
-     * to use (each individual array contains one second's worth of values).
-     * 
-     * @param arrayCount
-     */
+	 * Sets the number of elements in the array. Increasing this adds more random values
+	 * to use (each individual array contains one second's worth of values).
+	 *
+	 * @param arrayCount the array count
+	 */
 	public void arrayCount(int arrayCount)
 	{
 		_arrayCount = arrayCount;

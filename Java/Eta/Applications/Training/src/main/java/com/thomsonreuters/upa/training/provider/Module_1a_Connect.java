@@ -61,9 +61,17 @@ import com.thomsonreuters.upa.transport.Transport;
 import com.thomsonreuters.upa.transport.TransportFactory;
 import com.thomsonreuters.upa.transport.TransportReturnCodes;
 
+/**
+ * The Class Module_1a_Connect.
+ */
 public class Module_1a_Connect
 {
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args)
     {
         /**************************************************************************************************
@@ -530,11 +538,18 @@ public class Module_1a_Connect
         }
     }
 
-    /*********************************************************
+    /**
+     * *******************************************************
      * Closes channel and selector and exits application. * channel - Channel to
      * be closed * selector - Selector to be closed * error - tracks error info
      * code - if exit is due to errors/exceptions *
-     *********************************************************/
+     * *******************************************************
+     *
+     * @param channel the channel
+     * @param server the server
+     * @param selector the selector
+     * @param code the code
+     */
     public static void closeChannelServerCleanUpAndExit(Channel channel, Server server, Selector selector, int code)
     {
         Error error = TransportFactory.createError();

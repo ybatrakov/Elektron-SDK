@@ -40,12 +40,22 @@ public class MarketPriceEncoder
 		_tempUInt = CodecFactory.createUInt();
 	}
 
+	/**
+	 * Instantiates a new market price encoder.
+	 *
+	 * @param msgData the msg data
+	 */
 	public MarketPriceEncoder(XmlMsgData msgData)
 	{
 		_xmlMsgData = msgData;
 	}
 
-	/** Get the next MarketPrice post(moves over the list). */
+	/**
+	 *  Get the next MarketPrice post(moves over the list).
+	 *
+	 * @param mpItem the mp item
+	 * @return the market price msg
+	 */
 	public MarketPriceMsg nextPost(MarketPriceItem mpItem)
 	{ 
 		int mpItemIndex = mpItem.iMsg();
@@ -59,7 +69,12 @@ public class MarketPriceEncoder
 		return mpMsg;
 	}
 
-	/** Get the next MarketPrice generic msg(moves over the list). */
+	/**
+	 *  Get the next MarketPrice generic msg(moves over the list).
+	 *
+	 * @param mpItem the mp item
+	 * @return the market price msg
+	 */
 	public MarketPriceMsg nextGenMsg(MarketPriceItem mpItem)
 	{ 
 		int mpItemIndex = mpItem.iMsg();
@@ -73,7 +88,15 @@ public class MarketPriceEncoder
 		return mpMsg;
 	}
 	
-	/** Encodes a MarketPrice data body for a message. */
+	/**
+	 *  Encodes a MarketPrice data body for a message.
+	 *
+	 * @param _eIter the e iter
+	 * @param mpMsg the mp msg
+	 * @param msgClass the msg class
+	 * @param encodeStartTime the encode start time
+	 * @return the int
+	 */
 	public int encodeDataBody(EncodeIterator _eIter, MarketPriceMsg mpMsg, int msgClass, long encodeStartTime)
 	{
 		// encode field list

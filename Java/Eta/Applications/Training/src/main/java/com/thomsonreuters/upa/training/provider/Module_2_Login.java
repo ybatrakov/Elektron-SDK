@@ -176,6 +176,9 @@ import com.thomsonreuters.upa.transport.TransportBuffer;
 import com.thomsonreuters.upa.transport.WriteArgs;
 import com.thomsonreuters.upa.transport.WriteFlags;
 
+/**
+ * The Class Module_2_Login.
+ */
 public class Module_2_Login
 {
 
@@ -189,11 +192,19 @@ public class Module_2_Login
     public static String loginRequestInfo_InstanceId;
     public static String loginRequestInfo_Role;
 
+    /**
+     * The Enum LoginRejectReason.
+     */
     public static enum LoginRejectReason
     {
         MAX_LOGIN_REQUESTS_REACHED, NO_USER_NAME_IN_REQUEST
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args)
     {
         /**************************************************************************************************
@@ -928,14 +939,16 @@ public class Module_2_Login
         }
     }
 
-    /*********************************************************
+    /**
+     * *******************************************************
      * Closes channel and selector and exits application. *
-     * 
+     *
      * @param channel - Channel to be closed *
-     * @param selector - Selector to be closed
      * @param server - server to be closed *
+     * @param selector - Selector to be closed
      * @param code - if exit is due to errors/exceptions *
-     *********************************************************/
+     * *******************************************************
+     */
     public static void closeChannelServerCleanUpAndExit(Channel channel, Server server, Selector selector, int code)
     {
         Error error = TransportFactory.createError();
@@ -1020,6 +1033,11 @@ public class Module_2_Login
     static long nextSendPingTime; /* time to send next ping from client */
     static boolean receivedClientMsg; /* flag for server message received */
 
+    /**
+     * Inits the ping management.
+     *
+     * @param channel the channel
+     */
     public static void initPingManagement(Channel channel)
     {
         /* get current time */
@@ -1044,11 +1062,14 @@ public class Module_2_Login
 
     }
 
-    /*********************************************************
-     * Processing ping management handler
-     * 
+    /**
+     * *******************************************************
+     * Processing ping management handler.
+     *
      * @param channel - The channel for ping management processing
-     *********************************************************/
+     * *******************************************************
+     * @return the int
+     */
     public static int processPingManagementHandler(Channel channel)
     {
         /* Handles the ping processing for upaChannel. Sends a ping to the client if the next send ping time has arrived and
@@ -1139,13 +1160,15 @@ public class Module_2_Login
         return retval;
     }
 
-    /**************************************************************
-     * Sends a message buffer to the channel *
-     * 
+    /**
+     * ************************************************************
+     * Sends a message buffer to the channel *.
+     *
      * @param channel - the Channel to send the message buffer to *
      * @param msgBuf - the buffer to be sent *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     */
     public static int sendMessage(Channel channel, TransportBuffer msgBuf)
     {
         int retCode = 0;
@@ -1264,15 +1287,18 @@ public class Module_2_Login
         return retCode;
     }
 
-    /**************************************************************
-     * Processes a login request *
-     * 
+    /**
+     * ************************************************************
+     * Processes a login request *.
+     *
      * @param channel - the Channel of connection *
      * @param msg - the partially decoded message *
      * @param decIter - the decode iterator *
      * @param error - tracks error info *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int processLoginRequest(Channel channel, Msg msg, DecodeIterator decIter, Error error) throws UnknownHostException
     {
         MsgKey requestKey = null;
@@ -1444,6 +1470,13 @@ public class Module_2_Login
      **************************************************************/
     static UInt supportBatchRequests = CodecFactory.createUInt();
 
+    /**
+     * Send login response.
+     *
+     * @param channel the channel
+     * @return the int
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int sendLoginResponse(Channel channel) throws UnknownHostException
     {
         int retCode;
@@ -1718,11 +1751,13 @@ public class Module_2_Login
         return retCode;
     }
 
-    /**********************************************************************
-     * Sends the login request reject status message for a channel *
-     * 
+    /**
+     * ********************************************************************
+     * Sends the login request reject status message for a channel *.
+     *
      * @param streamId - the stream id to close the login for *
-     **********************************************************************/
+     * ********************************************************************
+     */
     public static void closeLoginStream(int streamId)
     {
         /* find original request information associated with streamId */
@@ -1734,14 +1769,16 @@ public class Module_2_Login
         }
     }
 
-    /**************************************************************
-     * Performs two time pass to obtain buffer *
-     * 
+    /**
+     * ************************************************************
+     * Performs two time pass to obtain buffer *.
+     *
      * @param channel - the Channel of connection *
      * @param size - size of requested buffer *
      * @param error - tracks error info *
      * @return obtained buffer *
-     **************************************************************/
+     * ************************************************************
+     */
     public static TransportBuffer upaGetBuffer(Channel channel, int size, Error error)
     {
         int retCode;
@@ -1785,14 +1822,17 @@ public class Module_2_Login
         return msgBuf;
     }
 
-    /**********************************************************************
-     * Sends the login request reject status message for a channel *
-     * 
+    /**
+     * ********************************************************************
+     * Sends the login request reject status message for a channel *.
+     *
      * @param channel - the Channel of connection *
      * @param streamId - the stream id of the login request reject status *
      * @param reason - the reason for the reject *
      * @return status code *
-     **********************************************************************/
+     * ********************************************************************
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int sendLoginRequestRejectStatusMsg(Channel channel, int streamId, LoginRejectReason reason) throws UnknownHostException
     {
         int retCode;
@@ -1943,9 +1983,11 @@ public class Module_2_Login
         return retCode;
     }
 
-    /****************************************
+    /**
+     * **************************************
      * Clears the login request info values *
-     ****************************************/
+     * **************************************.
+     */
     public static void clearLoginRequestInfo()
     {
         loginRequestInfo_IsInUse = false;

@@ -11,37 +11,61 @@ public class TimeRecord
 	private long _endTime;		/* Recorded end time. */
 	private long _ticks;		/* Units per microsecond. */
 	
-	/** Recorded start time. */
+	/**
+	 *  Recorded start time.
+	 *
+	 * @return the long
+	 */
 	public long startTime()
 	{
 		return _startTime;
 	}
 	
-	/** Recorded start time. */
+	/**
+	 *  Recorded start time.
+	 *
+	 * @param startTime the start time
+	 */
 	public void startTime(long startTime)
 	{
 		_startTime = startTime;
 	}
 	
-	/** Recorded end time. */
+	/**
+	 *  Recorded end time.
+	 *
+	 * @return the long
+	 */
 	public long endTime()
 	{
 		return _endTime;
 	}
 	
-	/** Recorded end time. */
+	/**
+	 *  Recorded end time.
+	 *
+	 * @param endTime the end time
+	 */
 	public void endTime(long endTime)
 	{
 		_endTime = endTime;
 	}
 
-	/** Units per microsecond. */
+	/**
+	 *  Units per microsecond.
+	 *
+	 * @return the long
+	 */
 	public long ticks()
 	{
 		return _ticks;
 	}
 
-	/** Units per microsecond. */
+	/**
+	 *  Units per microsecond.
+	 *
+	 * @param ticks the ticks
+	 */
 	public void ticks(long ticks)
 	{
 		_ticks = ticks;

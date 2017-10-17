@@ -304,6 +304,9 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
 import com.thomsonreuters.upa.transport.WriteArgs;
 import com.thomsonreuters.upa.transport.WritePriorities;
 
+/**
+ * The Class Module_5_HandleItemRequest.
+ */
 public class Module_5_HandleItemRequest
 {
     public static boolean loginRequestInfo_IsInUse;
@@ -341,6 +344,9 @@ public class Module_5_HandleItemRequest
     public static MsgKey marketPriceItemRequestInfo_MsgKey = CodecFactory.createMsgKey(); /* Clears an  message key */
     public static boolean simulate = false;
 
+    /**
+     * The Enum LoginRejectReason.
+     */
     public static enum LoginRejectReason
     {
         MAX_LOGIN_REQUESTS_REACHED, NO_USER_NAME_IN_REQUEST
@@ -357,11 +363,20 @@ public class Module_5_HandleItemRequest
 
     private static final int MAX_DICTIONARY_STATUS_MSG_SIZE = 1024;
 
+    /**
+     * The Enum DictionaryRejectReason.
+     */
     public enum DictionaryRejectReason
     {
         UNKNOWN_DICTIONARY_NAME, MAX_DICTIONARY_REQUESTS_REACHED, DICTIONARY_RDM_DECODER_FAILED;
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     public static void main(String[] args) throws IOException
     {
         /**************************************************************************************************
@@ -1369,10 +1384,17 @@ public class Module_5_HandleItemRequest
         System.exit(code);
     }
 
-    /**************************************************************************************************
+    /**
+     * ************************************************************************************************
      * Closes a dictionary stream. streamId - The stream id to close the
      * dictionary for
-     **************************************************************************************************/
+     * ************************************************************************************************
+     *
+     * @param chnl the chnl
+     * @param streamId the stream id
+     * @param error the error
+     * @param _dictionary the dictionary
+     */
     public static void closeDictionary(Channel chnl, int streamId, Error error, DataDictionary _dictionary)
     {
         /* find the original request information associated with streamId */
@@ -1393,6 +1415,9 @@ public class Module_5_HandleItemRequest
 
     }
 
+    /**
+     * Clear dictionary req info.
+     */
     public static void clearDictionaryReqInfo()
     {
         fieldDictionaryRequestInfo_StreamId = 0;
@@ -1449,11 +1474,15 @@ public class Module_5_HandleItemRequest
 
     }
 
-    /*********************************************************
-     * Processing ping management handler
-     * 
+    /**
+     * *******************************************************
+     * Processing ping management handler.
+     *
      * @param channel - The channel for ping management processing
-     *********************************************************/
+     * *******************************************************
+     * @param selector the selector
+     * @return the int
+     */
 
     public static int processPingManagementHandler(Channel channel, Selector selector)
     {
@@ -1544,13 +1573,15 @@ public class Module_5_HandleItemRequest
         return retval;
     }
 
-    /**************************************************************
-     * Sends a message buffer to the channel *
-     * 
+    /**
+     * ************************************************************
+     * Sends a message buffer to the channel *.
+     *
      * @param channel - the Channel to send the message buffer to *
      * @param msgBuf - the buffer to be sent *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     */
     public static int sendMessage(Channel channel, TransportBuffer msgBuf)
     {
         int retCode = 0;
@@ -1669,15 +1700,18 @@ public class Module_5_HandleItemRequest
         return retCode;
     }
 
-    /**************************************************************
-     * Processes a login request *
-     * 
+    /**
+     * ************************************************************
+     * Processes a login request *.
+     *
      * @param channel - the Channel of connection *
      * @param msg - the partially decoded message *
      * @param decIter - the decode iterator *
      * @param error - tracks error info *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int processLoginRequest(Channel channel, Msg msg, DecodeIterator decIter, Error error) throws UnknownHostException
     {
         MsgKey requestKey = null;
@@ -1843,11 +1877,15 @@ public class Module_5_HandleItemRequest
         return TransportReturnCodes.SUCCESS;
     }
 
-    /**************************************************************
-     * Sends the login refresh response to channel *
-     * 
+    /**
+     * ************************************************************
+     * Sends the login refresh response to channel *.
+     *
      * @param channel - the Channel of connection *
-     **************************************************************/
+     * ************************************************************
+     * @return the int
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int sendLoginResponse(Channel channel) throws UnknownHostException
     {
         int retCode;
@@ -2119,11 +2157,13 @@ public class Module_5_HandleItemRequest
         return retCode;
     }
 
-    /**********************************************************************
-     * Sends the login request reject status message for a channel *
-     * 
+    /**
+     * ********************************************************************
+     * Sends the login request reject status message for a channel *.
+     *
      * @param streamId - the stream id to close the login for *
-     **********************************************************************/
+     * ********************************************************************
+     */
     public static void closeLoginStream(int streamId)
     {
         /* find original request information associated with streamId */
@@ -2135,14 +2175,16 @@ public class Module_5_HandleItemRequest
         }
     }
 
-    /**************************************************************
-     * Performs two time pass to obtain buffer *
-     * 
+    /**
+     * ************************************************************
+     * Performs two time pass to obtain buffer *.
+     *
      * @param channel - the Channel of connection *
      * @param size - size of requested buffer *
      * @param error - tracks error info *
      * @return obtained buffer *
-     **************************************************************/
+     * ************************************************************
+     */
     public static TransportBuffer upaGetBuffer(Channel channel, int size, Error error)
     {
         int retCode;
@@ -2182,14 +2224,17 @@ public class Module_5_HandleItemRequest
         return msgBuf;
     }
 
-    /**********************************************************************
-     * Sends the login request reject status message for a channel *
-     * 
+    /**
+     * ********************************************************************
+     * Sends the login request reject status message for a channel *.
+     *
      * @param channel - the Channel of connection *
      * @param streamId - the stream id of the login request reject status *
      * @param reason - the reason for the reject *
      * @return status code *
-     **********************************************************************/
+     * ********************************************************************
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int sendLoginRequestRejectStatusMsg(Channel channel, int streamId, LoginRejectReason reason) throws UnknownHostException
     {
         int retCode;
@@ -2329,9 +2374,11 @@ public class Module_5_HandleItemRequest
         return retCode;
     }
 
-    /****************************************
+    /**
+     * **************************************
      * Clears the login request info values *
-     ****************************************/
+     * **************************************.
+     */
     public static void clearLoginRequestInfo()
     {
         loginRequestInfo_IsInUse = false;
@@ -2345,17 +2392,20 @@ public class Module_5_HandleItemRequest
         loginRequestInfo_Role = "Unknown";
     }
 
-    /************************************************************************************************************
+    /**
+     * **********************************************************************************************************
      * Processes a source directory request. This consists of decoding the
      * source directory request and calling * sendSourceDirectoryResponse() to
      * send the source directory response. *
-     * 
+     *
      * @param chnl - the Channel of connection *
      * @param error - tracks error info *
      * @param dIter - The decode iterator *
      * @param msg - The partially decoded message *
      * @param maxMsgSize - The channel max message size *
-     ************************************************************************************************************/
+     * **********************************************************************************************************
+     * @return the int
+     */
     public static int processSourceDirectoryRequest(Channel chnl, Error error, DecodeIterator dIter, Msg msg, int maxMsgSize)
     {
 
@@ -2415,7 +2465,8 @@ public class Module_5_HandleItemRequest
         return TransportReturnCodes.SUCCESS;
     }
 
-    /************************************************************************************************************************************
+    /**
+     * **********************************************************************************************************************************
      * Send Source Directory response to a channel. This consists of getting a
      * message buffer, setting the source directory * response information,
      * encoding the source directory response, and sending the source directory
@@ -2423,7 +2474,7 @@ public class Module_5_HandleItemRequest
      * information about all available services in the system. * An OMM consumer
      * typically requests a Source Directory to retrieve information about
      * available services and their capabilities. *
-     * 
+     *
      * @param channel - the Channel of connection *
      * @param error - tracks error info *
      * @param maxMsgSize - The channel max message size *
@@ -2431,7 +2482,9 @@ public class Module_5_HandleItemRequest
      *            provider application (Optional to set) *
      * @param serviceId - the serviceId specified by the OMM interactive
      *            provider application (Optional to set) *
-     ************************************************************************************************************************************/
+     * **********************************************************************************************************************************
+     * @return the int
+     */
     public static int sendSourceDirectoryResponse(Channel channel, Error error, int maxMsgSize, String serviceName, int serviceId)
     {
         int retval;
@@ -3065,15 +3118,18 @@ public class Module_5_HandleItemRequest
         return retval;
     }
 
-    /***************************************************************************************************************
+    /**
+     * *************************************************************************************************************
      * Sends the source directory request reject status message for a channel.
-     * 
+     *
      * @param channel - the Channel of connection
      * @param streamId - The stream id of the source directory request reject
      *            status
      * @param reason - The reason for the reject
      * @param maxFragmentSize - max fragment size before fragmentation
-     ***************************************************************************************************************/
+     * *************************************************************************************************************
+     * @return the int
+     */
     public static int sendSrcDirectoryRequestRejectStatusMsg(Channel channel, int streamId, DirectoryRejectReason reason, int maxFragmentSize)
     {
 
@@ -3189,11 +3245,16 @@ public class Module_5_HandleItemRequest
         return retCode;
     }
 
-    /************************************************************************************************************
+    /**
+     * **********************************************************************************************************
      * Closes a source directory stream. * streamId - The stream id to close the
      * source directory for * upaChannelInfo - The channel management
      * information including the source directory request information *
-     ************************************************************************************************************/
+     * **********************************************************************************************************
+     *
+     * @param streamId the stream id
+     * @param channel the channel
+     */
     public static void closeSourceDirectoryStream(int streamId, Channel channel)
     {
         /* find original request information associated with streamId */
@@ -3206,6 +3267,9 @@ public class Module_5_HandleItemRequest
         }
     }
 
+    /**
+     * Clear source directory req info.
+     */
     public static void clearSourceDirectoryReqInfo()
     {
         sourceDirectoryRequestInfo_StreamId = 0;
@@ -3214,18 +3278,21 @@ public class Module_5_HandleItemRequest
         sourceDirectoryRequestInfo_IsInUse = false;
     }
 
-    /****************************************************************************************************************************
+    /**
+     * **************************************************************************************************************************
      * Processes a dictionary request. This consists of decoding the dictionary
      * request and calling the corresponding flavors * of the
      * sendDictionaryResponse() functions to send the dictionary response. *
-     * 
+     *
      * @param chnl - Channel of connection *
      * @param msg - The partially decoded message *
      * @param dIter - The decode iterator *
      * @param dictionary - The dictionary to encode field information or
      *            enumerated type information from *
      * @param maxSize - The channel max message size *
-     ****************************************************************************************************************************/
+     * **************************************************************************************************************************
+     * @return the int
+     */
     public static int processDictionaryRequest(Channel chnl, Msg msg, DecodeIterator dIter, DataDictionary dictionary, int maxSize)
     {
         MsgKey requestKey = CodecFactory.createMsgKey();
@@ -3311,18 +3378,21 @@ public class Module_5_HandleItemRequest
         return CodecReturnCodes.SUCCESS;
     }
 
-    /*****************************************************************************************************************************************************
+    /**
+     * ***************************************************************************************************************************************************
      * Sends the field dictionary or enumType dictionary response to a channel.
      * This consists of getting a message buffer, encoding the field dictionary
      * or enumType dictionary response, and sending the field dictionary or
      * enumType dictionary response to the server.
-     * 
+     *
      * @param chnl - Channel of connection
      * @param dictionary - The dictionary to encode field information or
      *            enumerated type information from
      * @param dictionaryType - the type of the dictionary
      * @param maxSize - The channel max message size
-     *****************************************************************************************************************************************************/
+     * ***************************************************************************************************************************************************
+     * @return the int
+     */
 
     public static int sendDictionaryResponse(Channel chnl, DataDictionary dictionary, int dictionaryType, int maxSize)
     {
@@ -3695,6 +3765,15 @@ public class Module_5_HandleItemRequest
         return retval;
     }
 
+    /**
+     * Send dictionary request reject status msg.
+     *
+     * @param chnl the chnl
+     * @param streamId the stream id
+     * @param reason the reason
+     * @param maxSize the max size
+     * @return the int
+     */
     /*
      * Sends the dictionary request reject status message for a channel.
      * upaChannelInfo - The channel management information including the dictionary request information and
@@ -3805,6 +3884,14 @@ public class Module_5_HandleItemRequest
 
     }
 
+    /**
+     * Send dictionary close status message.
+     *
+     * @param chnl the chnl
+     * @param error the error
+     * @param maxSize the max size
+     * @return the int
+     */
     public static int sendDictionaryCloseStatusMessage(Channel chnl, Error error, int maxSize)
     {
 
@@ -3912,6 +3999,11 @@ public class Module_5_HandleItemRequest
         return retval;
     }
 
+    /**
+     * Close market price item stream.
+     *
+     * @param streamId the stream id
+     */
     /*
      * Closes a market price item stream.
      * streamId - The stream id to close the market price item for
@@ -3929,6 +4021,9 @@ public class Module_5_HandleItemRequest
         }
     }
 
+    /**
+     * Clear market price item req info.
+     */
     public static void clearMarketPriceItemReqInfo()
     {
         marketPriceItemRequestInfo_StreamId = 0;
@@ -3940,6 +4035,17 @@ public class Module_5_HandleItemRequest
         marketPriceItemRequestInfo_MsgKey.name().data(marketPriceItemRequestInfo_ItemName);
     }
 
+    /**
+     * Process market price request.
+     *
+     * @param chnl the chnl
+     * @param msg the msg
+     * @param dIter the d iter
+     * @param _dictionary the dictionary
+     * @param error the error
+     * @param maxMsgSize the max msg size
+     * @return the int
+     */
     public static int processMarketPriceRequest(Channel chnl, Msg msg, DecodeIterator dIter, DataDictionary _dictionary, Error error, int maxMsgSize)
     {
 
@@ -4062,10 +4168,19 @@ public class Module_5_HandleItemRequest
         return CodecReturnCodes.SUCCESS;
     }
 
+    /**
+     * The Enum ItemRejectReason.
+     */
     public enum ItemRejectReason
     {
         NONE, ITEM_COUNT_REACHED, INVALID_SERVICE_ID, QOS_NOT_SUPPORTED, ITEM_ALREADY_OPENED, STREAM_ALREADY_IN_USE, KEY_ENC_ATTRIB_NOT_SUPPORTED, PRIVATE_STREAM_REDIRECT, PRIVATE_STREAM_MISMATCH, ITEM_NOT_SUPPORTED, REQUEST_DECODE_ERROR, BATCH_ITEM_REISSUE, DOMAIN_NOT_SUPPORTED;
         
+		/**
+		 * To string.
+		 *
+		 * @param rejectReason the reject reason
+		 * @return the string
+		 */
 		public static String toString(ItemRejectReason rejectReason)
         {
             switch (rejectReason)
@@ -4102,6 +4217,14 @@ public class Module_5_HandleItemRequest
         }
     }
 
+    /**
+     * Send item close status msg.
+     *
+     * @param channel the channel
+     * @param maxMsgSize the max msg size
+     * @param encodeIter the encode iter
+     * @return the int
+     */
     public static int sendItemCloseStatusMsg(Channel channel, int maxMsgSize, EncodeIterator encodeIter)
     {
         int retval;
@@ -4200,6 +4323,17 @@ public class Module_5_HandleItemRequest
         return retval;
     }
 
+    /**
+     * Send market price item request reject status msg.
+     *
+     * @param channel the channel
+     * @param streamId the stream id
+     * @param domainType the domain type
+     * @param reason the reason
+     * @param maxMsgSize the max msg size
+     * @param error the error
+     * @return the int
+     */
     public static int sendMarketPriceItemRequestRejectStatusMsg(Channel channel, int streamId, int domainType, ItemRejectReason reason, int maxMsgSize, Error error)
     {
         int retval;
@@ -4334,6 +4468,15 @@ public class Module_5_HandleItemRequest
     static Real tempReal = CodecFactory.createReal();
     static UInt tempUInt = CodecFactory.createUInt();
 
+    /**
+     * Send market price item response.
+     *
+     * @param channel the channel
+     * @param dictionary the dictionary
+     * @param error the error
+     * @param maxMsgSize the max msg size
+     * @return the int
+     */
     public static int sendMarketPriceItemResponse(Channel channel, DataDictionary dictionary, Error error, int maxMsgSize)
     {
 

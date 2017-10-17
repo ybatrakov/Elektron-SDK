@@ -42,7 +42,7 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service;
  * application is to consume or post content between an OMM consumer and OMM
  * provider. It is a single-threaded client application.
  * </p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * This class is responsible for the following:
  * <ul>
@@ -71,13 +71,13 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service;
  * slight decrease in performance compared to writing applications directly to
  * the UPA interfaces.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * The RDMFieldDictionary and enumtype.def files could be located in the
  * directory of execution or this application will request dictionary from
  * provider.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Change directory to the <i>Applications/Examples</i> directory and run <i>ant</i> to
  * build.
@@ -94,7 +94,7 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service;
  * [-pdomain proxy domain] [-krbfile proxyKRBFile] [-keyfile keystoreFile] [-keypasswd keystore password]
  * [-at authenticationToken] [-ax authenticationExtended] [-aid applicationId]
  *   
- * <p>
+ * </p>
  * <ul>
  * <li>-h Server host name. Default is <i>localhost</i>.
  * <li>-p Server port number. Default is <i>14002</i>.
@@ -228,6 +228,9 @@ public class Consumer implements ResponseCallback
     private String _localHostName = null;
     private String _localIPaddress = null;
 
+    /**
+     * Instantiates a new consumer.
+     */
     public Consumer()
     {
         channelInfo = TransportFactory.createChannelInfo();
@@ -470,8 +473,8 @@ public class Consumer implements ResponseCallback
      * It is responsible for: Initializing command line options used by the
      * application. Parsing command line arguments. Initializing all domain
      * handlers. Loading dictionaries from file.
-     * 
-     * @param args
+     *
+     * @param args the args
      */
     public void init(String[] args)
     {
@@ -776,6 +779,9 @@ public class Consumer implements ResponseCallback
      * calling the applicable specific method for further processing.
      * chnl - The channel of the response
      * buffer - The message buffer containing the response.
+     *
+     * @param chnl the chnl
+     * @param buffer the buffer
      */
     public void processResponse(ChannelSession chnl, TransportBuffer buffer)
     {
@@ -1357,6 +1363,12 @@ public class Consumer implements ResponseCallback
         CommandLine.addOption("aid", "", "Specifies the Application ID.");
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception
     {
         Consumer consumer = new Consumer();

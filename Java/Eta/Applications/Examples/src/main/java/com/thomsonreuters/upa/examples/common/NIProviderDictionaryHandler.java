@@ -52,7 +52,10 @@ public class NIProviderDictionaryHandler
     private State[] states; // first=field dictionary state
     						// second=enum dictionary state
     
-    public NIProviderDictionaryHandler()
+    /**
+	 * Instantiates a new NI provider dictionary handler.
+	 */
+	public NIProviderDictionaryHandler()
     {
         dictionary = CodecFactory.createDataDictionary();
         
@@ -66,7 +69,8 @@ public class NIProviderDictionaryHandler
     
     /**
      * Load dictionary from file.
-     * 
+     *
+     * @param error the error
      * @return true if the Field and EnumType dictionaries were loaded,
      *         otherwise false.
      */
@@ -98,12 +102,22 @@ public class NIProviderDictionaryHandler
    
     /**
      * Returns the data dictionary.
+     *
+     * @return the data dictionary
      */
     public DataDictionary dictionary()
     {
         return dictionary;
     }
     
+    /**
+     * Send dictionary requests.
+     *
+     * @param chnl the chnl
+     * @param error the error
+     * @param serviceId the service id
+     * @return the int
+     */
     public int sendDictionaryRequests(ChannelSession chnl, Error error, int serviceId)
 	{
 		if( dictionaryRequest == null )
@@ -161,6 +175,14 @@ public class NIProviderDictionaryHandler
 		return chnl.write(msgBuf, error);
 	}
 
+	/**
+	 * Process response.
+	 *
+	 * @param msg the msg
+	 * @param dIter the d iter
+	 * @param error the error
+	 * @return the int
+	 */
 	public int processResponse(Msg msg, DecodeIterator dIter, Error error)
 	{
         switch (msg.msgClass())
@@ -328,6 +350,12 @@ public class NIProviderDictionaryHandler
         return true;
     }
 
+	/**
+	 * Close stream.
+	 *
+	 * @param channel the channel
+	 * @param error the error
+	 */
 	public void closeStream(ChannelSession channel, Error error) 
 	{
 		/* close dictionary stream */

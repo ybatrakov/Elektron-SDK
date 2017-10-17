@@ -53,6 +53,9 @@ public class SymbolListHandler
 
     private boolean snapshotRequested;
 
+    /**
+     * Instantiates a new symbol list handler.
+     */
     public SymbolListHandler()
     {
         state = CodecFactory.createState();
@@ -63,31 +66,61 @@ public class SymbolListHandler
         closeMessage = new MarketPriceClose();
     }
 
+    /**
+     * Snapshot request.
+     *
+     * @param snapshotRequested the snapshot requested
+     */
     public void snapshotRequest(boolean snapshotRequested)
     {
         this.snapshotRequested = snapshotRequested;
     }
 
+    /**
+     * Symbol list name.
+     *
+     * @return the buffer
+     */
     public Buffer symbolListName()
     {
         return symbolListName;
     }
 
+    /**
+     * Service id.
+     *
+     * @return the int
+     */
     public int serviceId()
     {
         return serviceId;
     }
 
+    /**
+     * Service id.
+     *
+     * @param serviceId the service id
+     */
     public void serviceId(int serviceId)
     {
         this.serviceId = serviceId;
     }
 
+    /**
+     * Qos.
+     *
+     * @return the qos
+     */
     public Qos qos()
     {
         return qos;
     }
 
+    /**
+     * Capabilities.
+     *
+     * @return the list
+     */
     public List<Long> capabilities()
     {
         return capabilities;
@@ -103,6 +136,13 @@ public class SymbolListHandler
         return false;
     }
 
+    /**
+     * Send request.
+     *
+     * @param chnl the chnl
+     * @param error the error
+     * @return the int
+     */
     public int sendRequest(ChannelSession chnl, com.thomsonreuters.upa.transport.Error error)
     {
         /* check to see if the provider supports the symbol list domain */
@@ -152,6 +192,14 @@ public class SymbolListHandler
         return chnl.write(msgBuf, error);
     }
 
+    /**
+     * Process response.
+     *
+     * @param msg the msg
+     * @param dIter the d iter
+     * @param dictionary the dictionary
+     * @return the int
+     */
     public int processResponse(Msg msg, DecodeIterator dIter, DataDictionary dictionary)
     {
         map.clear();
@@ -241,8 +289,10 @@ public class SymbolListHandler
 
     /**
      * Close the symbol list stream.
-     * 
+     *
      * @param chnl - The channel to send a symbol list close to
+     * @param error the error
+     * @return the int
      */
     public int closeStream(ChannelSession chnl, Error error)
     {

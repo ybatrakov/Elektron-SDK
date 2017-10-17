@@ -36,8 +36,9 @@ public class SessionHandler
 	}
 	
 	/**
-	 * 
-	 * @return Lock for the handler. 
+	 * Handler lock.
+	 *
+	 * @return Lock for the handler.
 	 */
 	public ReentrantLock handlerLock()
 	{
@@ -45,7 +46,8 @@ public class SessionHandler
 	}
 	
 	/**
-	 * 
+	 * New channels list.
+	 *
 	 * @return New channels accepted from the main thread.
 	 */
 	public ArrayList<Channel> newChannelsList()
@@ -54,8 +56,9 @@ public class SessionHandler
 	}
 	
 	/**
-	 * 
-	 * @return Total number of channels this thread is currently handling. 
+	 * Open channels count.
+	 *
+	 * @return Total number of channels this thread is currently handling.
 	 */
 	public int openChannelsCount()
 	{
@@ -64,7 +67,8 @@ public class SessionHandler
 
 	/**
 	 * Set the total number of channels this thread is currently handling. 
-	 * @param openChannelsCount
+	 *
+	 * @param openChannelsCount the open channels count
 	 */
 	public void openChannelsCount(int openChannelsCount)
 	{
@@ -72,8 +76,9 @@ public class SessionHandler
 	}
 
 	/**
-	 * 
-	 * @return true if connections are active. 
+	 * Active.
+	 *
+	 * @return true if connections are active.
 	 */
 	public boolean active()
 	{
@@ -81,7 +86,8 @@ public class SessionHandler
 	}
 
 	/**
-	 * 
+	 * Active.
+	 *
 	 * @param active - connections are active.
 	 */
 	public void active(boolean active)
@@ -90,7 +96,8 @@ public class SessionHandler
 	}
 
 	/**
-	 * 
+	 * Latency records.
+	 *
 	 * @return Latency records. Updated from transport thread.
 	 */
 	public TimeRecordQueue latencyRecords()
@@ -99,7 +106,8 @@ public class SessionHandler
 	}
 
 	/**
-	 * 
+	 * Transport thread.
+	 *
 	 * @return Thread associated with this handler.
 	 */
 	public TransportThread transportThread()
@@ -117,7 +125,8 @@ public class SessionHandler
 	}
 
 	/**
-	 * 
+	 * Role.
+	 *
 	 * @return Role of this handler.
 	 */
 	public int role()
@@ -126,6 +135,8 @@ public class SessionHandler
 	}
 
 	/**
+	 * Role.
+	 *
 	 * @param role  Role of this handler.
 	 */
 	public void role(int role)
@@ -134,6 +145,8 @@ public class SessionHandler
 	}
 
 	/**
+	 * Prev M cast stats.
+	 *
 	 * @return multicast statistics. Used for multicast connection.
 	 */
 	public MCastStats prevMCastStats()
@@ -142,7 +155,8 @@ public class SessionHandler
 	}
 
 	/**
-	 * 
+	 * Prev M cast stats.
+	 *
 	 * @param prevMCastStats multicast statistics.
 	 */
 	public void prevMCastStats(MCastStats prevMCastStats)

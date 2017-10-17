@@ -87,6 +87,11 @@ public class ProviderDictionaryHandler
         ENUM_TYPE_DOWNLOAD_NAME.data( "RWFEnum");
     }
     
+    /**
+     * Instantiates a new provider dictionary handler.
+     *
+     * @param providerSesssion the provider sesssion
+     */
     public ProviderDictionaryHandler(ProviderSession providerSesssion)
     {
         _dictionary = CodecFactory.createDataDictionary();
@@ -111,6 +116,8 @@ public class ProviderDictionaryHandler
 
     /**
      * Returns the data dictionary.
+     *
+     * @return the data dictionary
      */
     public DataDictionary dictionary()
     {
@@ -127,7 +134,10 @@ public class ProviderDictionaryHandler
     }
 
     /**
-     * Loads dictionary files
+     * Loads dictionary files.
+     *
+     * @param error the error
+     * @return true, if successful
      */
     public boolean loadDictionary(Error error)
     {
@@ -156,7 +166,9 @@ public class ProviderDictionaryHandler
     }
 
     /**
-     * Indicates if the dictionary has been loaded
+     * Indicates if the dictionary has been loaded.
+     *
+     * @return true, if is dictionary ready
      */
     public boolean isDictionaryReady() 
 	{
@@ -170,6 +182,14 @@ public class ProviderDictionaryHandler
 		}
 	}
     
+    /**
+     * Send dictionary requests.
+     *
+     * @param chnl the chnl
+     * @param error the error
+     * @param serviceId the service id
+     * @return the int
+     */
     public int sendDictionaryRequests(Channel chnl, Error error, int serviceId)
 	{
 		if( _dictionaryRequest == null )
@@ -232,10 +252,12 @@ public class ProviderDictionaryHandler
      * decodeDictionaryRequest() to decode the request and calling
      * sendDictionaryResonse() to send the dictionary response. Returns success
      * if dictionary request processing succeeds or failure if processing fails.
-     * 
+     *
      * @param chnl - The channel of the request msg - The partially decoded
      *            message
+     * @param msg the msg
      * @param dIter - The decode iterator
+     * @param error the error
      * @return {@link CodecReturnCodes}
      */
     public int processRequest(Channel chnl, Msg msg, DecodeIterator dIter, Error error)
@@ -283,6 +305,15 @@ public class ProviderDictionaryHandler
         return CodecReturnCodes.SUCCESS;
     }
 
+	/**
+	 * Process message.
+	 *
+	 * @param chnl the chnl
+	 * @param msg the msg
+	 * @param dIter the d iter
+	 * @param error the error
+	 * @return the int
+	 */
 	public int processMessage(Channel chnl,Msg msg, DecodeIterator dIter, Error error)
 	{
         switch (msg.msgClass())
@@ -445,13 +476,12 @@ public class ProviderDictionaryHandler
     }
 
     /**
-     * 
      * Sends the dictionary close status message(s) for a channel. This consists
      * of finding all request information for this channel and sending the close
      * status messages to the channel.
-     * 
+     *
      * @param chnl - The channel to send close status message(s) to
-     * 
+     * @param error the error
      * @return {@link CodecReturnCodes}
      */
     public int sendCloseStatusMsgs(Channel chnl, Error error)
@@ -473,10 +503,10 @@ public class ProviderDictionaryHandler
     /**
      * Sends the dictionary close status message for a channel. Returns success
      * if send dictionary close status succeeds or failure if it fails.
-     * 
+     *
      * @param chnl - The channel to send close status message to
      * @param streamId - The stream id of the close status
-     * 
+     * @param error the error
      * @return {@link CodecReturnCodes}
      */
     public int sendCloseStatusMsg(Channel chnl, int streamId, Error error)
@@ -823,6 +853,12 @@ public class ProviderDictionaryHandler
         return true;
     }
 
+    /**
+     * Close stream.
+     *
+     * @param clientChannel the client channel
+     * @param error the error
+     */
     public void closeStream(Channel clientChannel, Error error)
     {
     	/* close dictionary stream */

@@ -56,6 +56,9 @@ public class SymbolListItems
     private MapEntry _tempMapEntry = CodecFactory.createMapEntry();
     private Buffer _tempBuffer = CodecFactory.createBuffer();
 
+    /**
+     * Instantiates a new symbol list items.
+     */
     public SymbolListItems()
     {
         for (int i = 0; i < MAX_SYMBOL_LIST_SIZE; i++)
@@ -100,8 +103,8 @@ public class SymbolListItems
     }
 
     /**
-     * Sets the status and and name of a symbol list item
-     * 
+     * Sets the status and and name of a symbol list item.
+     *
      * @param itemName - the name that the symbol list item will be set to
      * @param itemNum - An index into the symbol list array
      */
@@ -116,6 +119,8 @@ public class SymbolListItems
 
     /**
      * Returns the current number of items in the symbol list.
+     *
+     * @return the int
      */
     public int itemCount()
     {
@@ -139,8 +144,8 @@ public class SymbolListItems
     }
 
     /**
-     * Increments the interest count of an item in the symbol list
-     * 
+     * Increments the interest count of an item in the symbol list.
+     *
      * @param itemNum - An index into the symbol list array.
      */
     public void incrementInterestCount(int itemNum)
@@ -150,7 +155,9 @@ public class SymbolListItems
 
     /**
      * Decrements the interest count of an item in the symbol list itemNum - An
-     * index into the symbol list array
+     * index into the symbol list array.
+     *
+     * @param itemNum the item num
      */
     public void decrementInterestCount(int itemNum)
     {
@@ -159,7 +166,10 @@ public class SymbolListItems
 
     /**
      * Returns the current interest count of an item in the symbol list itemNum
-     * - An index into the symbol list array
+     * - An index into the symbol list array.
+     *
+     * @param itemNum the item num
+     * @return the int
      */
     public int interestCount(int itemNum)
     {
@@ -199,20 +209,19 @@ public class SymbolListItems
     /**
      * Encodes the symbol list response. Returns success if encoding succeeds or
      * failure if encoding fails.
-     * 
+     *
      * @param chnl - The channel to send a market price response to
      * @param itemInfo - The item information
-     * @param isSolicited - The response is solicited if set
      * @param msgBuf - The message buffer to encode the market price response
      *            into
      * @param streamId - The stream id of the market price response
      * @param isStreaming - Flag for streaming or snapshot
      * @param serviceId - The service id of the market price response
+     * @param isSolicited - The response is solicited if set
      * @param dictionary - The dictionary used for encoding
      * @param responseType - The type of response to be encoded: refresh, add
      *            update, or delete update
      * @param error - error in case of encoding error
-     * 
      * @return {@link CodecReturnCodes}
      */
     public int encodeResponse(Channel chnl, ItemInfo itemInfo, TransportBuffer msgBuf, int streamId, boolean isStreaming, int serviceId, boolean isSolicited, DataDictionary dictionary, int responseType, Error error)

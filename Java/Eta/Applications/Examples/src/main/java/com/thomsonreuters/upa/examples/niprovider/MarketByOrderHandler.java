@@ -51,6 +51,12 @@ public class MarketByOrderHandler
     protected FieldEntry fieldEntry = CodecFactory.createFieldEntry();
     private EncodeIterator encIter = CodecFactory.createEncodeIterator();
 
+    /**
+     * Instantiates a new market by order handler.
+     *
+     * @param watchList the watch list
+     * @param dictionary the dictionary
+     */
     public MarketByOrderHandler(StreamIdWatchList watchList, DataDictionary dictionary)
     {
         this(watchList, DomainTypes.MARKET_BY_ORDER, dictionary);
@@ -101,9 +107,10 @@ public class MarketByOrderHandler
 
     /**
      * Close all item streams.
-     * 
+     *
      * @param chnl The channel to send a item stream close to.
      * @param error Populated if an error occurs.
+     * @return the int
      */
     public int closeStreams(ChannelSession chnl, Error error)
     {
@@ -129,11 +136,11 @@ public class MarketByOrderHandler
     
     /**
      * Encodes and sends item refreshes for market by order domain.
-     * 
+     *
      * @param chnl The channel to send a refresh to.
      * @param itemNames List of item names.
+     * @param serviceInfo the service info
      * @param error Populated if an error occurs.
-     * 
      * @return success if item refreshes can be made, can be encoded and sent
      *         successfully. Failure if encoding/sending refreshes failed.
      */

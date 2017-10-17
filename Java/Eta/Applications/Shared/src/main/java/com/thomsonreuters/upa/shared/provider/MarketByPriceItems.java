@@ -53,6 +53,9 @@ public class MarketByPriceItems
     }
 
 
+    /**
+     * Instantiates a new market by price items.
+     */
     public MarketByPriceItems()
     {
         _marketByPriceList = new ArrayList<MarketByPriceItem>(MAX_MARKET_PRICE_ITEM_LIST_SIZE);
@@ -91,6 +94,9 @@ public class MarketByPriceItems
 
     /**
      * Gets storage for a market by price item from the list.
+     *
+     * @param itemName the item name
+     * @return the market by price item
      */
     public MarketByPriceItem get(String itemName)
     {
@@ -131,16 +137,19 @@ public class MarketByPriceItems
     /**
      * Encodes the market by price refresh. Returns success if encoding succeeds
      * or failure if encoding fails.
-     * 
+     *
      * @param channel - The channel to send a market by price refresh to
      * @param itemInfo - The item information
-     * @param isSolicited - The refresh is solicited if set
      * @param msgBuf - The message buffer to encode the market by price refresh
      *            into
+     * @param isSolicited - The refresh is solicited if set
      * @param streamId - The stream id of the market by price refresh
      * @param isStreaming - Flag for streaming or snapshot
+     * @param isPrivateStream the is private stream
      * @param serviceId - The service id of the market by price refresh
      * @param dictionary - The dictionary used for encoding
+     * @param multiPartNo the multi part no
+     * @param error the error
      * @return {@link CodecReturnCodes}
      */
     public int encodeRefresh(Channel channel, ItemInfo itemInfo, TransportBuffer msgBuf, boolean isSolicited, int streamId, boolean isStreaming, boolean isPrivateStream, int serviceId, DataDictionary dictionary, int multiPartNo, Error error)
@@ -208,18 +217,19 @@ public class MarketByPriceItems
     /**
      * Encodes the market by price update. Returns success if encoding succeeds
      * or failure if encoding fails.
-     * 
+     *
      * @param channel - The channel to send a market by price update to
      * @param itemInfo - The item information
-     * @param isSolicited - The update is solicited if set
      * @param msgBuf - The message buffer to encode the market by price update
      *            into
+     * @param isSolicited - The update is solicited if set
      * @param streamId - The stream id of the market by price update
      * @param isStreamingRequest - Flag for streaming or snapshot
      * @param isPrivateStreamRequest - Flag for private stream request
      * @param serviceId - The service id of the market by price update
      * @param dictionary - The dictionary used for encoding
      * @param error - error in case of encoding failure
+     * @return the int
      */
     public int encodeUpdate(Channel channel, ItemInfo itemInfo, TransportBuffer msgBuf, boolean isSolicited, int streamId, boolean isStreamingRequest, boolean isPrivateStreamRequest, int serviceId, DataDictionary dictionary, Error error)
     {

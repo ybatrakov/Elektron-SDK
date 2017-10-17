@@ -94,6 +94,8 @@ public class ProviderPerfConfig
     /**
      * Parses command-line arguments to fill in the application's configuration
      * structures.
+     *
+     * @param args the args
      */
     public static void init(String[] args)
     {
@@ -271,61 +273,101 @@ public class ProviderPerfConfig
                 "             Use Reactor: " + (_useReactor ? "Yes" : "No") + "\n";
                                }
 
-    /** Time application runs before exiting. */
+    /**
+     *  Time application runs before exiting.
+     *
+     * @return the int
+     */
     public static int runTime()
     {
         return _runTime;
     }
 
-    /** Main loop ticks per second. */
+    /**
+     *  Main loop ticks per second.
+     *
+     * @return the int
+     */
     public static int ticksPerSec()
     {
         return _ticksPerSec;
     }
 
-    /** Main loop ticks per second. */
+    /**
+     *  Main loop ticks per second.
+     *
+     * @param ticksPerSec the ticks per sec
+     */
 	public static void ticksPerSec(int ticksPerSec)
 	{
 		_ticksPerSec = ticksPerSec;
 	}
 
-    /** Number of threads that handle connections. */
+    /**
+     *  Number of threads that handle connections.
+     *
+     * @return the int
+     */
     public static int threadCount()
     {
         return _threadCount;
     }
     
-    /** Number of threads that handle connections. */
+    /**
+     *  Number of threads that handle connections.
+     *
+     * @param threadCount the thread count
+     */
 	public static void threadCount(int threadCount)
 	{
 		_threadCount = threadCount; 
 	}
 
-	/** Item List file. Provides a list of items to open. */
+	/**
+	 *  Item List file. Provides a list of items to open.
+	 *
+	 * @return the string
+	 */
 	public static String itemFilename()
 	{
 		return _itemFilename;
 	}
 	
-	/** Item List file. Provides a list of items to open. */
+	/**
+	 *  Item List file. Provides a list of items to open.
+	 *
+	 * @param itemFilename the item filename
+	 */
 	public static void itemFilename(String itemFilename)
 	{
 		_itemFilename = itemFilename;
 	}
 	
-	/** Data file. Describes the data to use when encoding messages. */
+	/**
+	 *  Data file. Describes the data to use when encoding messages.
+	 *
+	 * @return the string
+	 */
 	public static String msgFilename()
 	{
 		return _msgFilename;
 	}
 	
-	/** Data file. Describes the data to use when encoding messages. */
+	/**
+	 *  Data file. Describes the data to use when encoding messages.
+	 *
+	 * @param msgFilename the msg filename
+	 */
 	public static void msgFilename(String msgFilename)
 	{
 		_msgFilename = msgFilename;
 	}
 
-	/** Whether to log update latency information to a file. */
+	/**
+	 *  Whether to log update latency information to a file.
+	 *
+	 * @return true, if successful
+	 */
 	public static boolean logLatencyToFile()
 	{
 	    if(_latencyFilename == null) _logLatencyToFile = false;
@@ -334,187 +376,310 @@ public class ProviderPerfConfig
 		return _logLatencyToFile;
 	}
 
-	/** Name of the latency log file. */
+	/**
+	 *  Name of the latency log file.
+	 *
+	 * @return the string
+	 */
     public static String latencyFilename()
     {
         return _latencyFilename;
     }
     
-    /** Name of the summary log file. */
+    /**
+     *  Name of the summary log file.
+     *
+     * @return the string
+     */
     public static String summaryFilename()
     {
         return _summaryFilename;
     }
     
-    /** Name of the stats file. */
+    /**
+     *  Name of the stats file.
+     *
+     * @return the string
+     */
     public static String statsFilename()
     {
         return _statsFilename;
     }
     
+	/**
+	 * Stats filename.
+	 *
+	 * @param statsFilename the stats filename
+	 */
 	public static void statsFilename(String statsFilename)
 	{
 		_statsFilename = statsFilename;
 	}
 
-    /** Controls how often statistics are written. */
+    /**
+     *  Controls how often statistics are written.
+     *
+     * @return the int
+     */
     public static int writeStatsInterval()
     {
         return _writeStatsInterval;
     }
 
-    /** Controls whether stats appear on the screen. */
+    /**
+     *  Controls whether stats appear on the screen.
+     *
+     * @return true, if successful
+     */
     public static boolean displayStats()
     {
         return _displayStats;
     }
 
-    /** direct write enabled. */
+    /**
+     *  direct write enabled.
+     *
+     * @return true, if successful
+     */
     public static boolean directWrite()
     {
         return _directWrite;
     }
 
-    /** direct write enabled. */
+    /**
+     *  direct write enabled.
+     *
+     * @param directWrite the direct write
+     */
 	public static void directWrite(boolean directWrite)
 	{
 		_directWrite = directWrite;
 	}
     
-    /** Port number. */
+    /**
+     *  Port number.
+     *
+     * @return the string
+     */
     public static String portNo()
     {
         return _portNo;
     }
 
-    /** Name of interface. */
+    /**
+     *  Name of interface.
+     *
+     * @return the string
+     */
     public static String interfaceName()
     {
         return _interfaceName;
     }
 
-    /** Guaranteed Output Buffers. */
+    /**
+     *  Guaranteed Output Buffers.
+     *
+     * @return the int
+     */
     public static int guaranteedOutputBuffers()
     {
         return _guaranteedOutputBuffers;
     }
     
-    /** Max Fragment Size. */
+    /**
+     *  Max Fragment Size.
+     *
+     * @return the int
+     */
     public static int maxFragmentSize()
     {
         return _maxFragmentSize;
     }
 
-    /** System Send Buffer Size */
+    /**
+     *  System Send Buffer Size.
+     *
+     * @return the int
+     */
     public static int sendBufSize()
     {
         return _sendBufSize;
     }
 
-    /** System Receive Buffer Size */
+    /**
+     *  System Receive Buffer Size.
+     *
+     * @return the int
+     */
     public static int recvBufSize()
     {
         return _recvBufSize;
     }
 
-    /** Sets the point that causes UPA to automatically flush. */
+    /**
+     *  Sets the point that causes UPA to automatically flush.
+     *
+     * @return the int
+     */
     public static int highWaterMark()
     {
         return _highWaterMark;
     }
 
-    /** Enable/Disable Nagle's algorithm. */
+    /**
+     *  Enable/Disable Nagle's algorithm.
+     *
+     * @return true, if successful
+     */
     public static boolean tcpNoDelay()
     {
         return _tcpNoDelay;
     }
     
-    /**Name of the provided service */
+    /**
+     * Name of the provided service.
+     *
+     * @return the string
+     */
     public static String serviceName()
     {
         return _serviceName;
     }
 
-    /**Name of the provided service */
+    /**
+     * Name of the provided service.
+     *
+     * @param serviceName the service name
+     */
 	public static void serviceName(String serviceName)
 	{
 		_serviceName = serviceName;
 	}
     
-    /** ID of the provided service */
+    /**
+     *  ID of the provided service.
+     *
+     * @return the int
+     */
     public static int serviceId()
     {
         return _serviceId;
     }
 
-    /** ID of the provided service */
+    /**
+     *  ID of the provided service.
+     *
+     * @param serviceId the service id
+     */
 	public static void serviceId(int serviceId)
 	{
 		_serviceId = serviceId;
 	}
     
-    /** Advertised OpenLimit (set to 0 to not provide this)  */
+    /**
+     *  Advertised OpenLimit (set to 0 to not provide this).
+     *
+     * @return the int
+     */
     public static int openLimit()
     {
         return _openLimit;
     }
 
-    /** Advertised OpenLimit (set to 0 to not provide this)  */
+    /**
+     *  Advertised OpenLimit (set to 0 to not provide this).
+     *
+     * @param openLimit the open limit
+     */
 	public static void openLimit(int openLimit)
 	{
 		_openLimit = openLimit;
 	}
 
-    /** number of packing buffers */
+    /**
+     *  number of packing buffers.
+     *
+     * @return the int
+     */
     public static int totalBuffersPerPack()
     {
         return _totalBuffersPerPack;
     }
     
-    /** number of packing buffers */
+    /**
+     *  number of packing buffers.
+     *
+     * @param totalBuffersPerPack the total buffers per pack
+     */
 	public static void totalBuffersPerPack(int totalBuffersPerPack)
 	{
 		_totalBuffersPerPack = totalBuffersPerPack;
 	}
 
-	/** packing buffers size*/
+	/**
+	 *  packing buffers size.
+	 *
+	 * @return the int
+	 */
     public static int packingBufferLength()
     {
         return _packingBufferLength;
     }
 
-    /** packing buffers size*/
+    /**
+     *  packing buffers size.
+     *
+     * @param packingBufferLength the packing buffer length
+     */
 	public static void packingBufferLength(int packingBufferLength)
 	{
 		_packingBufferLength = packingBufferLength;
 	}
     
-    /** updates per second*/
+    /**
+     *  updates per second.
+     *
+     * @return the int
+     */
     public static int updatesPerSec()
     {
         return _updatesPerSec;
     }
 
-    /** updates per second*/
+    /**
+     *  updates per second.
+     *
+     * @param updatesPerSec the updates per sec
+     */
 	public static void updatesPerSec(int updatesPerSec)
 	{
 		_updatesPerSec = updatesPerSec;
 	}
 
-    /** updates per second*/
+    /**
+     *  updates per second.
+     *
+     * @return the int
+     */
     public static int genMsgsPerSec()
     {
         return _genMsgsPerSec;
     }
 
-    /** generic msgs per second*/
+    /**
+     *  generic msgs per second.
+     *
+     * @param genMsgsPerSec the gen msgs per sec
+     */
 	public static void genMsgsPerSec(int genMsgsPerSec)
 	{
 		_genMsgsPerSec = genMsgsPerSec;
 	}
 
 	/**
-	 * Number of refreshes to send in a burst(controls granularity of time-checking) 
+	 * Number of refreshes to send in a burst(controls granularity of time-checking).
+	 *
+	 * @return the int
 	 */
     public static int refreshBurstSize()
     {
@@ -522,7 +687,9 @@ public class ProviderPerfConfig
     }
 
     /**
-     * Number of refreshes to send in a burst(controls granularity of time-checking) 
+     * Number of refreshes to send in a burst(controls granularity of time-checking).
+     *
+     * @param refreshBurstSize the refresh burst size
      */
 	public static void refreshBurstSize(int refreshBurstSize)
 	{
@@ -531,6 +698,8 @@ public class ProviderPerfConfig
   
 	/**
 	 * Latency updates per second.
+	 *
+	 * @return the int
 	 */
     public static int latencyUpdateRate()
     {
@@ -539,6 +708,8 @@ public class ProviderPerfConfig
 
     /**
      * Latency updates per second.
+     *
+     * @param latencyUpdateRate the latency update rate
      */
 	public static void latencyUpdateRate(int latencyUpdateRate)
 	{
@@ -547,6 +718,8 @@ public class ProviderPerfConfig
 
 	/**
 	 * Latency generic msgs per second.
+	 *
+	 * @return the int
 	 */
     public static int latencyGenMsgRate()
     {
@@ -555,13 +728,19 @@ public class ProviderPerfConfig
 
     /**
      * Latency generic msgs per second.
+     *
+     * @param latencyGenMsgRate the latency gen msg rate
      */
 	public static void latencyGenMsgRate(int latencyGenMsgRate)
 	{
 		_latencyGenMsgRate = latencyGenMsgRate;
 	}
 	
-    /** Converts configuration parameters to a string */
+    /**
+     *  Converts configuration parameters to a string.
+     *
+     * @return the string
+     */
     public static String convertToString()
     {
         return _configString;
@@ -578,10 +757,10 @@ public class ProviderPerfConfig
 	}
 	
 	/**
-     * Sets Updates per tick.
-     * 
-     * @param updatesPerTick
-     */
+	 * Sets Updates per tick.
+	 *
+	 * @param updatesPerTick the updates per tick
+	 */
 	public static void updatesPerTick(int updatesPerTick)
 	{
 		_updatesPerTick = updatesPerTick;
@@ -598,10 +777,10 @@ public class ProviderPerfConfig
 	}
 
 	/**
-     * Sets remainder updates per tick. 
-     * 
-     * @param updatesPerTickRemainder
-     */
+	 * Sets remainder updates per tick. 
+	 *
+	 * @param updatesPerTickRemainder the updates per tick remainder
+	 */
 	public static void updatesPerTickRemainder(int updatesPerTickRemainder)
 	{
 		_updatesPerTickRemainder = updatesPerTickRemainder;
@@ -618,10 +797,10 @@ public class ProviderPerfConfig
 	}
 	
 	/**
-     * Sets Generic msgs per tick.
-     * 
-     * @param genMsgsPerTick
-     */
+	 * Sets Generic msgs per tick.
+	 *
+	 * @param genMsgsPerTick the gen msgs per tick
+	 */
 	public static void genMsgsPerTick(int genMsgsPerTick)
 	{
 		_genMsgsPerTick = genMsgsPerTick;
@@ -638,16 +817,20 @@ public class ProviderPerfConfig
 	}
 
 	/**
-     * Sets remainder generic msgs per tick. 
-     * 
-     * @param genMsgsPerTickRemainder
-     */
+	 * Sets remainder generic msgs per tick. 
+	 *
+	 * @param genMsgsPerTickRemainder the gen msgs per tick remainder
+	 */
 	public static void genMsgsPerTickRemainder(int genMsgsPerTickRemainder)
 	{
 		_genMsgsPerTickRemainder = genMsgsPerTickRemainder;
 	}
 	
-    /** Use the VA Reactor instead of the UPA Channel for sending and receiving. */
+    /**
+     *  Use the VA Reactor instead of the UPA Channel for sending and receiving.
+     *
+     * @return true, if successful
+     */
     public static boolean useReactor()
     {
         return _useReactor;

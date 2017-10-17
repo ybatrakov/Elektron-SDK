@@ -242,6 +242,9 @@ import com.thomsonreuters.upa.transport.TransportBuffer;
 import com.thomsonreuters.upa.transport.WriteArgs;
 import com.thomsonreuters.upa.transport.WriteFlags;
 
+/**
+ * The Class Module_4_Dictionary.
+ */
 public class Module_4_Dictionary
 {    
     private static final String FIELD_DICTIONARY_FILE_NAME = "RDMFieldDictionary";
@@ -281,6 +284,11 @@ public class Module_4_Dictionary
     public static boolean dictionariesLoadedInfo_enumTypeDictionaryFirstPart = true;
     public static boolean dictionariesLoadedInfo_isInitialized=false;
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args)
 	{	
 		/**************************************************************************************************
@@ -1216,6 +1224,11 @@ public class Module_4_Dictionary
 	static boolean 				receivedServerMsg; /* flag for server message received */
     
 	
+	/**
+	 * Inits the ping management.
+	 *
+	 * @param channel the channel
+	 */
 	public static void initPingManagement(Channel channel)
 	{
 		/* get current time */
@@ -1232,6 +1245,14 @@ public class Module_4_Dictionary
 		nextReceivePingTime =currentTime + pingTimeoutServer * 1000;
     }
 	
+	/**
+	 * Process ping management handler.
+	 *
+	 * @param channel the channel
+	 * @param opMask the op mask
+	 * @param selector the selector
+	 * @return the int
+	 */
 	/*
 	 * Processing ping management handler
 	 * upaChannel - The channel for ping management processing
@@ -1324,12 +1345,15 @@ public class Module_4_Dictionary
 		return retval;
 	}
 
-	/**************************************************************
-	 * Sends a message buffer to the channel                      *
+	/**
+	 * ************************************************************
+	 * Sends a message buffer to the channel                      *.
+	 *
 	 * @param channel - the Channel to send the message buffer to *
 	 * @param msgBuf  - the buffer to be sent                     *
 	 * @return status code                                        *
-	 **************************************************************/
+	 * ************************************************************
+	 */
 	public static int sendMessage(Channel channel, TransportBuffer msgBuf)
 	{
 		Error error = TransportFactory.createError();
@@ -1409,12 +1433,15 @@ public class Module_4_Dictionary
 
 	final public static int LOGIN_STREAM_ID = 1;
     
-    /**************************************************************
-     * Sends login request message to a channel                   *
+    /**
+     * ************************************************************
+     * Sends login request message to a channel                   *.
+     *
      * @param channel - the Channel of connection                 *
      * @param maxFragmentSize - the maximum fragment size before fragmentation *
      * @return status code                                        *
-     **************************************************************/
+     * ************************************************************
+     */
 	
 	public static int sendLoginRequest(Channel channel,int maxFragmentSize)
 	{
@@ -1545,12 +1572,15 @@ public class Module_4_Dictionary
 		return retCode;
 	}
 	
-	/**************************************************************
-	 * Processes a login response                                 *
+	/**
+	 * ************************************************************
+	 * Processes a login response                                 *.
+	 *
 	 * @param msg     - the partially decoded message             *
 	 * @param decIter - the decode iterator                       *
 	 * @return status code                                        *
-	 **************************************************************/
+	 * ************************************************************
+	 */
 	public static int processLoginResponse(Msg msg, DecodeIterator decIter)
 	{
 		int retCode;
@@ -1698,12 +1728,15 @@ public class Module_4_Dictionary
 		return TransportReturnCodes.SUCCESS;
 	}
 	
-	/**************************************************************
-	 * Close the login stream                                     *
+	/**
+	 * ************************************************************
+	 * Close the login stream                                     *.
+	 *
 	 * @param channel - the Channel of connection                 *
 	 * @param error   - tracks error info                         *
 	 * @return status code                                        *
-	 **************************************************************/
+	 * ************************************************************
+	 */
 	public static int closeLoginStream(Channel channel, Error error)
 	{
 		int retCode;
@@ -1759,13 +1792,16 @@ public class Module_4_Dictionary
 		return retCode;
 	}
 	
-	/**************************************************************
-	 * Performs two time pass to obtain buffer                    *
+	/**
+	 * ************************************************************
+	 * Performs two time pass to obtain buffer                    *.
+	 *
 	 * @param channel - the Channel of connection                 *
 	 * @param size    - size of requested buffer                  *
 	 * @param error   - tracks error info                         *
 	 * @return obtained buffer                                    *
-	 **************************************************************/
+	 * ************************************************************
+	 */
 	public static TransportBuffer upaGetBuffer(Channel channel, int size, Error error)
 	{
 		int retCode;
@@ -1801,6 +1837,13 @@ public class Module_4_Dictionary
 	
 	final static int SRCDIR_STREAM_ID = 2;
 
+	/**
+	 * Send source directory request.
+	 *
+	 * @param channel the channel
+	 * @param maxMsgSize the max msg size
+	 * @return the int
+	 */
 	public static int sendSourceDirectoryRequest(Channel channel,int maxMsgSize)
     {   
 		int ret;
@@ -1900,6 +1943,16 @@ public class Module_4_Dictionary
 	
 	
 	
+	/**
+	 * Process source directory response.
+	 *
+	 * @param chnl the chnl
+	 * @param msg the msg
+	 * @param error the error
+	 * @param dIter the d iter
+	 * @param selector the selector
+	 * @return the int
+	 */
 	public static int processSourceDirectoryResponse(Channel chnl, Msg msg,Error error, DecodeIterator dIter, Selector selector)
     {	
 		int retval;
@@ -2569,13 +2622,22 @@ public class Module_4_Dictionary
     }
 	
 	
-	/********************************************************************************************************************************
+	/**
+	 * ******************************************************************************************************************************
 	 * Processes a dictionary response. This consists of decoding the response.														*
 	 * upaChannelInfo - The channel management information including the dictionaries loaded information that is populated/updated	*
 	 * msg - The partially decoded message																							*
 	 * decodeIter - The decode iterator																								*
 	 * dataDictionary - the dictionary used for decoding the field entry data														*
-	 ********************************************************************************************************************************/
+	 * ******************************************************************************************************************************
+	 *
+	 * @param chnl the chnl
+	 * @param msg the msg
+	 * @param dIter the d iter
+	 * @param dictionary the dictionary
+	 * @param selector the selector
+	 * @return the int
+	 */
 	 public static int processDictionaryResponse(Channel chnl, Msg msg, DecodeIterator dIter, DataDictionary dictionary,Selector selector)
 	    {	
 		 	
@@ -2742,7 +2804,17 @@ public class Module_4_Dictionary
 	 * dictionaryName - The name of the dictionary to request
 	 */
    
-    public static int sendDictionaryRequest(Channel chnl,DataDictionary dictionary,int maxFragmentSize, Selector selector,String dictionaryName)
+    /**
+	 * Send dictionary request.
+	 *
+	 * @param chnl the chnl
+	 * @param dictionary the dictionary
+	 * @param maxFragmentSize the max fragment size
+	 * @param selector the selector
+	 * @param dictionaryName the dictionary name
+	 * @return the int
+	 */
+	public static int sendDictionaryRequest(Channel chnl,DataDictionary dictionary,int maxFragmentSize, Selector selector,String dictionaryName)
     {	
 
         Error error=TransportFactory.createError();

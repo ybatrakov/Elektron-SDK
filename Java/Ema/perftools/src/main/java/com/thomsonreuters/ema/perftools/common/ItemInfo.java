@@ -12,6 +12,9 @@ public class ItemInfo
 	private int				_itemFlags;		// See ItemFlags struct
 	private ItemAttributes	_attributes;	// Attributes that uniquely identify this item
 	
+	/**
+	 * Instantiates a new item info.
+	 */
 	public ItemInfo()
 	{
 		_attributes = new ItemAttributes();
@@ -26,12 +29,21 @@ public class ItemInfo
 		_attributes.domainType(0);
 	}
 
-    /** Item's Stream ID */
+    /**
+     *  Item's Stream ID.
+     *
+     * @return the int
+     */
 	public int itemId()
 	{
 		return _itemId;
 	}
 
+	/**
+	 * Item id.
+	 *
+	 * @param itemId the item id
+	 */
 	public void itemId(int itemId)
 	{
 		_itemId = itemId;
@@ -40,6 +52,8 @@ public class ItemInfo
     /**
      * Holds information about the item's data. This data will be different
      * depending on the domain of the item.
+     *
+     * @return the object
      */
 	public Object itemData()
 	{
@@ -49,6 +63,8 @@ public class ItemInfo
     /**
      * Holds information about the item's data. This data will be different
      * depending on the domain of the item.
+     *
+     * @param itemData the item data
      */
 	public void itemData(Object itemData)
 	{
@@ -56,7 +72,8 @@ public class ItemInfo
 	}
 
 	/**
-	 * 
+	 * Item flags.
+	 *
 	 * @return {@link ItemFlags}
 	 */
     public int itemFlags()
@@ -65,7 +82,8 @@ public class ItemInfo
 	}
 
     /**
-     * 
+     * Item flags.
+     *
      * @param itemFlags - {@link ItemFlags}
      */
 	public void itemFlags(int itemFlags)

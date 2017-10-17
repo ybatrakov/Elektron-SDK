@@ -62,7 +62,15 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.login.LoginRefresh;
  */
 public class NewsHandler
 {
+    
+    /**
+     * The transport buffer size request.
+     */
     public static int TRANSPORT_BUFFER_SIZE_REQUEST = ChannelSession.MAX_MSG_SIZE;
+    
+    /**
+     * The transport buffer size close.
+     */
     public static int TRANSPORT_BUFFER_SIZE_CLOSE = ChannelSession.MAX_MSG_SIZE;
 
     private int domainType;
@@ -113,6 +121,13 @@ public class NewsHandler
     private Headline headline = new Headline();
     private ChannelSession _chnl;
 
+    /**
+     * Instantiates a new news handler.
+     *
+     * @param fontSize the font size
+     * @param font the font
+     * @param watchList the watch list
+     */
     public NewsHandler(int fontSize, String font, StreamIdWatchList watchList)
     {
         this(fontSize, font, DomainTypes.MARKET_PRICE, watchList);
@@ -137,11 +152,21 @@ public class NewsHandler
         return new MarketPriceRequest();
     }
 
+    /**
+     * View request.
+     *
+     * @param doViewRequest the do view request
+     */
     public void viewRequest(boolean doViewRequest)
     {
         viewRequested = doViewRequest;
     }
 
+    /**
+     * Snapshot request.
+     *
+     * @param snapshotRequested the snapshot requested
+     */
     public void snapshotRequest(boolean snapshotRequested)
     {
         this.snapshotRequested = snapshotRequested;
@@ -176,6 +201,12 @@ public class NewsHandler
         return chnl.write(msgBuf, error);
     }
 
+    /**
+     * Gets the first item.
+     *
+     * @param itemName the item name
+     * @return the first item
+     */
     /*
      * this method is used while posting to query the first requested item, if
      * any. It will populate the passed in buffer with the name and length
@@ -199,18 +230,15 @@ public class NewsHandler
     }
 
     /**
-     * Encodes and sends item requests for news items
-     * 
+     * Encodes and sends item requests for news items.
+     *
      * @param chnl - The channel to send a source directory request to
-     * 
      * @param itemNames - List of item names
-     * 
      * @param isPrivateStream - flag indicating if requested items are private
      *            stream or not.
-     * 
      * @param loginInfo - RDM login information
      * @param serviceInfo - RDM directory response information
-     * 
+     * @param error the error
      * @return success if item requests can be made, can be encoded and sent
      *         successfully. Failure if service does not support market price
      *         capability or failure for encoding/sending request.
@@ -361,10 +389,12 @@ public class NewsHandler
      * extracting the key, printing out the item name contained in the key,
      * decoding the field list and field entry, and calling decodeFieldEntry()
      * to decode the field entry data.
-     * 
+     *
+     * @param chnl the chnl
      * @param msg - The partially decoded message
      * @param dIter - The decode iterator
-     * 
+     * @param dictionary the dictionary
+     * @param error the error
      * @return success if decoding succeeds, failure if it fails.
      */
     public int processResponse(ChannelSession chnl, Msg msg, DecodeIterator dIter,
@@ -580,6 +610,13 @@ public class NewsHandler
         return CodecReturnCodes.SUCCESS;
     }
 
+    /**
+     * Send pnac request.
+     *
+     * @param itemNames the item names
+     * @param error the error
+     * @return the int
+     */
     // sends one item at a time to current channelsession
     public int sendPnacRequest(List<String> itemNames, Error error)
     {
@@ -985,8 +1022,10 @@ public class NewsHandler
 
     /**
      * Close all item streams.
-     * 
+     *
      * @param chnl - The channel to send a item stream close to
+     * @param error the error
+     * @return the int
      */
     public int closeStreams(ChannelSession chnl, Error error)
     {

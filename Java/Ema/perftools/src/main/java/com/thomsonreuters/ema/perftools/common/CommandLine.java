@@ -37,7 +37,8 @@ public final class CommandLine
     /**
      * Specify a string command line option (e.g. -option value) without a
      * default value.
-     * 
+     *
+     * @param arg the arg
      * @param description explanation of the option
      */
     public static void addOption(String arg, String description)
@@ -67,6 +68,13 @@ public final class CommandLine
     	}
     }
 
+    /**
+     * Adds the option.
+     *
+     * @param arg the arg
+     * @param defaultValues the default values
+     * @param description the description
+     */
     public static void addOption(String arg, String[] defaultValues, String description)
     {
     	if (!_options.containsKey(arg))
@@ -77,6 +85,12 @@ public final class CommandLine
     	}
     }
 
+    /**
+     * Adds the required option.
+     *
+     * @param arg the arg
+     * @param description the description
+     */
     public static void addRequiredOption(String arg, String description)
     {
     	if (!_options.containsKey(arg))
@@ -112,7 +126,9 @@ public final class CommandLine
     }
 
     /**
-     * @return option help text generated from all added options 
+     * Option help string.
+     *
+     * @return option help text generated from all added options
      */
     public synchronized static String optionHelpString()
     {
@@ -129,6 +145,12 @@ public final class CommandLine
         return helpString.toString();
     }
 
+    /**
+     * Checks for arg.
+     *
+     * @param varName the var name
+     * @return true, if successful
+     */
     public static boolean hasArg(String varName)
     {
         return _parameters.containsKey(varName);
@@ -183,6 +205,11 @@ public final class CommandLine
         }
     }
     
+    /**
+     * Parses the args.
+     *
+     * @param argv the argv
+     */
     public static void parseArgs(String[] argv)
     {
         ArgumentToken.clear();
@@ -237,6 +264,8 @@ public final class CommandLine
     }
 
     /**
+     * Values.
+     *
      * @param varName required command line variable (without the '-')
      * @return String value of the variable
      */
@@ -261,6 +290,8 @@ public final class CommandLine
     }
 
     /**
+     * Value.
+     *
      * @param varName required command line variable (without the '-')
      * @return String value of the variable
      * @throws NullPointerException if required variable was not in the command
@@ -275,6 +306,8 @@ public final class CommandLine
     }
 
     /**
+     * Boolean value.
+     *
      * @param varName required command line variable (without the '-')
      * @return String value of the variable
      * @throws NullPointerException if required variable was not in the command
@@ -289,6 +322,8 @@ public final class CommandLine
     }
    
     /**
+     * Int value.
+     *
      * @param varName required command line variable (without the '-')
      * @return String value of the variable
      * @throws NumberFormatException if required variable string
@@ -303,6 +338,8 @@ public final class CommandLine
     }
 
     /**
+     * Program name.
+     *
      * @param progname Program name for the help string.
      */
     public static void programName(String progname)

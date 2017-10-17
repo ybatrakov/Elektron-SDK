@@ -46,11 +46,19 @@ public class YieldCurveRequest extends MsgBaseImpl
     private ArrayEntry arrayEntry = CodecFactory.createArrayEntry();
     private Buffer itemNameBuf = CodecFactory.createBuffer();
 
+    /**
+     * Instantiates a new yield curve request.
+     */
     public YieldCurveRequest()
     {
         this(DomainTypes.YIELD_CURVE);
     }
 
+    /**
+     * Instantiates a new yield curve request.
+     *
+     * @param domainType the domain type
+     */
     public YieldCurveRequest(int domainType)
     {
         qos = CodecFactory.createQos();
@@ -94,7 +102,8 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Service id.
+     *
      * @return service id
      */
     public int serviceId()
@@ -103,7 +112,10 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * @param serviceId
+     * Service id.
+     *
+     * @param serviceId the service id
+     * @return the yield curve request
      */
     public YieldCurveRequest serviceId(int serviceId)
     {
@@ -112,7 +124,8 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Item names.
+     *
      * @return list of item names
      */
     public List<String> itemNames()
@@ -121,7 +134,8 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Priority class.
+     *
      * @return priority class used by request
      */
     public int priorityClass()
@@ -130,7 +144,8 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Priority count.
+     *
      * @return priority count used by request
      */
     public int priorityCount()
@@ -139,10 +154,10 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
-     * @param priorityClass
-     * @param priorityCount
-     * 
+     * Priority.
+     *
+     * @param priorityClass the priority class
+     * @param priorityCount the priority count
      */
     public void priority(int priorityClass, int priorityCount)
     {
@@ -223,7 +238,8 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Qos.
+     *
      * @return Qos used by request
      */
     public Qos qos()
@@ -232,7 +248,8 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * View fields.
+     *
      * @return list of view fields
      */
     public List<String> viewFields()
@@ -258,7 +275,8 @@ public class YieldCurveRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Domain type.
+     *
      * @return Domain type
      */
     public int domainType()
@@ -448,6 +466,9 @@ public class YieldCurveRequest extends MsgBaseImpl
         return CodecReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#toString()
+     */
     public String toString()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -503,6 +524,9 @@ public class YieldCurveRequest extends MsgBaseImpl
         return stringBuf.toString();
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#decode(com.thomsonreuters.upa.codec.DecodeIterator, com.thomsonreuters.upa.codec.Msg)
+     */
     @Override
     public int decode(DecodeIterator dIter, Msg msg)
     {

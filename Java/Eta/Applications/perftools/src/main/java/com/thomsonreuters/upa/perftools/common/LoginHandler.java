@@ -50,6 +50,9 @@ public class LoginHandler
     private LoginStatus _loginStatus = (LoginStatus)LoginMsgFactory.createMsg();
  
 
+    /**
+     * Instantiates a new login handler.
+     */
     public LoginHandler()
     {
         _loginClose.rdmMsgType(LoginMsgType.CLOSE);
@@ -80,8 +83,8 @@ public class LoginHandler
     
     /**
      * Sets the user name requested by the application.
-     * 
-     * @param userName
+     *
+     * @param userName the user name
      */
     public void userName(String userName)
     {
@@ -90,8 +93,8 @@ public class LoginHandler
 
     /**
      * Sets the application name for the request.
-     * 
-     * @param applicationName
+     *
+     * @param applicationName the application name
      */
     public void applicationName(String applicationName)
     {
@@ -101,8 +104,8 @@ public class LoginHandler
     /**
      * Login Role. Constant from {@link com.thomsonreuters.upa.rdm.Login.RoleTypes}.
      * Default login role is {@link com.thomsonreuters.upa.rdm.Login.RoleTypes#CONS}
-     * 
-     * @param role
+     *
+     * @param role the role
      */
     public void role(int role)
     {
@@ -113,11 +116,12 @@ public class LoginHandler
      * Sends a login request to a channel. This consists of getting a message
      * buffer, setting the login request information, encoding the login
      * request, and sending the login request to the server.
-     * 
+     *
+     * @param channel The channel to send a login request to
+     * @param error the error
+     * @param eIter the e iter
      * @return Returns success if send login request succeeds or failure if it
      *         fails.
-     * 
-     * @param channel The channel to send a login request to
      */
     public TransportBuffer getRequestMsg(Channel channel, Error error, EncodeIterator eIter)
     {
@@ -167,7 +171,10 @@ public class LoginHandler
     /**
      * Close the login stream. Note that closing login stream will automatically
      * close all other streams at the provider.
-     * 
+     *
+     * @param channel the channel
+     * @param error the error
+     * @param eIter the e iter
      * @return Returns success if close login stream succeeds or failure if it
      *         fails.
      */
@@ -202,9 +209,10 @@ public class LoginHandler
      * login status and login refresh, it updates login states (closed, closed
      * recoverable, suspect, success). Query methods are provided to query these
      * login states.
-     * 
-     * @param dIter The decode iterator
+     *
      * @param msg The partially decoded message
+     * @param dIter The decode iterator
+     * @param error the error
      * @return returns success if decoding of message succeeds or failure if it
      *         fails.
      */

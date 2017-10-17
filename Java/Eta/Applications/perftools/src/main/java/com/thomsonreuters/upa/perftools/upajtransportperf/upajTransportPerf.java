@@ -34,7 +34,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * The upajTransportPerf application. This application may act as a client or
  * server as appropriate, and tests the sending of raw messages across connections.
  * <p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * The purpose of this application is to measure performance of the UPA transport,
  * using the different supported connection types with variable message sizes.
@@ -65,11 +65,11 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * see the UPA-J Open Source Performance Tools Guide
  * (Docs/UPAJPerfToolsGuide.pdf).
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * No additional files are necessary to run this application.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * From the <i>Applications/PerfTools</i> directory run <i>ant</i> or <i>buildPerfTools.bat/ksh</i> script to
  * build performance examples.
  * <p>
@@ -77,9 +77,8 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * <p>
  * java -cp ../../Libs/upa.jar;../../Libs/upaValueAdd.jar;./xpp3-1.1.3_8.jar;./xpp3_min-1.1.3_8.jar;bin
  * com.thomsonreuters.upa.perftools.upajtransportperf.upajTransportPerf
- * <p>
+ * </p>
  * <i>-help</i> displays command line options, with a brief description of each option
- * <p>
  */
 public class upajTransportPerf implements ShutdownCallback
 {   

@@ -57,12 +57,25 @@ public class MarketPriceDecoder
     private OmmAscii _fidAsciiValue; /* storage for Buffer */
     private PostUserInfo _postUserInfo; /* post user information */
     
+    /**
+     * Instantiates a new market price decoder.
+     *
+     * @param postUserInfo the post user info
+     */
     public MarketPriceDecoder(PostUserInfo postUserInfo)
     {
     	_postUserInfo = postUserInfo;
 	}
 
-    /** Decode the update. */
+    /**
+     *  Decode the update.
+     *
+     * @param msgType the msg type
+     * @param fieldList the field list
+     * @param _consThreadInfo the cons thread info
+     * @param downcastDecoding the downcast decoding
+     * @return true, if successful
+     */
 	public boolean decodeResponse(int msgType, FieldList fieldList, ConsumerThreadInfo _consThreadInfo, boolean downcastDecoding)
 	{
 		long timeTracker = 0;

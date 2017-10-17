@@ -49,6 +49,9 @@ public class MarketPriceItems
     protected MarketPriceUpdate _marketPriceUpdate;
     protected EncodeIterator _encodeIter = CodecFactory.createEncodeIterator();
 
+    /**
+     * Instantiates a new market price items.
+     */
     public MarketPriceItems()
     {
         _marketPriceList = new ArrayList<MarketPriceItem>(MAX_MARKET_PRICE_ITEM_LIST_SIZE);
@@ -85,6 +88,9 @@ public class MarketPriceItems
 
     /**
      * Gets storage for a market price item from the list.
+     *
+     * @param itemName the item name
+     * @return the market price item
      */
     public MarketPriceItem get(String itemName)
     {
@@ -131,7 +137,12 @@ public class MarketPriceItems
     }
 
     /**
-     * Updates the item's data from the post we got
+     * Updates the item's data from the post we got.
+     *
+     * @param mpItem the mp item
+     * @param dIter the d iter
+     * @param error the error
+     * @return the int
      */
     public int updateFieldsFromPost(MarketPriceItem mpItem, DecodeIterator dIter, Error error)
     {
@@ -282,19 +293,18 @@ public class MarketPriceItems
     /**
      * Encodes the market price response. Returns success if encoding succeeds
      * or failure if encoding fails.
-     * 
+     *
      * @param channel - The channel to send a market price response to
      * @param itemInfo - The item information
-     * @param isSolicited - The response is solicited if set
      * @param msgBuf - The message buffer to encode the market price response
      *            into
+     * @param isSolicited - The response is solicited if set
      * @param streamId - The stream id of the market price response
      * @param isStreaming - Flag for streaming or snapshot
      * @param isPrivateStream - Flag for private stream
      * @param serviceId - The service id of the market price response
      * @param dictionary - The dictionary used for encoding
      * @param error - error in case of encoding failure
-     * 
      * @return {@link CodecReturnCodes}
      */
     public int encodeResponse(Channel channel, ItemInfo itemInfo, TransportBuffer msgBuf, boolean isSolicited, int streamId, boolean isStreaming, boolean isPrivateStream, int serviceId, DataDictionary dictionary, Error error)

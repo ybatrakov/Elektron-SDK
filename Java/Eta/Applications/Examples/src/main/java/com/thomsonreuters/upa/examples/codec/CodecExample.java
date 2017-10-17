@@ -14,7 +14,7 @@ import com.thomsonreuters.upa.codec.EncodeIterator;
  * encoding and decoding using the UPA API. The user can set break points and
  * step through this code to get a look and feel for how to use the API.
  * <p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * Encode/decode examples for all containers (ElementList, FieldList,
  * FilterList, Map, Message, Series, Vector) are provided. There are two Message
@@ -37,11 +37,11 @@ import com.thomsonreuters.upa.codec.EncodeIterator;
  * <li>Vector encode/decode examples are located in VectorCodec.java.
  * </ul>
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * No special setup is required.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * This example is intended to run within an IDE but can also be ran
  * stand-alone.

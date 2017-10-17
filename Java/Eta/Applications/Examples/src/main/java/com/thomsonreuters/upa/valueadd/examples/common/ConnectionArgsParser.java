@@ -237,6 +237,8 @@ public class ConnectionArgsParser
 
 	/**
 	 * Returns list of parsed connection arguments.
+	 *
+	 * @return the list
 	 */
 	public List<ConnectionArg> connectionList()
 	{

@@ -19,11 +19,11 @@ public abstract class XMLReader
     
 	
 	/**
-     * Parses xml message data file.
-     * 
-     * @param filename
-     * @return {@link PerfToolsReturnCodes}
-     */
+	 * Parses xml message data file.
+	 *
+	 * @param filename the filename
+	 * @return {@link PerfToolsReturnCodes}
+	 */
 	public int parseFile( String filename) 
 	{
 		if( filename == null )

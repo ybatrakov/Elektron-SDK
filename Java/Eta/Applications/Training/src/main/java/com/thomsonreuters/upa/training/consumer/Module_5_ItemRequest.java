@@ -287,6 +287,9 @@ import com.thomsonreuters.upa.transport.TransportBuffer;
 import com.thomsonreuters.upa.transport.WriteArgs;
 import com.thomsonreuters.upa.transport.WritePriorities;
 
+/**
+ * The Class Module_5_ItemRequest.
+ */
 public class Module_5_ItemRequest
 {
 
@@ -333,6 +336,11 @@ public class Module_5_ItemRequest
     static State marketPriceItemInfo_itemState = CodecFactory.createState();
     static int MARKETPRICE_ITEM_STREAM_ID_START = -2;
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args)
     {
         /**************************************************************************************************
@@ -1313,6 +1321,11 @@ public class Module_5_ItemRequest
     static long nextSendPingTime; /* time to send next ping from client */
     static boolean receivedServerMsg; /* flag for server message received */
 
+    /**
+     * Inits the ping management.
+     *
+     * @param channel the channel
+     */
     public static void initPingManagement(Channel channel)
     {
         /* get current time */
@@ -1329,6 +1342,14 @@ public class Module_5_ItemRequest
         nextReceivePingTime = currentTime + pingTimeoutServer * 1000;
     }
 
+    /**
+     * Process ping management handler.
+     *
+     * @param channel the channel
+     * @param opMask the op mask
+     * @param selector the selector
+     * @return the int
+     */
     /*
      * Processing ping management handler
      * upaChannel - The channel for ping management processing
@@ -1423,13 +1444,15 @@ public class Module_5_ItemRequest
         return retval;
     }
 
-    /**************************************************************
-     * Sends a message buffer to the channel *
-     * 
+    /**
+     * ************************************************************
+     * Sends a message buffer to the channel *.
+     *
      * @param channel - the Channel to send the message buffer to *
      * @param msgBuf - the buffer to be sent *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     */
     public static int sendMessage(Channel channel, TransportBuffer msgBuf)
     {
         Error error = TransportFactory.createError();
@@ -1509,13 +1532,15 @@ public class Module_5_ItemRequest
 
     final public static int LOGIN_STREAM_ID = 1;
     
-    /**************************************************************
-     * Sends login request message to a channel *
-     * 
+    /**
+     * ************************************************************
+     * Sends login request message to a channel *.
+     *
      * @param channel - the Channel of connection *
      * @param maxFragmentSize - the maximum fragment size before fragmentation *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     */
     
     public static int sendLoginRequest(Channel channel, int maxFragmentSize)
     {
@@ -1644,13 +1669,15 @@ public class Module_5_ItemRequest
         return retCode;
     }
 
-    /**************************************************************
-     * Processes a login response *
-     * 
+    /**
+     * ************************************************************
+     * Processes a login response *.
+     *
      * @param msg - the partially decoded message *
      * @param decIter - the decode iterator *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     */
     public static int processLoginResponse(Msg msg, DecodeIterator decIter)
     {
         int retCode;
@@ -1797,13 +1824,15 @@ public class Module_5_ItemRequest
         return TransportReturnCodes.SUCCESS;
     }
 
-    /**************************************************************
-     * Close the login stream *
-     * 
+    /**
+     * ************************************************************
+     * Close the login stream *.
+     *
      * @param channel - the Channel of connection *
      * @param error - tracks error info *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     */
     public static int closeLoginStream(Channel channel, Error error)
     {
         int retCode;
@@ -1859,14 +1888,16 @@ public class Module_5_ItemRequest
         return retCode;
     }
 
-    /**************************************************************
-     * Performs two time pass to obtain buffer *
-     * 
+    /**
+     * ************************************************************
+     * Performs two time pass to obtain buffer *.
+     *
      * @param channel - the Channel of connection *
      * @param size - size of requested buffer *
      * @param error - tracks error info *
      * @return obtained buffer *
-     **************************************************************/
+     * ************************************************************
+     */
     public static TransportBuffer upaGetBuffer(Channel channel, int size, Error error)
     {
         int retCode;
@@ -1901,6 +1932,13 @@ public class Module_5_ItemRequest
 
     final static int SRCDIR_STREAM_ID = 2;
 
+    /**
+     * Send source directory request.
+     *
+     * @param channel the channel
+     * @param maxMsgSize the max msg size
+     * @return the int
+     */
     public static int sendSourceDirectoryRequest(Channel channel, int maxMsgSize)
     {
         int ret;
@@ -1992,6 +2030,16 @@ public class Module_5_ItemRequest
 
     }
 
+    /**
+     * Process source directory response.
+     *
+     * @param chnl the chnl
+     * @param msg the msg
+     * @param error the error
+     * @param dIter the d iter
+     * @param selector the selector
+     * @return the int
+     */
     public static int processSourceDirectoryResponse(Channel chnl, Msg msg, Error error, DecodeIterator dIter, Selector selector)
     {
         int retval;
@@ -2641,13 +2689,22 @@ public class Module_5_ItemRequest
         return CodecReturnCodes.SUCCESS;
     }
 
-    /********************************************************************************************************************************
+    /**
+     * ******************************************************************************************************************************
      * Processes a dictionary response. This consists of decoding the response.
      * * upaChannelInfo - The channel management information including the
      * dictionaries loaded information that is populated/updated * msg - The
      * partially decoded message * decodeIter - The decode iterator *
      * dataDictionary - the dictionary used for decoding the field entry data *
-     ********************************************************************************************************************************/
+     * ******************************************************************************************************************************
+     *
+     * @param chnl the chnl
+     * @param msg the msg
+     * @param dIter the d iter
+     * @param dictionary the dictionary
+     * @param selector the selector
+     * @return the int
+     */
     public static int processDictionaryResponse(Channel chnl, Msg msg, DecodeIterator dIter, DataDictionary dictionary, Selector selector)
     {
 
@@ -2804,6 +2861,16 @@ public class Module_5_ItemRequest
      * dictionaryName - The name of the dictionary to request
      */
 
+    /**
+     * Send dictionary request.
+     *
+     * @param chnl the chnl
+     * @param dictionary the dictionary
+     * @param maxFragmentSize the max fragment size
+     * @param selector the selector
+     * @param dictionaryName the dictionary name
+     * @return the int
+     */
     public static int sendDictionaryRequest(Channel chnl, DataDictionary dictionary, int maxFragmentSize, Selector selector, String dictionaryName)
     {
 
@@ -2896,6 +2963,13 @@ public class Module_5_ItemRequest
 
     }
 
+    /**
+     * Send market price item request.
+     *
+     * @param chnl the chnl
+     * @param maxFragmentSize the max fragment size
+     * @return the int
+     */
     public static int sendMarketPriceItemRequest(Channel chnl, int maxFragmentSize)
     {
 
@@ -3009,6 +3083,16 @@ public class Module_5_ItemRequest
 
     }
 
+    /**
+     * Process market price item response.
+     *
+     * @param chnl the chnl
+     * @param msg the msg
+     * @param dIter the d iter
+     * @param dictionary the dictionary
+     * @param error the error
+     * @return the int
+     */
     /*
      * Processes a market price response. This consists of extracting the key, printing out the item name contained in the key,
      * decoding the field list and field entry data.
@@ -3162,6 +3246,14 @@ public class Module_5_ItemRequest
     static Time fidTimeValue = CodecFactory.createTime();
     static DateTime fidDateTimeValue = CodecFactory.createDateTime();
 
+    /**
+     * Decode market price payload.
+     *
+     * @param fieldList the field list
+     * @param dIter the d iter
+     * @param dictionary the dictionary
+     * @return the int
+     */
     public static int decodeMarketPricePayload(FieldList fieldList, DecodeIterator dIter, DataDictionary dictionary)
     {
 
@@ -3420,6 +3512,13 @@ public class Module_5_ItemRequest
         return CodecReturnCodes.SUCCESS;
     }
 
+    /**
+     * Close market price item stream.
+     *
+     * @param chnl the chnl
+     * @param maxFragmentSize the max fragment size
+     * @return the int
+     */
     public static int closeMarketPriceItemStream(Channel chnl, int maxFragmentSize)
     {
         Error error = TransportFactory.createError();

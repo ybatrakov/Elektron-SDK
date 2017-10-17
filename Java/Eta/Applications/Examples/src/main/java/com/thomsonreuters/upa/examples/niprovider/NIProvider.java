@@ -43,7 +43,7 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service;
  * dictionary from an adh.
  * It is a single-threaded client application.
  * <p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * This class is responsible for the following:
  * <ul>
@@ -74,13 +74,13 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service;
  * slight decrease in performance compared to writing applications directly to
  * the UPA interfaces.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * The RDMFieldDictionary and enumtype.def files must be located in the
  * directory of execution. If not available and adh supports dictionary requests,
  * the dictionary is down loaded from adh.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Change directory to the <i>Applications/Examples</i> directory and run <i>ant</i> to
  * build.
@@ -89,7 +89,7 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service;
  * com.thomsonreuters.upa.examples.niprovider.NIProvider [-h infraHostName] [-p
  * infraPortNo] [-uname loginUserName] [-s serviceName] [-id serviceId] [-mp
  * marketPriceItemName] [-mbo marketByOrderItemName] [-x] [-runtime runTime]
- * <p>
+ * </p>
  * <ul>
  * <li>-h Infrastructure host name for TCP socket. Default is <i>localhost</i>.
  * <li>-p Infrastructure port number for TCP socket. Default is <i>14003</i>.
@@ -162,6 +162,9 @@ public class NIProvider implements ResponseCallback
     
    public static int TRANSPORT_BUFFER_SIZE_STATUS_MSG = ChannelSession.MAX_MSG_SIZE;
 
+    /**
+     * Instantiates a new NI provider.
+     */
     public NIProvider()
     {
     	channelInfo = TransportFactory.createChannelInfo();
@@ -421,8 +424,8 @@ public class NIProvider implements ResponseCallback
      * command line options used by the application. Parsing command line
      * arguments. Initializing all domain handlers. Loading dictionaries from
      * file. Enabling XML tracing, if specified.
-     * 
-     * @param args
+     *
+     * @param args the args
      */
     public void init(String[] args)
     {
@@ -874,7 +877,10 @@ public class NIProvider implements ResponseCallback
     }
 
     /**
-     * @param args
+     * The main method.
+     *
+     * @param args the arguments
+     * @throws Exception the exception
      */
     public static void main(String[] args) throws Exception
     {

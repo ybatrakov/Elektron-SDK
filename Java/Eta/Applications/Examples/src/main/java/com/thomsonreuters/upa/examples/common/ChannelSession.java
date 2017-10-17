@@ -86,6 +86,9 @@ public class ChannelSession
 	public boolean canSendLoginReissue;
 	public boolean isLoginReissue;
     
+    /**
+     * Instantiates a new channel session.
+     */
     public ChannelSession()
     {
         copts.clear();
@@ -153,6 +156,12 @@ public class ChannelSession
         return Transport.initialize(initArgs, error);
     }
 
+    /**
+     * Flush.
+     *
+     * @param error the error
+     * @return the int
+     */
     public int flush(Error error)
     {
         if (channelState() == ChannelState.INACTIVE)
@@ -187,8 +196,8 @@ public class ChannelSession
     }
 
     /**
-     * Retrieves the {@link ConnectOptions} 
-     * 
+     * Retrieves the {@link ConnectOptions} .
+     *
      * @return {@link ConnectOptions}
      */
     public ConnectOptions getConnectOptions()
@@ -207,6 +216,8 @@ public class ChannelSession
     }
 
     /**
+     * Should recover connection.
+     *
      * @return true if connection recovery flag is set during channel connection
      *         failure.
      */
@@ -389,10 +400,9 @@ public class ChannelSession
     }
 
     /**
-     * Closes the UPA channel and uninitilizes Transport
-     * 
+     * Closes the UPA channel and uninitilizes Transport.
+     *
      * @param error error information in case of failure
-     * 
      * @return {@link TransportReturnCodes}
      */
     public int uninit(Error error)
@@ -518,9 +528,9 @@ public class ChannelSession
     
     /**
      * Writes the content of the {@link TransportBuffer} to the UPA channel.
-     * 
-     * @param msgBuf
-     * @param error
+     *
+     * @param msgBuf the msg buf
+     * @param error the error
      * @return {@link TransportReturnCodes}
      * @see Channel#write(TransportBuffer, WriteArgs, Error)
      */
@@ -757,6 +767,11 @@ public class ChannelSession
         }
     }
 
+    /**
+     * Select ret val.
+     *
+     * @return the int
+     */
     public int selectRetVal()
     {
         return selectRetVal;

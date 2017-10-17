@@ -36,6 +36,12 @@ public class ProviderSession
     private ProviderThread _providerThread;                     // Provider thread of this session.
     private ReactorErrorInfo _errorInfo;                        // Use the VA Reactor instead of the UPA Channel for sending and receiving
 
+    /**
+     * Instantiates a new provider session.
+     *
+     * @param xmlMsgData the xml msg data
+     * @param itemEncoder the item encoder
+     */
     public ProviderSession(XmlMsgData xmlMsgData, ItemEncoder itemEncoder)
     {
         _refreshItemList = new ItemWatchlist(100000);
@@ -50,6 +56,8 @@ public class ProviderSession
 
     /**
      * Initializes for one client channel.
+     *
+     * @param clientChannelInfo the client channel info
      */
     public void init(ClientChannelInfo clientChannelInfo)
     {
@@ -117,6 +125,8 @@ public class ProviderSession
 
     /**
      * Clears item information.
+     *
+     * @param itemInfo the item info
      */
     public void freeItemInfo(ItemInfo itemInfo)
     {
@@ -210,8 +220,8 @@ public class ProviderSession
 
     /**
      * Handles item stream close.
-     * 
-     * @param streamId
+     *
+     * @param streamId the stream id
      */
     public void closeItemStream(int streamId)
     {
@@ -237,7 +247,9 @@ public class ProviderSession
     }
 
     /**
-     * Returns item lists to send refresh messages to. 
+     * Returns item lists to send refresh messages to.
+     *
+     * @return the item watchlist
      */
     public ItemWatchlist refreshItemList()
     {
@@ -245,7 +257,9 @@ public class ProviderSession
     }
 
     /**
-     * Returns item lists to send update messages to. 
+     * Returns item lists to send update messages to.
+     *
+     * @return the item watchlist
      */
     public ItemWatchlist updateItemList()
     {
@@ -253,7 +267,9 @@ public class ProviderSession
     }
 
     /**
-     * Returns item lists to send generic messages to. 
+     * Returns item lists to send generic messages to.
+     *
+     * @return the item watchlist
      */
     public ItemWatchlist genMsgItemList()
     {
@@ -262,6 +278,8 @@ public class ProviderSession
 
     /**
      * Returns open items indexed by attributes.
+     *
+     * @return the map
      */
     public Map<ItemAttributes, ItemInfo> itemAttributesTable()
     {
@@ -270,6 +288,8 @@ public class ProviderSession
 
     /**
      * Returns open items indexed by stream id.
+     *
+     * @return the map
      */
     public Map<Integer, ItemInfo> itemStreamIdTable()
     {
@@ -278,6 +298,8 @@ public class ProviderSession
 
     /**
      * Returns number of items currently opened.
+     *
+     * @return the int
      */
     public int openItemCount()
     {
@@ -286,6 +308,8 @@ public class ProviderSession
 
     /**
      * Returns number of unexpected close messages received.
+     *
+     * @return the int
      */
     public int unexpectedCloseCount()
     {
@@ -294,6 +318,8 @@ public class ProviderSession
 
     /**
      * Client channel information.
+     *
+     * @return the client channel info
      */
     public ClientChannelInfo clientChannelInfo()
     {
@@ -302,6 +328,8 @@ public class ProviderSession
 
     /**
      * Current buffer in use by this client channel.
+     *
+     * @return the transport buffer
      */
     public TransportBuffer writingBuffer()
     {
@@ -310,6 +338,8 @@ public class ProviderSession
 
     /**
      * Sets current buffer to use by this client channel.
+     *
+     * @param writingBuffer the writing buffer
      */
     public void writingBuffer(TransportBuffer writingBuffer)
     {
@@ -318,6 +348,8 @@ public class ProviderSession
 
     /**
      * Total number of buffers currently packed in _writingBuffer.
+     *
+     * @return the int
      */
     public int packedBufferCount()
     {
@@ -326,6 +358,8 @@ public class ProviderSession
 
     /**
      * Total number of buffers currently packed in _writingBuffer.
+     *
+     * @param packedBufferCount the packed buffer count
      */
     public void packedBufferCount(int packedBufferCount)
     {
@@ -334,6 +368,8 @@ public class ProviderSession
 
     /**
      * Time in nano seconds at which this channel was fully setup.
+     *
+     * @return the long
      */
     public long timeActivated()
     {
@@ -342,6 +378,8 @@ public class ProviderSession
 
     /**
      * Time in nano seconds at which this channel was fully setup.
+     *
+     * @param timeActivated the time activated
      */
     public void timeActivated(long timeActivated)
     {
@@ -350,6 +388,8 @@ public class ProviderSession
     
     /**
      * Provider thread of this session.
+     *
+     * @return the provider thread
      */
     public ProviderThread providerThread()
     {
@@ -358,6 +398,8 @@ public class ProviderSession
 
     /**
      * Provider thread of this session.
+     *
+     * @param providerThread the provider thread
      */
     public void providerThread(ProviderThread providerThread)
     {
