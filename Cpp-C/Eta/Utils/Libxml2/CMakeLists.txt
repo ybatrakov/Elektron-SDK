@@ -32,6 +32,7 @@ include_directories( include )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
+      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR
       ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     add_library( XML2objects OBJECT ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
   else()

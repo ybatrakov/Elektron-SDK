@@ -21,9 +21,11 @@ add_executable( WatchlistConsumer${STATIC_EXT} ${SOURCE_FILES} )
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   set(OTHER_LIBRARIES ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} stdc++ )
   if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
+      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR
       ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     target_link_libraries( WatchlistConsumer librsslReactor librsslRDM librsslVAUtil ${OTHER_LIBRARIES} )
   elseif ( (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedShared") OR
+      (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertShared") OR
       (${CMAKE_BUILD_TYPE} STREQUAL "DebugShared") )
     target_link_libraries( WatchlistConsumer ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
   endif()

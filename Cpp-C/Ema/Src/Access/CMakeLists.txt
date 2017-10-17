@@ -56,11 +56,13 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
 
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
+      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic") OR
       ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     add_library ( libema STATIC ${EmaSrcFiles} ${EmaHeaderFiles} $<TARGET_OBJECTS:RDMobjects>
       $<TARGET_OBJECTS:ReactorObjects> $<TARGET_OBJECTS:VAUtilObjects> $<TARGET_OBJECTS:XML2objects>
     )
   elseif ( (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedShared") OR
+      (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertShared") OR
       (${CMAKE_BUILD_TYPE} STREQUAL "DebugShared") )
     add_library ( libema SHARED ${EmaSrcFiles} ${EmaHeaderFiles} )
     target_link_libraries( libema librsslVA ${RSSL} libxml2 )

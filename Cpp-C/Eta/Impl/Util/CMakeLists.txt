@@ -8,6 +8,7 @@ set( VAUtilSrcFiles
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
+      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR      
       ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     add_library( VAUtilObjects OBJECT ${VAUtilSrcFiles} )
     add_library( librsslVAUtil STATIC ${VAUtilSrcFiles} )

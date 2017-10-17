@@ -21,6 +21,8 @@
 **/DebugStatic
 **/OptimizedShared
 **/OptimizedStatic
+**/OptimizedAssertShared
+**/OptimizedAssertStatic
 **/refman
 
 
