@@ -22,19 +22,29 @@ public class TimeRecordQueue
 		}
 	}
 	
-	/** Queue of submitted TimeRecord objects. */
+	/**
+	 *  Queue of submitted TimeRecord objects.
+	 *
+	 * @return the queue
+	 */
 	public Queue<TimeRecord> records()
 	{
 		return _records;
 	}
 
-	/** Reusable pool of TimeRecord objects. */
+	/**
+	 *  Reusable pool of TimeRecord objects.
+	 *
+	 * @return the queue
+	 */
 	public Queue<TimeRecord> pool()
 	{
 		return _pool;
 	}
 
-	/** Cleans up TimeRecordQueue */
+	/**
+	 *  Cleans up TimeRecordQueue.
+	 */
 	public void cleanup()
 	{
 		while (!_records.isEmpty())

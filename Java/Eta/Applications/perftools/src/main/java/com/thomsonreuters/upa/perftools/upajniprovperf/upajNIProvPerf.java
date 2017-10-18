@@ -22,7 +22,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * encoders and decoders, in providing Level I Market Price content to the
  * Thomson Reuters Enterprise Platform Advanced Data Hub (ADH).
  * <p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * The provider creates two categories of threads:
  * <ul>
@@ -47,7 +47,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * <p>
  * This application uses XML Pull Parser (XPP), an open source XML parser library.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * The following configuration files are required:
  * <ul>
@@ -56,7 +56,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * <li>MsgData.xml, located in PerfTools
  * </ul>
  * <p>
- * <H2>Running the application:</H2> 
+ * <em>Running the application:</em> 
  * <p>
  * From the <i>Applications/PerfTools</i> directory run <i>ant</i> or <i>buildPerfTools.bat/ksh</i> script to
  * build performance examples.
@@ -67,7 +67,6 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  *  com.thomsonreuters.upa.perftools.upajniprovperf.upajNIProvPerf
  * <p>
  * <i>-help</i> displays command line options, with a brief description of each option
- * <p>
  */
 public class upajNIProvPerf
 {	

@@ -34,6 +34,9 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     protected Real tempReal = CodecFactory.createReal();
     protected UInt tempUInt = CodecFactory.createUInt();
     
+    /**
+     * Instantiates a new market price response base.
+     */
     protected MarketPriceResponseBase()
     {
         itemName = CodecFactory.createBuffer();
@@ -62,8 +65,8 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
 
     /**
      * Dictionary for encoding market price refresh/update message.
-     * 
-     * @param dictionary
+     *
+     * @param dictionary the dictionary
      */
     public void dictionary(DataDictionary dictionary)
     {
@@ -71,6 +74,8 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     }
     
     /**
+     * Item name.
+     *
      * @return item name
      */
     public Buffer itemName()
@@ -79,7 +84,8 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Market price item.
+     *
      * @return market price item data.
      */
     public MarketPriceItem marketPriceItem()
@@ -88,6 +94,8 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     }
     
     /**
+     * Service id.
+     *
      * @return service id
      */
     public int serviceId()
@@ -96,7 +104,9 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     }
 
     /**
-     * @param serviceId
+     * Service id.
+     *
+     * @param serviceId the service id
      */
     public void serviceId(int serviceId)
     {
@@ -106,6 +116,8 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     /**
      * The market price refresh flags. Populated by
      * {@link MarketPriceRefreshFlags}.
+     *
+     * @return the int
      */
     public int flags()
     {
@@ -115,8 +127,8 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     /**
      * The market price refresh flags. Populated by
      * {@link MarketPriceRefreshFlags}.
-     * 
-     * @param flags
+     *
+     * @param flags the flags
      */
     public void flags(int flags)
     {
@@ -124,7 +136,8 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     }
     
     /**
-     * 
+     * Market price item.
+     *
      * @param itemData - market price item data.
      */
     public void marketPriceItem(MarketPriceItem itemData)
@@ -351,14 +364,29 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
         return msg.encodeComplete(encodeIter, true);
     }
 
+    /**
+     * Encode msg.
+     *
+     * @return the msg
+     */
     public abstract Msg encodeMsg();
 
     
+    /**
+     * Encode refresh fields.
+     *
+     * @param encodeIter the encode iter
+     * @param dictionary the dictionary
+     * @return the int
+     */
     protected int encodeRefreshFields(EncodeIterator encodeIter, DataDictionary dictionary)
     {
        return CodecReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#buildStringBuffer()
+     */
     public StringBuilder buildStringBuffer()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -384,6 +412,9 @@ public abstract class MarketPriceResponseBase extends MsgBaseImpl
     }
    
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#decode(com.thomsonreuters.upa.codec.DecodeIterator, com.thomsonreuters.upa.codec.Msg)
+     */
     @Override
     public int decode(DecodeIterator dIter, Msg msg)
     {

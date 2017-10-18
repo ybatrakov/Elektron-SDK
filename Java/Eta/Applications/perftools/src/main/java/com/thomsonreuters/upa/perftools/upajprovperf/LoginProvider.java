@@ -46,6 +46,9 @@ public class LoginProvider
     private ReactorErrorInfo      _errorInfo; // Use the VA Reactor instead of the UPA Channel for sending and receiving
     private ReactorSubmitOptions  _reactorSubmitOptions; // Use the VA Reactor instead of the UPA Channel for sending and receiving
     
+    /**
+     * Instantiates a new login provider.
+     */
     public LoginProvider()
     {
         _loginRefresh = (LoginRefresh)LoginMsgFactory.createMsg();
@@ -62,8 +65,9 @@ public class LoginProvider
 
     /**
      * Processes a login request.
-     * 
+     *
      * @param channelHandler - The channel handler
+     * @param clientChannelInfo the client channel info
      * @param msg - The partially decoded message
      * @param dIter - The decode iterator
      * @param error - Error information in case of failure
@@ -306,8 +310,8 @@ public class LoginProvider
 
     /**
      * Sets DACS application id for the login message.
-     * 
-     * @param applicationId
+     *
+     * @param applicationId the application id
      */
     public void applicationId(String applicationId)
     {
@@ -326,8 +330,8 @@ public class LoginProvider
 
     /**
      * Sets applicationName for the login message. 
-     * 
-     * @param applicationName
+     *
+     * @param applicationName the application name
      */
     public void applicationName(String applicationName)
     {
@@ -346,8 +350,8 @@ public class LoginProvider
 
     /**
      * Sets DACS position for login message.
-     * 
-     * @param position
+     *
+     * @param position the position
      */
     public void position(String position)
     {
@@ -371,7 +375,11 @@ public class LoginProvider
         }
     }
 
-    /** Returns loginRequest. */
+    /**
+     *  Returns loginRequest.
+     *
+     * @return the login request
+     */
     public LoginRequest loginRequest()
     {
         return _loginRequest;

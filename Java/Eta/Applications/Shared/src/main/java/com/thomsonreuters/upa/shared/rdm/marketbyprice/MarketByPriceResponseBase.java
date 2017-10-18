@@ -44,6 +44,9 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
     protected DateTime tempDateTime = CodecFactory.createDateTime();
     protected LocalFieldSetDefDb marketByPriceSetDefDb;
 
+    /**
+     * Instantiates a new market by price response base.
+     */
     protected MarketByPriceResponseBase()
     {
         EncodeIterator encIter = CodecFactory.createEncodeIterator();
@@ -108,8 +111,8 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
 
     /**
      * Dictionary for encoding market by order refresh/update message.
-     * 
-     * @param dictionary
+     *
+     * @param dictionary the dictionary
      */
     public void dictionary(DataDictionary dictionary)
     {
@@ -117,6 +120,8 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
     }
 
     /**
+     * Item name.
+     *
      * @return item name
      */
     public Buffer itemName()
@@ -125,7 +130,8 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Market by price item.
+     *
      * @return market by price item data.
      */
     public MarketByPriceItem marketByPriceItem()
@@ -134,7 +140,8 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Market by price item.
+     *
      * @param itemData market by price item data
      */
     public void marketByPriceItem(MarketByPriceItem itemData)
@@ -143,7 +150,8 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Part no.
+     *
      * @param partNo - current part number for multi-part refresh message.
      */
     public void partNo(int partNo)
@@ -151,6 +159,11 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
         this.partNo = partNo;
     }
 
+    /**
+     * Part no.
+     *
+     * @return the int
+     */
     public int partNo()
     {
         return partNo;
@@ -229,15 +242,38 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
         return msg.encodeComplete(encodeIter, true);
     }
 
+    /**
+     * Encode msg.
+     *
+     * @return the msg
+     */
     public abstract Msg encodeMsg();
 
+    /**
+     * Encode summary data.
+     *
+     * @param encodeIter the encode iter
+     * @param dictionary the dictionary
+     * @param map the map
+     * @return the int
+     */
     protected int encodeSummaryData(EncodeIterator encodeIter, DataDictionary dictionary, Map map)
     {
         return CodecReturnCodes.SUCCESS;
     }
 
+    /**
+     * Encode map entries.
+     *
+     * @param encodeIter the encode iter
+     * @param dictionary the dictionary
+     * @return the int
+     */
     protected abstract int encodeMapEntries(EncodeIterator encodeIter, DataDictionary dictionary);
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#buildStringBuffer()
+     */
     public StringBuilder buildStringBuffer()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -255,6 +291,9 @@ public abstract class MarketByPriceResponseBase extends MsgBaseImpl
         return stringBuf;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#decode(com.thomsonreuters.upa.codec.DecodeIterator, com.thomsonreuters.upa.codec.Msg)
+     */
     @Override
     public int decode(DecodeIterator dIter, Msg msg)
     {

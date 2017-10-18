@@ -101,6 +101,11 @@ public class XmlItemInfoList
 	
 	private XmlItemInfoListReader _xmlReader = new XmlItemInfoListReader();
 	
+	/**
+	 * Instantiates a new xml item info list.
+	 *
+	 * @param itemCount the item count
+	 */
 	public XmlItemInfoList(int itemCount)
 	{
 		_currentItemCount = 0;
@@ -110,8 +115,8 @@ public class XmlItemInfoList
 
 	/**
 	 * Parses xml message data file.
-	 * 
-	 * @param filename
+	 *
+	 * @param filename the filename
 	 * @return {@link PerfToolsReturnCodes}
 	 */
 	public int parseFile( String filename) 
@@ -130,25 +135,41 @@ public class XmlItemInfoList
 		return PerfToolsReturnCodes.SUCCESS;
 	}
 
-	/** The total number of items in the list */
+	/**
+	 *  The total number of items in the list.
+	 *
+	 * @return the int
+	 */
 	public int itemInfoCount()
 	{
 		return _itemInfoCount;
 	}
 
-	/** Number of items in list for posting. */
+	/**
+	 *  Number of items in list for posting.
+	 *
+	 * @return the int
+	 */
 	public int postItemCount()
 	{
 		return _postItemCount;
 	}
 
-	/** Number of items in list for sending generic msgs. */
+	/**
+	 *  Number of items in list for sending generic msgs.
+	 *
+	 * @return the int
+	 */
 	public int genMsgItemCount()
 	{
 		return _genMsgItemCount;
 	}
 	
-	/** The list of items */
+	/**
+	 *  The list of items.
+	 *
+	 * @return the xml item info[]
+	 */
 	public XmlItemInfo[] itemInfoList()
 	{
 		return _itemInfoList;

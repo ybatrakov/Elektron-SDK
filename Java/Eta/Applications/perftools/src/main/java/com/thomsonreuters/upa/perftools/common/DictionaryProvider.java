@@ -36,6 +36,10 @@ import com.thomsonreuters.upa.valueadd.reactor.ReactorSubmitOptions;
  */
 public class DictionaryProvider
 {
+	
+	/**
+	 * The Enum DictionaryRejectReason.
+	 */
 	public enum DictionaryRejectReason
 	{
 	    UNKNOWN_DICTIONARY_NAME,
@@ -75,6 +79,9 @@ public class DictionaryProvider
     private ReactorSubmitOptions  _reactorSubmitOptions; // Use the VA Reactor instead of the UPA Channel for sending and receiving
     private ReactorChannelInfo    _reactorChnlInfo; // Use the VA Reactor instead of the UPA Channel for sending and receiving
     
+    /**
+     * Instantiates a new dictionary provider.
+     */
     public DictionaryProvider()
     {
         _encodeIter = CodecFactory.createEncodeIterator();
@@ -97,7 +104,10 @@ public class DictionaryProvider
     }
     
     /**
-     * Loads dictionary files
+     * Loads dictionary files.
+     *
+     * @param error the error
+     * @return true, if successful
      */
     public boolean loadDictionary(Error error)
     {
@@ -115,6 +125,8 @@ public class DictionaryProvider
 
     /**
      * Returns the data dictionary.
+     *
+     * @return the data dictionary
      */
     public DataDictionary dictionary()
     {
@@ -252,6 +264,15 @@ public class DictionaryProvider
         return PerfToolsReturnCodes.SUCCESS;
     }
 
+    /**
+     * Send request reject reactor.
+     *
+     * @param clientChannelInfo the client channel info
+     * @param streamId the stream id
+     * @param reason the reason
+     * @param error the error
+     * @return the int
+     */
     /*
      * Sends the dictionary request reject status message for a reactor channel. 
      * chnl - The channel to send request reject status message to 
@@ -349,6 +370,13 @@ public class DictionaryProvider
         return PerfToolsReturnCodes.SUCCESS;
     }
 
+    /**
+     * Send field dictionary response reactor.
+     *
+     * @param clientChannelInfo the client channel info
+     * @param error the error
+     * @return the int
+     */
     /*
      * Sends a field dictionary response to a reactor channel. This consists of getting
      * a message buffer, encoding the dictionary response, and sending the
@@ -475,6 +503,13 @@ public class DictionaryProvider
         return PerfToolsReturnCodes.SUCCESS;
     }
 
+    /**
+     * Send enum type dictionary response reactor.
+     *
+     * @param clientChannelInfo the client channel info
+     * @param error the error
+     * @return the int
+     */
     /*
      * Sends a enum dictionary response to a reactor channel. This consists of getting
      * a message buffer, encoding the dictionary response, and sending the
@@ -528,18 +563,33 @@ public class DictionaryProvider
         return PerfToolsReturnCodes.SUCCESS;
     }
 
+    /**
+     * Field dictionary download name.
+     *
+     * @return the buffer
+     */
     /* Returns fieldDictionaryDownloadName. */
     public Buffer fieldDictionaryDownloadName()
     {
         return fieldDictionaryDownloadName;
     }
     
+    /**
+     * Enum type dictionary download name.
+     *
+     * @return the buffer
+     */
     /* Returns enumTypeDictionaryDownloadName. */
     public Buffer enumTypeDictionaryDownloadName()
     {
         return enumTypeDictionaryDownloadName;
     }
 
+    /**
+     * Dictionary request.
+     *
+     * @return the dictionary request
+     */
     /* Returns dictionaryRequest. */
     public DictionaryRequest dictionaryRequest()
     {

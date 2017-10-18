@@ -55,11 +55,11 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * choices were made to favor simplicity and readability over performance. It is
  * not intended to be used for measuring performance.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * No special setup is required.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Change directory to the <i>Applications/Examples</i> directory and run <i>ant</i> to
  * build.
@@ -67,7 +67,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * java -cp ./bin;../../Libs/upaValueAdd.jar;../../Libs/upa.jar
  * com.thomsonreuters.upa.examples.genericprov.GenericProv [-p srvrPortNo]
  * [-i interfaceName] [-s serviceName] [-id serviceId] [-x] [-runtime runTime]
- * <p>
+ * </p>
  * <ul>
  * <li>-p Server port number. Default is <i>14002</i>.
  * <li>-i Interface name. Default is <i>null</i>.

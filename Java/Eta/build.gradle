@@ -1,0 +1,3 @@
+// disable creating empty Eta.jar file 
+jar.enabled = false
+

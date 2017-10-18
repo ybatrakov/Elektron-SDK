@@ -57,11 +57,19 @@ public class MarketPriceRequest extends MsgBaseImpl
     private UInt tempUInt = CodecFactory.createUInt();
     private Array viewArray = CodecFactory.createArray();
 
+    /**
+     * Instantiates a new market price request.
+     */
     public MarketPriceRequest()
     {
         this(DomainTypes.MARKET_PRICE);
     }
 
+    /**
+     * Instantiates a new market price request.
+     *
+     * @param domainType the domain type
+     */
     public MarketPriceRequest(int domainType)
     {
         qos = CodecFactory.createQos();
@@ -108,7 +116,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Service id.
+     *
      * @return service id
      */
     public int serviceId()
@@ -117,7 +126,10 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * @param serviceId
+     * Service id.
+     *
+     * @param serviceId the service id
+     * @return the market price request
      */
     public MarketPriceRequest serviceId(int serviceId)
     {
@@ -126,7 +138,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Item names.
+     *
      * @return list of item names
      */
     public List<String> itemNames()
@@ -135,7 +148,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Priority class.
+     *
      * @return priority class used by request
      */
     public int priorityClass()
@@ -144,7 +158,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Priority count.
+     *
      * @return priority count used by request
      */
     public int priorityCount()
@@ -153,10 +168,10 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
-     * @param priorityClass
-     * @param priorityCount
-     * 
+     * Priority.
+     *
+     * @param priorityClass the priority class
+     * @param priorityCount the priority count
      */
     public void priority(int priorityClass, int priorityCount)
     {
@@ -237,7 +252,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Qos.
+     *
      * @return Qos used by request
      */
     public Qos qos()
@@ -246,7 +262,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * View fields.
+     *
      * @return list of view fields
      */
     public List<String> viewFields()
@@ -272,7 +289,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Domain type.
+     *
      * @return Domain type
      */
     public int domainType()
@@ -281,7 +299,9 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
     
     /**
-     * Set the identifier for the msg Key
+     * Set the identifier for the msg Key.
+     *
+     * @param setIdentifier the set identifier
      */
     
     public void identifier(int setIdentifier)
@@ -298,7 +318,8 @@ public class MarketPriceRequest extends MsgBaseImpl
     }
     
     /**
-     * Checks the presence of an identifier
+     * Checks the presence of an identifier.
+     *
      * @return true - if exists; false if does not exist;
      */
     public boolean checkHasIdentifier()
@@ -564,6 +585,9 @@ public class MarketPriceRequest extends MsgBaseImpl
         return CodecReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#toString()
+     */
     public String toString()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -630,6 +654,9 @@ public class MarketPriceRequest extends MsgBaseImpl
         return stringBuf.toString();
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#decode(com.thomsonreuters.upa.codec.DecodeIterator, com.thomsonreuters.upa.codec.Msg)
+     */
     @Override
     public int decode(DecodeIterator dIter, Msg msg)
     {

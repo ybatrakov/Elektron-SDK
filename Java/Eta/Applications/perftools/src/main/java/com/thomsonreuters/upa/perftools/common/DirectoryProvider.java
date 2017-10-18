@@ -49,6 +49,9 @@ public class DirectoryProvider
     // Service qos
     protected Qos                         _qos;
 
+    /**
+     * Instantiates a new directory provider.
+     */
     public DirectoryProvider()
     {
         _directoryRefresh = (DirectoryRefresh)DirectoryMsgFactory.createMsg();
@@ -126,6 +129,8 @@ public class DirectoryProvider
     }
 
 	/**
+	 * Service id.
+	 *
 	 * @return Service id configured for the provider
 	 */
     public int serviceId()
@@ -135,7 +140,8 @@ public class DirectoryProvider
 
     /**
      * Configure service id for the provider.
-     * @param serviceId
+     *
+     * @param serviceId the service id
      */
     public void serviceId(int serviceId)
     {
@@ -143,6 +149,8 @@ public class DirectoryProvider
     }
 
     /**
+     * Qos.
+     *
      * @return configured qos information for the provider.
      */
     public Qos qos()
@@ -151,6 +159,8 @@ public class DirectoryProvider
     }
 
     /**
+     * Service name.
+     *
      * @return Service name configured for the provider
      */
     public String serviceName()
@@ -160,7 +170,8 @@ public class DirectoryProvider
 
     /**
      * Configure service name for the provider.
-     * @param serviceName
+     *
+     * @param serviceName the service name
      */
     public void serviceName(String serviceName)
     {
@@ -168,6 +179,8 @@ public class DirectoryProvider
     }
 
     /**
+     * Open limit.
+     *
      * @return open limit configured for the provider
      */
     public int openLimit()
@@ -177,7 +190,8 @@ public class DirectoryProvider
 
     /**
      * Configure open limit for the provider.
-     * @param openLimit
+     *
+     * @param openLimit the open limit
      */
     public void openLimit(int openLimit)
     {
@@ -185,6 +199,8 @@ public class DirectoryProvider
     }
     
     /**
+     * Directory refresh.
+     *
      * @return directory refresh
      */
     public DirectoryRefresh directoryRefresh()

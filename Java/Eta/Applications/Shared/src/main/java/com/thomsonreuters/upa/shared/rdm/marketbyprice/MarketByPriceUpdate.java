@@ -25,6 +25,9 @@ public class MarketByPriceUpdate extends MarketByPriceResponseBase
 
     private UpdateMsg updateMsg = (UpdateMsg)CodecFactory.createMsg();
 
+    /**
+     * Instantiates a new market by price update.
+     */
     public MarketByPriceUpdate()
     {
         super();
@@ -95,7 +98,8 @@ public class MarketByPriceUpdate extends MarketByPriceResponseBase
 
     
     /**
-     * 
+     * Service id.
+     *
      * @return serviceId
      */
     public int serviceId()
@@ -104,13 +108,18 @@ public class MarketByPriceUpdate extends MarketByPriceResponseBase
     }
 
     /**
-     * @param serviceId
+     * Service id.
+     *
+     * @param serviceId the service id
      */
     public void serviceId(int serviceId)
     {
         this.serviceId = serviceId;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyprice.MarketByPriceResponseBase#encodeMsg()
+     */
     @Override
     public Msg encodeMsg()
     {
@@ -142,6 +151,9 @@ public class MarketByPriceUpdate extends MarketByPriceResponseBase
         return updateMsg;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyprice.MarketByPriceResponseBase#encodeMapEntries(com.thomsonreuters.upa.codec.EncodeIterator, com.thomsonreuters.upa.codec.DataDictionary)
+     */
     @Override
     protected int encodeMapEntries(EncodeIterator encodeIter, DataDictionary dictionary)
     {
@@ -329,6 +341,9 @@ public class MarketByPriceUpdate extends MarketByPriceResponseBase
         return ret;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#toString()
+     */
     public String toString()
     {
         StringBuilder toStringBuilder = super.buildStringBuffer();
@@ -346,6 +361,9 @@ public class MarketByPriceUpdate extends MarketByPriceResponseBase
 
     }
     
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#domainType()
+     */
     @Override
     public int domainType()
     {

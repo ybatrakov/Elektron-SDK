@@ -145,6 +145,8 @@ public class TransportPerfConfig
     /**
      * Parses command-line arguments to fill in the application's configuration
      * structures.
+     *
+     * @param args the args
      */
     public static void init(String[] args)
     {
@@ -535,240 +537,413 @@ public class TransportPerfConfig
         return tunneling;       
     }
 
-    /** Time application runs before exiting. */
+    /**
+     *  Time application runs before exiting.
+     *
+     * @return the int
+     */
     public static int runTime()
     {
         return _runTime;
     }
 
-    /** Number of threads that handle connections. */
+    /**
+     *  Number of threads that handle connections.
+     *
+     * @return the int
+     */
     public static int threadCount()
     {
         return _threadCount;
     }
     
-    /** Name of the summary log file. */
+    /**
+     *  Name of the summary log file.
+     *
+     * @return the string
+     */
     public static String summaryFilename()
     {
         return _summaryFilename;
     }
 
-    /** Controls how often statistics are written. */
+    /**
+     *  Controls how often statistics are written.
+     *
+     * @return the int
+     */
     public static int writeStatsInterval()
     {
         return _writeStatsInterval;
     }
 
-    /** Controls whether stats appear on the screen. */
+    /**
+     *  Controls whether stats appear on the screen.
+     *
+     * @return true, if successful
+     */
     public static boolean displayStats()
     {
         return _displayStats;
     }
     
-    /** Port number. */
+    /**
+     *  Port number.
+     *
+     * @return the string
+     */
     public static String portNo()
     {
         return _portNo;
     }
 
-    /** Name of interface. */
+    /**
+     *  Name of interface.
+     *
+     * @return the string
+     */
     public static String interfaceName()
     {
         return _interfaceName;
     }
 
-    /** Guaranteed Output Buffers. */
+    /**
+     *  Guaranteed Output Buffers.
+     *
+     * @return the int
+     */
     public static int guaranteedOutputBuffers()
     {
         return _guaranteedOutputBuffers;
     }
     
-    /** Max Fragment Size. */
+    /**
+     *  Max Fragment Size.
+     *
+     * @return the int
+     */
     public static int maxFragmentSize()
     {
         return _maxFragmentSize;
     }
 
-    /** System Send Buffer Size */
+    /**
+     *  System Send Buffer Size.
+     *
+     * @return the int
+     */
     public static int sendBufSize()
     {
         return _sendBufSize;
     }
 
-    /** System Receive Buffer Size */
+    /**
+     *  System Receive Buffer Size.
+     *
+     * @return the int
+     */
     public static int recvBufSize()
     {
         return _recvBufSize;
     }
 
-    /** Sets the point that causes UPA to automatically flush. */
+    /**
+     *  Sets the point that causes UPA to automatically flush.
+     *
+     * @return the int
+     */
     public static int highWaterMark()
     {
         return _highWaterMark;
     }
 
-    /** Enable/Disable Nagle's algorithm. */
+    /**
+     *  Enable/Disable Nagle's algorithm.
+     *
+     * @return true, if successful
+     */
     public static boolean tcpNoDelay()
     {
         return _tcpNoDelay;
     }
     
-    /** Converts configuration parameters to a string. */
+    /**
+     *  Converts configuration parameters to a string.
+     *
+     * @return the string
+     */
     public static String convertToString()
     {
         return _configString;
     }
 
-    /** Type of application(server, client). */
+    /**
+     *  Type of application(server, client).
+     *
+     * @return the int
+     */
     public static int appType()
     {
         return _appType;
     }
 
-    /** If set, the application will continually read rather than using notification.
-     * Messages cannot be sent in this mode. */
+    /**
+     *  If set, the application will continually read rather than using notification.
+     * Messages cannot be sent in this mode.
+     *
+     * @return true, if successful
+     */
     public static boolean busyRead()
     {
         return _busyRead;
     }
 
-    /** Compression level, optional depending on compression algorithm used. */
+    /**
+     *  Compression level, optional depending on compression algorithm used.
+     *
+     * @return the int
+     */
     public static int compressionLevel()
     {
         return _compressionLevel;
     }
 
-    /** Type of compression to use, if any. */
+    /**
+     *  Type of compression to use, if any.
+     *
+     * @return the int
+     */
     public static int compressionType()
     {
         return _compressionType;
     }
 
-    /** Type of connection. */
+    /**
+     *  Type of connection.
+     *
+     * @return the int
+     */
     public static int connectionType()
     {
         return _connectionType;
     }
 
-    /** hostName, if using Transport.connect(). */
+    /**
+     *  hostName, if using Transport.connect().
+     *
+     * @return the string
+     */
     public static String hostName()
     {
         return _hostName;
     }
 
-    /** Whether an inbound address was specified. */
+    /**
+     *  Whether an inbound address was specified.
+     *
+     * @return true, if successful
+     */
     public static boolean rAddr()
     {
         return _rAddr;
     }
 
-    /** Inbound address, if using a multicast connection. */
+    /**
+     *  Inbound address, if using a multicast connection.
+     *
+     * @return the string
+     */
     public static String recvAddr()
     {
         return _recvAddr;
     }
 
-    /** Inbound port, if using a multicast connection. */
+    /**
+     *  Inbound port, if using a multicast connection.
+     *
+     * @return the string
+     */
     public static String recvPort()
     {
         return _recvPort;
     }
 
-    /** Reflect received messages instead of generating them. */
+    /**
+     *  Reflect received messages instead of generating them.
+     *
+     * @return true, if successful
+     */
     public static boolean reflectMsgs()
     {
         return _reflectMsgs;
     }
 
-    /** Whether an outbound address was specified. */
+    /**
+     *  Whether an outbound address was specified.
+     *
+     * @return true, if successful
+     */
     public static boolean sAddr()
     {
         return _sAddr;
     }
 
-    /** Outbound address, if using a multicast connection. */
+    /**
+     *  Outbound address, if using a multicast connection.
+     *
+     * @return the string
+     */
     public static String sendAddr()
     {
         return _sendAddr;
     }
 
-    /** Outbound port, if using a multicast connection. */
+    /**
+     *  Outbound port, if using a multicast connection.
+     *
+     * @return the string
+     */
     public static String sendPort()
     {
         return _sendPort;
     }
 
-    /** Running a multicast connection and we want stats. */
+    /**
+     *  Running a multicast connection and we want stats.
+     *
+     * @return true, if successful
+     */
     public static boolean takeMCastStats()
     {
         return _takeMCastStats;
     }
 
-    /** Unicast port, if using a mulicast connection. */
+    /**
+     *  Unicast port, if using a mulicast connection.
+     *
+     * @return the string
+     */
     public static String unicastPort()
     {
         return _unicastPort;
     }
     
-    /** tcpControlPort. */
+    /**
+     *  tcpControlPort.
+     *
+     * @return the string
+     */
     public static String tcpControlPort()
     {
         return _tcpControlPort;
     }
     
-    /** unicastPortRange. */
+    /**
+     *  unicastPortRange.
+     *
+     * @return the int
+     */
     public static int portRoamRange()
     {
         return _portRoamRange;
     }
     
+    /**
+     * Checks for proxy.
+     *
+     * @return true, if successful
+     */
     public static boolean hasProxy()
     {
         return _proxy;
     }   
     
+    /**
+     * Proxy host.
+     *
+     * @return the string
+     */
     public static String proxyHost()
     {
         return _proxyHost;
     }
     
+    /**
+     * Proxy port.
+     *
+     * @return the int
+     */
     public static int proxyPort()
     {
         return _proxyPort;
     }
         
+    /**
+     * Proxy user name.
+     *
+     * @return the string
+     */
     public static String proxyUserName()
     {
         return _proxyUserName;
     }
         
+    /**
+     * Proxy password.
+     *
+     * @return the string
+     */
     public static String proxyPassword()
     {
         return _proxyPasswd;
     }
         
+    /**
+     * Proxy domain.
+     *
+     * @return the string
+     */
     public static String proxyDomain()
     {
         return _proxyDomain;
     }
         
+    /**
+     * Proxy KBR config file.
+     *
+     * @return the string
+     */
     public static String proxyKBRConfigFile()
     {
         return _proxyKRBConfigFile;
     }
     
+    /**
+     * Keystore file.
+     *
+     * @return the string
+     */
     public static String keystoreFile()
     {
         return _keystoreFile;
     }
     
+    /**
+     * Kestore password.
+     *
+     * @return the string
+     */
     public static String kestorePassword()
     {
         return _keystorePasswd;
     }
         
         
-    /** Converts configuration parameters to a string. */
+    /**
+     *  Converts configuration parameters to a string.
+     *
+     * @return the string
+     */
     public static String configString()
     {
         return _configString;

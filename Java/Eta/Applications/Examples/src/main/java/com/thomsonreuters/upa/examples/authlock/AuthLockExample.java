@@ -11,7 +11,7 @@ import java.util.List;
  * demonstrate the functionality of the DACS library.
  * 
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Change directory to the <i>Applications/Examples</i> directory and run <i>ant</i> to
  * build.
@@ -92,6 +92,9 @@ public class AuthLockExample
     	}
 	}
 	
+    /**
+     * Auth lock.
+     */
     public void authLock() {
     	// test calculateLockLength method
     	// set the input parameters: serviceId, operation, productEntityList
@@ -297,7 +300,9 @@ public class AuthLockExample
     }
 
     /**
-     * @param args
+     * The main method.
+     *
+     * @param args the arguments
      */
     public static void main(String[] args)
     {

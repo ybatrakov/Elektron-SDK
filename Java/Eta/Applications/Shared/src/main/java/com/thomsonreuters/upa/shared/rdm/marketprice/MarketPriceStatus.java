@@ -28,6 +28,9 @@ public class MarketPriceStatus extends MsgBaseImpl
     private final static String tab = "\t";
     private StatusMsg statusMsg = (StatusMsg)CodecFactory.createMsg();           
     
+    /**
+     * Instantiates a new market price status.
+     */
     public MarketPriceStatus()
     {
         state = CodecFactory.createState();
@@ -64,8 +67,8 @@ public class MarketPriceStatus extends MsgBaseImpl
     
     /**
      * The Market price Status Status flags. Populated by {@link MarketPriceStatusFlags}.
-     * 
-     * @param flags
+     *
+     * @param flags the flags
      */
     public void flags(int flags)
     {
@@ -219,6 +222,9 @@ public class MarketPriceStatus extends MsgBaseImpl
         flags |= MarketPriceStatusFlags.PRIVATE_STREAM;
     }
     
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#toString()
+     */
     public String toString()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -236,7 +242,8 @@ public class MarketPriceStatus extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Domain type.
+     *
      * @return domain type
      */
     public int domainType()
@@ -245,8 +252,9 @@ public class MarketPriceStatus extends MsgBaseImpl
     }
 
     /**
-     * 
-     * @param domainType
+     * Domain type.
+     *
+     * @param domainType the domain type
      */
     public void domainType(int domainType)
     {

@@ -47,9 +47,34 @@ jar {
 		include 'com/thomsonreuters/proxy/authentication/kerberos/login.conf'
 	}
 
+	destinationDir = file("../Libs/")
 	baseName = 'upa'
 }
 
+javadoc {
+        doFirst {
+                println "Generating javadoc for ETA"
+        }
+
+        destinationDir = new File('../Docs/refman/upaj/')
+        title = "ETA JAVA " +  "${version}"
+
+        exclude '**/*Impl.java'
+        exclude '**/JUnit*.java'
+
+        options.footer ('<a href="http://about.reuters.com/developer" target=_top>Thomson Reuters</a>')
+        options.header ('<a href="http://about.reuters.com/developer" target=_top>Thomson Reuters</a>')
+
+        options.group ('Access', 'com.thomsonreuters.ema.access')
+        options.group ('RDM', 'com.thomsonreuters.ema.rdm')
+
+        options.setWindowTitle ('ETA')
+}
+
+task cleanJar (type: Delete) {
+        delete "${jar.archivePath}"
+}
+clean.dependsOn cleanJar
 
 artifacts {
 	archives jar
@@ -62,5 +87,6 @@ tasks.withType (Test) {
 test {
 	// set to tru to see the junit stdoutput
         testLogging.showStandardStreams = false
+	maxParallelForks = Runtime.runtime.availableProcessors()
 }
 

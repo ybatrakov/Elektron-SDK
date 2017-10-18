@@ -15,21 +15,21 @@ import com.thomsonreuters.upa.ansipage.PageUpdate;
 /**
  * This example demonstrates using the AnsiPage encoder and decoder in an application.
  * <p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * This class demonstrates how the ANSIPage API can be used to do the following:
- * <p>
+ * </p>
  * <ul>
  *  <li>Encode ANSI strings into Page objects 
  *  <li>Decode ANSI strings from Page objects
  *  <li>Encode and decode PageUpdate lists
  * </ul>
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * No special setup is required.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Runs as a stand-alone with no arguments.
  */
@@ -48,6 +48,9 @@ public class AnsiPageExample
   ByteArrayInputStream bais = new ByteArrayInputStream(strInit);
   int numUpdates = 0;
 
+  /**
+   * Instantiates a new ansi page example.
+   */
   public AnsiPageExample()
   {
   }
@@ -140,7 +143,7 @@ public class AnsiPageExample
   }
 
   /**
-   * updatePage updates the page with update list
+   * updatePage updates the page with update list.
    */
   public void updatePage()
   {
@@ -182,7 +185,7 @@ public class AnsiPageExample
   }
 
   /**
-   * resetPage sets the page to empty state
+   * resetPage sets the page to empty state.
    */
   public void resetPage()
   {
@@ -196,7 +199,9 @@ public class AnsiPageExample
   }
 
   /**
-   * main driver of the AnsiPage example program
+   * main driver of the AnsiPage example program.
+   *
+   * @param args the arguments
    */
   public static void main(String[] args)
   {

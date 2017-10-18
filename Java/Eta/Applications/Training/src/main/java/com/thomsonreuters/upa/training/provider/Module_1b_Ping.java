@@ -89,9 +89,17 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
 import com.thomsonreuters.upa.transport.ReadArgs;
 import com.thomsonreuters.upa.transport.TransportBuffer;
 
+/**
+ * The Class Module_1b_Ping.
+ */
 public class Module_1b_Ping
 {
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args)
     {
         /**************************************************************************************************
@@ -741,11 +749,18 @@ public class Module_1b_Ping
         }
     }
 
-    /*********************************************************
+    /**
+     * *******************************************************
      * Closes channel and selector and exits application. * channel - Channel to
      * be closed * selector - Selector to be closed * error - tracks error info
      * code - if exit is due to errors/exceptions *
-     *********************************************************/
+     * *******************************************************
+     *
+     * @param channel the channel
+     * @param server the server
+     * @param selector the selector
+     * @param code the code
+     */
     public static void closeChannelServerCleanUpAndExit(Channel channel, Server server, Selector selector, int code)
     {
         Error error = TransportFactory.createError();
@@ -829,6 +844,11 @@ public class Module_1b_Ping
     static long nextSendPingTime; /* time to send next ping from client */
     static boolean receivedClientMsg; /* flag for server message received */
 
+    /**
+     * Inits the ping management.
+     *
+     * @param channel the channel
+     */
     public static void initPingManagement(Channel channel)
     {
         /* get current time */
@@ -853,10 +873,16 @@ public class Module_1b_Ping
 
     }
 
-    /*********************************************************
+    /**
+     * *******************************************************
      * Processing ping management handler upaChannel - The channel for ping
      * management processing
-     *********************************************************/
+     * *******************************************************.
+     *
+     * @param channel the channel
+     * @param selector the selector
+     * @return the int
+     */
     public static int processPingManagementHandler(Channel channel, Selector selector)
     {
         /* Handles the ping processing for upaChannel. Sends a ping to the client if the next send ping time has arrived and

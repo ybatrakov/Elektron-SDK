@@ -89,7 +89,11 @@ public class NIProvPerfConfig
         
     }
     
-    /** Parses command-line arguments to fill in the application's configuration structures. */
+    /**
+     *  Parses command-line arguments to fill in the application's configuration structures.
+     *
+     * @param args the args
+     */
 	public static void init(String[] args)
 	{
         try
@@ -286,80 +290,132 @@ public class NIProvPerfConfig
 	}
 
 	/* APPLICATION configuration */
-    /** Time application runs before exiting. */
+    /**
+	 *  Time application runs before exiting.
+	 *
+	 * @return the int
+	 */
 	public static int runTime()
 	{
 		return _runTime;
 	}
 	
-	/** Main loop ticks per second. */
+	/**
+	 *  Main loop ticks per second.
+	 *
+	 * @return the int
+	 */
 	public static int ticksPerSec()
 	{
 		return ProviderPerfConfig.ticksPerSec();
 	}
 	
-	/** Number of threads that handle connections. */
+	/**
+	 *  Number of threads that handle connections.
+	 *
+	 * @return the int
+	 */
 	public static int threadCount()
 	{
 		return ProviderPerfConfig.threadCount();
 	}
 
-	/** Item List file. Provides a list of items to open. */
+	/**
+	 *  Item List file. Provides a list of items to open.
+	 *
+	 * @return the string
+	 */
 	public static String itemFilename()
 	{
 		return ProviderPerfConfig.itemFilename();
 	}
 	
-	/** Data file. Describes the data to use when encoding messages. */
+	/**
+	 *  Data file. Describes the data to use when encoding messages.
+	 *
+	 * @return the string
+	 */
 	public static String msgFilename()
 	{
 		return ProviderPerfConfig.msgFilename();
 	}
 
-	/** Name of the summary log file. */
+	/**
+	 *  Name of the summary log file.
+	 *
+	 * @return the string
+	 */
 	public static String summaryFilename()
 	{
 		return _summaryFilename;
 	}
 	
-	/** Name of the statistics log file. */
+	/**
+	 *  Name of the statistics log file.
+	 *
+	 * @return the string
+	 */
 	public static String statsFilename()
 	{
 		return ProviderPerfConfig.statsFilename();
 	}
 	
-	/** Controls how often statistics are written. */
+	/**
+	 *  Controls how often statistics are written.
+	 *
+	 * @return the int
+	 */
 	public static int writeStatsInterval()
 	{
 		return _writeStatsInterval;
 	}
 	
-	/** Controls whether stats appear on the screen. */
+	/**
+	 *  Controls whether stats appear on the screen.
+	 *
+	 * @return true, if successful
+	 */
 	public static boolean displayStats()
 	{
 		return _displayStats;
 	}
 
-	/** How many messages are packed into a given buffer. */
+	/**
+	 *  How many messages are packed into a given buffer.
+	 *
+	 * @return the int
+	 */
 	public static int totalBuffersPerPack()
 	{
 		return	ProviderPerfConfig.totalBuffersPerPack();		
 	}
 	
-	/** Size of packable buffer, if packing. */
+	/**
+	 *  Size of packable buffer, if packing.
+	 *
+	 * @return the int
+	 */
 	public static int packingBufferLength()
 	{
 		return	ProviderPerfConfig.packingBufferLength();	
 	}
 	
-	/** Total refresh rate per second */
+	/**
+	 *  Total refresh rate per second.
+	 *
+	 * @return the int
+	 */
 	public static int refreshBurstSize()
 	{
 		return	ProviderPerfConfig.refreshBurstSize();		
 	}
 	
 	/* CONNECTION configuration */
-	/** Type of connection. */
+	/**
+	 *  Type of connection.
+	 *
+	 * @return the int
+	 */
 	public static int connectionType()
 	{
 		int retVal = -1;
@@ -376,145 +432,241 @@ public class NIProvPerfConfig
         return retVal;
 	}
 	
-	/** hostName, if using Channel.connect(). */
+	/**
+	 *  hostName, if using Channel.connect().
+	 *
+	 * @return the string
+	 */
 	public static String hostName()
 	{
 		return _hostName;
 	}
 	
-	/** Port number. */
+	/**
+	 *  Port number.
+	 *
+	 * @return the string
+	 */
 	public static String portNo()
 	{
 		return _portNo;
 	}
 	
-	/** Name of interface. */
+	/**
+	 *  Name of interface.
+	 *
+	 * @return the string
+	 */
 	public static String interfaceName()
 	{
 		return _interfaceName;
 	}
 	
-	/** Send address. */
+	/**
+	 *  Send address.
+	 *
+	 * @return the string
+	 */
 	public static String sendAddress()
 	{
 		return _sendAddress;
 	}
 	
-	/** Send port. */
+	/**
+	 *  Send port.
+	 *
+	 * @return the string
+	 */
 	public static String sendPort()
 	{
 		return _sendPort;
 	}
 	
-	/** Receive address. */
+	/**
+	 *  Receive address.
+	 *
+	 * @return the string
+	 */
 	public static String recvAddress()
 	{
 		return _recvAddress;
 	}
 	
-	/** Receive port. */
+	/**
+	 *  Receive port.
+	 *
+	 * @return the string
+	 */
 	public static String recvPort()
 	{
 		return _recvPort;
 	}
 	
-	/** Unicast port. */
+	/**
+	 *  Unicast port.
+	 *
+	 * @return the string
+	 */
 	public static String unicastPort()
 	{
 		return _unicastPort;
 	}
 	
-	/** Guaranteed Output Buffers. */
+	/**
+	 *  Guaranteed Output Buffers.
+	 *
+	 * @return the int
+	 */
 	public static int guaranteedOutputBuffers()
 	{
 		return _guaranteedOutputBuffers;
 	}
 	
-	/** System Send Buffer Size */
+	/**
+	 *  System Send Buffer Size.
+	 *
+	 * @return the int
+	 */
 	public static int sendBufSize()
 	{
 		return _sendBufSize;
 	}
 	
-	/** System Receive Buffer Size */
+	/**
+	 *  System Receive Buffer Size.
+	 *
+	 * @return the int
+	 */
 	public static int recvBufSize()
 	{
 		return _recvBufSize;
 	}
 
-	/** The point that causes UPA to automatically flush. */
+	/**
+	 *  The point that causes UPA to automatically flush.
+	 *
+	 * @return the int
+	 */
 	public static int highWaterMark()
 	{
 		return _highWaterMark;
 	}
 	
-	/** The fragment size. */
+	/**
+	 *  The fragment size.
+	 *
+	 * @return the int
+	 */
 	public static int maxFragmentSize()
 	{
 		return _maxFragmentSize;
 	}
 	
-	/** Enable/Disable Nagle's algorithm. */
+	/**
+	 *  Enable/Disable Nagle's algorithm.
+	 *
+	 * @return true, if successful
+	 */
 	public static boolean tcpNoDelay()
 	{
 		return _tcpNoDelay;
 	}
 
-	/** Username used when logging in. */
+	/**
+	 *  Username used when logging in.
+	 *
+	 * @return the string
+	 */
 	public static String username()
 	{
 		return _username;
 	}
 	
-	/** Number of items to publish. */
+	/**
+	 *  Number of items to publish.
+	 *
+	 * @return the int
+	 */
 	public static int itemPublishCount()
 	{
 		return _itemPublishCount;
 	}
 	
-	/** Number of items common to all connections, if using multiple connections. */
+	/**
+	 *  Number of items common to all connections, if using multiple connections.
+	 *
+	 * @return the int
+	 */
 	public static int commonItemCount()
 	{
 		return _commonItemCount;
 	}
 	
-	/** Number of updates to send per second. */
+	/**
+	 *  Number of updates to send per second.
+	 *
+	 * @return the int
+	 */
 	public static int updatesPerSec()
 	{
 		return ProviderPerfConfig.updatesPerSec();
 	}
 	
-	/** Number of latency updates to send per second. */
+	/**
+	 *  Number of latency updates to send per second.
+	 *
+	 * @return the int
+	 */
 	public static int latencyUpdateRate()
 	{
 		return ProviderPerfConfig.latencyUpdateRate();
 	}
 	
-    /** ID of the provided service */
+    /**
+     *  ID of the provided service.
+     *
+     * @return the int
+     */
 	public static int serviceId()
 	{
 		return ProviderPerfConfig.serviceId();
 	}
 	
-    /** Name of the provided service */
+    /**
+     *  Name of the provided service.
+     *
+     * @return the string
+     */
 	public static String serviceName()
 	{
 		return ProviderPerfConfig.serviceName();
 	}
 
-    /** Advertised OpenLimit (set to 0 to not provide this)  */
+    /**
+     *  Advertised OpenLimit (set to 0 to not provide this).
+     *
+     * @return the int
+     */
 	public static int openLimit()
 	{
 		return ProviderPerfConfig.openLimit();
 	}
 
-    /** Converts configuration parameters to a string */
+    /**
+     *  Converts configuration parameters to a string.
+     *
+     * @return the string
+     */
     public static String convertToString()
 	{
 		return _configString;
 	}
 
-    /** Use the VA Reactor instead of the UPA Channel for sending and receiving. */
+    /**
+     *  Use the VA Reactor instead of the UPA Channel for sending and receiving.
+     *
+     * @return true, if successful
+     */
     public static boolean useReactor()
     {
         return _useReactor;

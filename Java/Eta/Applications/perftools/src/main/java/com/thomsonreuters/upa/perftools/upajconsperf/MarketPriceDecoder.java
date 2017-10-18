@@ -66,6 +66,11 @@ public class MarketPriceDecoder
     	_fidBufferValue = CodecFactory.createBuffer();
     }
     
+    /**
+     * Instantiates a new market price decoder.
+     *
+     * @param postUserInfo the post user info
+     */
     public MarketPriceDecoder(PostUserInfo postUserInfo)
     {
     	_postUserInfo = postUserInfo;
@@ -94,7 +99,14 @@ public class MarketPriceDecoder
         }
     }
     
-    /** Decode the update. */
+    /**
+     *  Decode the update.
+     *
+     * @param iter the iter
+     * @param msg the msg
+     * @param consumerThread the consumer thread
+     * @return the int
+     */
 	public int decodeUpdate(DecodeIterator iter, Msg msg, ConsumerThreadInfo consumerThread)
 	{
 		int ret = 0;

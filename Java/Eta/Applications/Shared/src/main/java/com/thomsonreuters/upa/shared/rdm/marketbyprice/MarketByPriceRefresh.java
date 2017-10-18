@@ -33,6 +33,9 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
     // used for encoding
     private RefreshMsg refreshMsg = (RefreshMsg)CodecFactory.createMsg();
 
+    /**
+     * Instantiates a new market by price refresh.
+     */
     public MarketByPriceRefresh()
     {
         state = CodecFactory.createState();
@@ -53,6 +56,8 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
     /**
      * The market by price refresh flags. Populated by
      * {@link MarketPriceRefreshFlags}.
+     *
+     * @return the int
      */
     public int flags()
     {
@@ -62,6 +67,8 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
     /**
      * The market by price refresh flags. Populated by
      * {@link MarketPriceRefreshFlags}.
+     *
+     * @param flags the flags
      */
     public void flags(int flags)
     {
@@ -89,7 +96,8 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
     }
 
     /**
-     * 
+     * Service id.
+     *
      * @return service id
      */
     public int serviceId()
@@ -98,13 +106,18 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
     }
 
     /**
-     * @param serviceId
+     * Service id.
+     *
+     * @param serviceId the service id
      */
     public void serviceId(int serviceId)
     {
         this.serviceId = serviceId;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyprice.MarketByPriceResponseBase#encodeMsg()
+     */
     public Msg encodeMsg()
     {
         refreshMsg.clear();
@@ -294,6 +307,9 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
         flags |= MarketPriceRefreshFlags.HAS_SERVICE_ID;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#toString()
+     */
     public String toString()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -332,6 +348,9 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
         return stringBuf.toString();
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyprice.MarketByPriceResponseBase#encodeSummaryData(com.thomsonreuters.upa.codec.EncodeIterator, com.thomsonreuters.upa.codec.DataDictionary, com.thomsonreuters.upa.codec.Map)
+     */
     protected int encodeSummaryData(EncodeIterator encodeIter, DataDictionary dictionary, Map map)
     {
         DictionaryEntry dictionaryEntry;
@@ -390,6 +409,9 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
         return ret;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.shared.rdm.marketbyprice.MarketByPriceResponseBase#encodeMapEntries(com.thomsonreuters.upa.codec.EncodeIterator, com.thomsonreuters.upa.codec.DataDictionary)
+     */
     protected int encodeMapEntries(EncodeIterator encodeIter, DataDictionary dictionary)
     {
         // encode the order book
@@ -541,6 +563,9 @@ public class MarketByPriceRefresh extends MarketByPriceResponseBase
         return mapEntry.encodeComplete(encodeIter, true);
     }
     
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#domainType()
+     */
     @Override
     public int domainType()
     {

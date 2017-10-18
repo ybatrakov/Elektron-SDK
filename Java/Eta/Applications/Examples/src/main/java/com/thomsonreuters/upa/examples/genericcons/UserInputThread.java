@@ -18,6 +18,9 @@ public class UserInputThread implements Runnable
         _inputStream = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     @Override
     /** Runs the thread to get user input. */
     public void run()
@@ -53,6 +56,8 @@ public class UserInputThread implements Runnable
     
     /**
      * Retrieves next file name from the file name queue.
+     *
+     * @return the string
      */
     public String nextFilename()
     {

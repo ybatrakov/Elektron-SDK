@@ -35,6 +35,9 @@ public class EDFDictionaryHandler extends DictionaryHandler
     private boolean globalDefsDictionaryLoadedFromFile = false;
     private int globalDefsDictionaryStreamId = -1;
 
+    /**
+     * Instantiates a new EDF dictionary handler.
+     */
     public EDFDictionaryHandler()
     {
         super();
@@ -52,7 +55,9 @@ public class EDFDictionaryHandler extends DictionaryHandler
     }
 
     /**
-     * Returns whether or not the global defs dictionary has been loaded
+     * Returns whether or not the global defs dictionary has been loaded.
+     *
+     * @return true, if is global defs dictionary loaded
      */
     public boolean isGlobalDefsDictionaryLoaded()
     {
@@ -62,6 +67,8 @@ public class EDFDictionaryHandler extends DictionaryHandler
     /**
      * Returns whether or not the global defs dictionary has been loaded
      * from a file.
+     *
+     * @return true, if is global defs dictionary loaded from file
      */
     public boolean isGlobalDefsDictionaryLoadedFromFile()
     {
@@ -70,6 +77,8 @@ public class EDFDictionaryHandler extends DictionaryHandler
 
     /**
      * Returns the field Set Definition database.
+     *
+     * @return the global field set def db
      */
     public GlobalFieldSetDefDb fieldSetDefDb()
     {
@@ -80,8 +89,11 @@ public class EDFDictionaryHandler extends DictionaryHandler
      * Sends both field and enumType dictionary requests to a channel. This
      * consists of getting a message buffer, encoding the dictionary request,
      * and sending the dictionary request to the server.
-     * 
+     *
      * @param chnl - The channel to send a dictionary requests to
+     * @param dictionaryName the dictionary name
+     * @param error the error
+     * @return the int
      */
     public int sendRequests(ChannelSession chnl, String dictionaryName, Error error)
     {
@@ -137,11 +149,11 @@ public class EDFDictionaryHandler extends DictionaryHandler
      * dictionary messages to decode the dictionary and setting dictionary
      * download states (fieldDictionaryLoaded and enumTypeDictionaryLoaded)
      * after complete dictionaries are received.
-     * 
+     *
      * @param chnl - The channel of the response
      * @param msg - The partially decoded message
      * @param dIter - The decode iterator
-     * 
+     * @param error the error
      * @return success if decoding succeeds, failure if it fails.
      */
     public int processResponse(Channel chnl, Msg msg, DecodeIterator dIter, Error error)
@@ -336,6 +348,9 @@ public class EDFDictionaryHandler extends DictionaryHandler
         return TransportReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.examples.common.DictionaryHandler#closeStreams(com.thomsonreuters.upa.examples.common.ChannelSession, com.thomsonreuters.upa.transport.Error)
+     */
     public int closeStreams(ChannelSession channel, Error error)
     {
         /* close dictionary stream */

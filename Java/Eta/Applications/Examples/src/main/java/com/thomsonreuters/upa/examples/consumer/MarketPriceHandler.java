@@ -56,8 +56,15 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.login.LoginRefresh;
  */
 public class MarketPriceHandler
 {
+    
+    /**
+     * The transport buffer size request.
+     */
     public static int TRANSPORT_BUFFER_SIZE_REQUEST = ChannelSession.MAX_MSG_SIZE;
 	
+    /**
+     * The transport buffer size close.
+     */
     public static int TRANSPORT_BUFFER_SIZE_CLOSE = ChannelSession.MAX_MSG_SIZE;
 
     private int domainType;
@@ -97,6 +104,11 @@ public class MarketPriceHandler
     private State fidStateValue = CodecFactory.createState();
     private EncodeIterator encIter = CodecFactory.createEncodeIterator();
 
+    /**
+     * Instantiates a new market price handler.
+     *
+     * @param watchList the watch list
+     */
     public MarketPriceHandler(StreamIdWatchList watchList)
     {
         this(DomainTypes.MARKET_PRICE, watchList);
@@ -120,11 +132,21 @@ public class MarketPriceHandler
         return new MarketPriceRequest();
     }
 
+    /**
+     * View request.
+     *
+     * @param doViewRequest the do view request
+     */
     public void viewRequest(boolean doViewRequest)
     {
         viewRequested = doViewRequest;
     }
 
+    /**
+     * Snapshot request.
+     *
+     * @param snapshotRequested the snapshot requested
+     */
     public void snapshotRequest(boolean snapshotRequested)
     {
         this.snapshotRequested = snapshotRequested;
@@ -158,6 +180,12 @@ public class MarketPriceHandler
         return chnl.write(msgBuf, error);
     }
 
+    /**
+     * Gets the first item.
+     *
+     * @param mpItemName the mp item name
+     * @return the first item
+     */
     /*
      * this method is used while posting to query the first requested market
      * price item, if any. It will populate the passed in buffer with the name
@@ -183,17 +211,14 @@ public class MarketPriceHandler
     /**
      * Encodes and sends item requests for three market price domains
      * (MarketPrice, MarketByPrice, MarketByOrder).
-     * 
+     *
      * @param chnl - The channel to send a source directory request to
-     * 
      * @param itemNames - List of item names
-     * 
      * @param isPrivateStream - flag indicating if requested items are private
      *            stream or not.
-     * 
      * @param loginInfo - RDM login information
      * @param serviceInfo - RDM directory response information
-     * 
+     * @param error the error
      * @return success if item requests can be made, can be encoded and sent
      *         successfully. Failure if service does not support market price capability
      *         or failure for encoding/sending request.
@@ -353,10 +378,11 @@ public class MarketPriceHandler
      * printing out the item name contained in the key, decoding the field list
      * and field entry, and calling decodeFieldEntry() to decode the field entry
      * data.
-     * 
+     *
      * @param msg - The partially decoded message
      * @param dIter - The decode iterator
-     * 
+     * @param dictionary the dictionary
+     * @param error the error
      * @return success if decoding succeeds, failure if it fails.
      */
     public int processResponse(Msg msg, DecodeIterator dIter, DataDictionary dictionary, Error error)
@@ -805,8 +831,10 @@ public class MarketPriceHandler
 
     /**
      * Close all item streams.
-     * 
+     *
      * @param chnl - The channel to send a item stream close to
+     * @param error the error
+     * @return the int
      */
     public int closeStreams(ChannelSession chnl, Error error)
     {

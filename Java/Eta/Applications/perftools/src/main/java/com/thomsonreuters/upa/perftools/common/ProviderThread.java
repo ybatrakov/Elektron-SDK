@@ -58,6 +58,11 @@ public class ProviderThread extends Thread
     private ReactorSubmitOptions        _submitOptions;                     // Use the VA Reactor instead of the UPA Channel for sending and receiving
     private ReactorErrorInfo            _errorInfo;                         // Use the VA Reactor instead of the UPA Channel for sending and receiving
  
+    /**
+     * Instantiates a new provider thread.
+     *
+     * @param xmlMsgData the xml msg data
+     */
     public ProviderThread(XmlMsgData xmlMsgData)
     {
         super("ProviderThread");
@@ -86,6 +91,9 @@ public class ProviderThread extends Thread
 
     /**
      * Initializes a ProviderThread.
+     *
+     * @param providerIndex the provider index
+     * @param providerType the provider type
      */
     protected void init(int providerIndex, ProviderType providerType)
     {
@@ -423,6 +431,10 @@ public class ProviderThread extends Thread
     
     /**
      * Sends a burst of refreshes for items that currently need to send one.
+     *
+     * @param providerSession the provider session
+     * @param error the error
+     * @return the int
      */
     protected int sendRefreshBurst(ProviderSession providerSession, Error error)
     {
@@ -467,7 +479,10 @@ public class ProviderThread extends Thread
     
     /**
      * Sends a burst of item updates.
-     * 
+     *
+     * @param providerSession the provider session
+     * @param error the error
+     * @return the int
      */
     protected int sendUpdateBurst(ProviderSession providerSession, Error error)
     {
@@ -524,7 +539,10 @@ public class ProviderThread extends Thread
     
     /**
      * Sends a burst of item generic messages.
-     * 
+     *
+     * @param providerSession the provider session
+     * @param error the error
+     * @return the int
      */
     protected int sendGenMsgBurst(ProviderSession providerSession, Error error)
     {
@@ -589,6 +607,8 @@ public class ProviderThread extends Thread
     
     /**
      * Refresh message burst count sent.
+     *
+     * @return the count stat
      */
     public CountStat refreshMsgCount()
     {
@@ -597,6 +617,8 @@ public class ProviderThread extends Thread
 
     /**
      * Update message burst count sent.
+     *
+     * @return the count stat
      */
     public CountStat updateMsgCount()
     {
@@ -605,6 +627,8 @@ public class ProviderThread extends Thread
 
     /**
      * Item requests received.
+     *
+     * @return the count stat
      */
     public CountStat itemRequestCount()
     {
@@ -613,6 +637,8 @@ public class ProviderThread extends Thread
 
     /**
      * Item close requests received.
+     *
+     * @return the count stat
      */
     public CountStat closeMsgCount()
     {
@@ -621,6 +647,8 @@ public class ProviderThread extends Thread
 
     /**
      * Posts received.
+     *
+     * @return the count stat
      */
     public CountStat postMsgCount()
     {
@@ -629,6 +657,8 @@ public class ProviderThread extends Thread
 
     /**
      * Number of messages blocked due  not sent due to lack of output buffers.
+     *
+     * @return the count stat
      */
     public CountStat outOfBuffersCount()
     {
@@ -637,6 +667,8 @@ public class ProviderThread extends Thread
 
     /**
      * Counts total messages sent.
+     *
+     * @return the count stat
      */
     public CountStat msgSentCount()
     {
@@ -644,7 +676,9 @@ public class ProviderThread extends Thread
     }
 
     /**
-     * Total buffers sent(used with msgSentCount for packing statistics). 
+     * Total buffers sent(used with msgSentCount for packing statistics).
+     *
+     * @return the count stat
      */
     public CountStat bufferSentCount()
     {
@@ -653,6 +687,8 @@ public class ProviderThread extends Thread
 
     /**
      * Index given to this provider thread.
+     *
+     * @return the long
      */
 	public long providerIndex()
 	{
@@ -661,36 +697,59 @@ public class ProviderThread extends Thread
 
 	/**
 	 * Item encoder.
+	 *
+	 * @return the item encoder
 	 */
 	public ItemEncoder itemEncoder()
 	{
 		return _itemEncoder;
 	}
 	
-    /** Signals thread to shutdown. */
+    /**
+     *  Signals thread to shutdown.
+     *
+     * @return true, if successful
+     */
     public boolean shutdown()
     {
         return _shutdown;
     }
 
-    /** Signals thread to shutdown. */
+    /**
+     *  Signals thread to shutdown.
+     *
+     * @param value the value
+     */
     public void shutdown(boolean value)
     {
         _shutdown = value;
     }
 
-    /** Acknowledges thread is shutdown. */
+    /**
+     *  Acknowledges thread is shutdown.
+     *
+     * @return true, if successful
+     */
     public boolean shutdownAck()
     {
         return _shutdownAck;
     }
 
-    /** Acknowledges thread is shutdown. */
+    /**
+     *  Acknowledges thread is shutdown.
+     *
+     * @param value the value
+     */
     public void shutdownAck(boolean value)
     {
         _shutdownAck = value;
     }
 
+    /**
+     * Gets the prov thread info.
+     *
+     * @return the prov thread info
+     */
     public ProviderThreadInfo getProvThreadInfo()
     {
     	return _provThreadInfo;

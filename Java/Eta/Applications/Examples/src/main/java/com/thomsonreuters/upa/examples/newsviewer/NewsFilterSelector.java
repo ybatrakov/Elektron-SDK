@@ -28,6 +28,12 @@ import javax.swing.JTextField;
  */
 public class NewsFilterSelector
 {
+    
+    /**
+     * Instantiates a new news filter selector.
+     *
+     * @param newsHeadlineViewer the news headline viewer
+     */
     public NewsFilterSelector(NewsHeadlineViewer newsHeadlineViewer)
     {
         _codeDb = new NewsCodeDb(this);
@@ -35,6 +41,9 @@ public class NewsFilterSelector
         initGUI();
     }
 
+    /**
+     * Inits the GUI.
+     */
     public void initGUI()
     {
         _panel = new JPanel();
@@ -251,11 +260,19 @@ public class NewsFilterSelector
         expression.append(")");
     }
 
+    /**
+     * Component.
+     *
+     * @return the component
+     */
     public Component component()
     {
         return _panel;
     }
 
+    /**
+     * Open dialog.
+     */
     public void openDialog()
     {
         _codeDb.dump();
@@ -266,7 +283,9 @@ public class NewsFilterSelector
 
     /**
      * Replaces special characters of regular expression.
-     * 
+     *
+     * @param s the s
+     * @return the string
      */
     public static String escapeRegex(String s)
     {

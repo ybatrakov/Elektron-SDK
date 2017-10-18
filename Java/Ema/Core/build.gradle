@@ -41,12 +41,20 @@ jar {
 		from sharedManifest 
 	}
 
+        destinationDir = file("../Libs/")
 	baseName = 'ema'
 }
+
+task cleanJar (type: Delete) {
+        delete "${jar.archivePath}"
+}
+
+clean.dependsOn cleanJar
 
 tasks.withType (Test) {
         jvmArgs "-enableassertions"
 }
+
 
 test {
 	// exclude the utility class and the suite class
@@ -54,6 +62,7 @@ test {
 	exclude '**/RunAllTests.class'
         // set to tru to see the junit stdoutput
         testLogging.showStandardStreams = false
+        maxParallelForks = Runtime.runtime.availableProcessors()
 }
 
 javadoc {
@@ -61,7 +70,7 @@ javadoc {
 		println "Generating javadoc for EMA"
 	}
 
-	destinationDir = new File('Ema/Docs/refman/emajava/')
+	destinationDir = new File('../Docs/refman/emajava/')
 	title = "EMA JAVA " +  "${version}"
 
 	exclude '**/*Impl.java'
@@ -74,5 +83,16 @@ javadoc {
 	options.group ('RDM', 'com.thomsonreuters.ema.rdm')
 
 	options.setWindowTitle ('EMA')
+}
+
+task javadocJar (type: Jar, dependsOn: this.javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+	destinationDir = jar.destinationDir
+	archiveName = 'ema-javadoc.jar'
+}
+
+artifacts {
+	archives javadocJar
 }
 

@@ -821,59 +821,89 @@ public class XmlMsgData
 	}
 
 	/**
-     * Parses xml message data file.
-     * 
-     * @param filename
-     * @return {@link PerfToolsReturnCodes}
-     */
+	 * Parses xml message data file.
+	 *
+	 * @param filename the filename
+	 * @return {@link PerfToolsReturnCodes}
+	 */
 	public int parseFile( String filename) 
 	{
 		return _xmlReader.parseFile(filename);
 	}
 
-	/** Market price refresh message. */
+	/**
+	 *  Market price refresh message.
+	 *
+	 * @return the market price msg
+	 */
 	public MarketPriceMsg marketPriceRefreshMsg()
 	{
 		return _marketPriceRefreshMsg;
 	}
 
-	/** Array of market price update messages. */
+	/**
+	 *  Array of market price update messages.
+	 *
+	 * @return the market price msg[]
+	 */
 	public MarketPriceMsg[] marketPriceUpdateMsgs() 
 	{
 		return _marketPriceUpdateMsgs;
 	}
 
-	/** Array of market price post messages. */
+	/**
+	 *  Array of market price post messages.
+	 *
+	 * @return the market price msg[]
+	 */
 	public MarketPriceMsg[] marketPricePostMsgs()
 	{
 		return _marketPricePostMsgs;
 	}
 
-	/** Array of market price generic messages. */
+	/**
+	 *  Array of market price generic messages.
+	 *
+	 * @return the market price msg[]
+	 */
 	public MarketPriceMsg[] marketPriceGenMsgs()
 	{
 		return _marketPriceGenMsgs;
 	}
 	
-	/** Market price update message count. */
+	/**
+	 *  Market price update message count.
+	 *
+	 * @return the int
+	 */
 	public int marketPriceUpdateMsgCount()
 	{
 		return _updateCount;
 	}
 
-	/** Market price post message count. */
+	/**
+	 *  Market price post message count.
+	 *
+	 * @return the int
+	 */
 	public int marketPricePostMsgCount()
 	{
 		return _postCount;
 	}
 
-	/** Market price generic message count. */
+	/**
+	 *  Market price generic message count.
+	 *
+	 * @return the int
+	 */
 	public int marketPriceGenMsgCount()
 	{
 		return _genMsgCount;
 	}
 	
 	/**
+	 * Checks for market price.
+	 *
 	 * @return true, if there is market data in the xml.
 	 */
     public boolean hasMarketPrice()

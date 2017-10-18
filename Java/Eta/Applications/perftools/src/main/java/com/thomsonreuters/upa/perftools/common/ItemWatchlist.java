@@ -10,6 +10,11 @@ public class ItemWatchlist
     private ArrayList<ItemInfo> _entryList;   // list of entries
     int _index;      // current index for cyclic access
 
+    /**
+     * Instantiates a new item watchlist.
+     *
+     * @param count the count
+     */
     public ItemWatchlist(int count)
     {
         _entryList = new ArrayList<ItemInfo>(count); 
@@ -38,8 +43,8 @@ public class ItemWatchlist
 
     /**
      * Add item to the watch list.
-     * 
-     * @param itemInfo
+     *
+     * @param itemInfo the item info
      */
     public void add(ItemInfo itemInfo)
     {

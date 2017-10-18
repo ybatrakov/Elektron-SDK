@@ -44,6 +44,9 @@ public class DirectoryHandler implements OmmConsumerClient
     private ReqMsg _directoryRequest = EmaFactory.createReqMsg();
     private boolean _acceptRequest;
     
+    /**
+     * Instantiates a new directory handler.
+     */
     public DirectoryHandler()
     {
         _state = new ServiceState();
@@ -60,6 +63,8 @@ public class DirectoryHandler implements OmmConsumerClient
     }
 
     /**
+     * Checks if is requested service up.
+     *
      * @return true if service requested by application is up, false if not.
      */
     public boolean isRequestedServiceUp()
@@ -68,6 +73,8 @@ public class DirectoryHandler implements OmmConsumerClient
     }
 
     /**
+     * Service id.
+     *
      * @return service id associated with the service name requested by application.
      */
     public int serviceId()
@@ -79,6 +86,8 @@ public class DirectoryHandler implements OmmConsumerClient
      * Sends a source directory request to a channel. This consists of getting a
      * message buffer, encoding the source directory request, and sending the
      * source directory request to the server.
+     *
+     * @return the request
      */
     public ReqMsg getRequest()
     {
@@ -150,6 +159,9 @@ public class DirectoryHandler implements OmmConsumerClient
 		return foundService;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.thomsonreuters.ema.access.OmmConsumerClient#onRefreshMsg(com.thomsonreuters.ema.access.RefreshMsg, com.thomsonreuters.ema.access.OmmConsumerEvent)
+	 */
 	@Override
 	public void onRefreshMsg(RefreshMsg refreshMsg, OmmConsumerEvent consumerEvent)
 	{
@@ -167,6 +179,9 @@ public class DirectoryHandler implements OmmConsumerClient
              System.out.println("Requested service '" + _serviceName + "' not up. Waiting for service to be up...");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.thomsonreuters.ema.access.OmmConsumerClient#onUpdateMsg(com.thomsonreuters.ema.access.UpdateMsg, com.thomsonreuters.ema.access.OmmConsumerEvent)
+	 */
 	@Override
 	public void onUpdateMsg(UpdateMsg updateMsg, OmmConsumerEvent consumerEvent)
 	{
@@ -178,6 +193,9 @@ public class DirectoryHandler implements OmmConsumerClient
         	decode(updateMsg.payload().map());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.thomsonreuters.ema.access.OmmConsumerClient#onStatusMsg(com.thomsonreuters.ema.access.StatusMsg, com.thomsonreuters.ema.access.OmmConsumerEvent)
+	 */
 	@Override
 	public void onStatusMsg(StatusMsg statusMsg, OmmConsumerEvent consumerEvent)
 	{
@@ -192,10 +210,21 @@ public class DirectoryHandler implements OmmConsumerClient
          }
 	}
 
+	/* (non-Javadoc)
+	 * @see com.thomsonreuters.ema.access.OmmConsumerClient#onGenericMsg(com.thomsonreuters.ema.access.GenericMsg, com.thomsonreuters.ema.access.OmmConsumerEvent)
+	 */
 	@Override
 	public void onGenericMsg(GenericMsg genericMsg, OmmConsumerEvent consumerEvent) {}
+	
+	/* (non-Javadoc)
+	 * @see com.thomsonreuters.ema.access.OmmConsumerClient#onAckMsg(com.thomsonreuters.ema.access.AckMsg, com.thomsonreuters.ema.access.OmmConsumerEvent)
+	 */
 	@Override
 	public void onAckMsg(AckMsg ackMsg, OmmConsumerEvent consumerEvent) {}
+	
+	/* (non-Javadoc)
+	 * @see com.thomsonreuters.ema.access.OmmConsumerClient#onAllMsg(com.thomsonreuters.ema.access.Msg, com.thomsonreuters.ema.access.OmmConsumerEvent)
+	 */
 	@Override
 	public void onAllMsg(com.thomsonreuters.ema.access.Msg msg, OmmConsumerEvent consumerEvent) {}
 }

@@ -234,6 +234,9 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
 import com.thomsonreuters.upa.transport.WriteArgs;
 import com.thomsonreuters.upa.transport.WritePriorities;
 
+/**
+ * The Class Module_3_ProvideDirectory.
+ */
 public class Module_3_ProvideDirectory
 {
     public static boolean loginRequestInfo_IsInUse;
@@ -251,11 +254,20 @@ public class Module_3_ProvideDirectory
     public static int sourceDirectoryRequestInfo_ServiceId;
     public static boolean sourceDirectoryRequestInfo_IsInUse;
 
+    /**
+     * The Enum LoginRejectReason.
+     */
     public static enum LoginRejectReason
     {
         MAX_LOGIN_REQUESTS_REACHED, NO_USER_NAME_IN_REQUEST
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     * @throws Exception the exception
+     */
     public static void main(String[] args) throws Exception
     {
         /**************************************************************************************************
@@ -1148,11 +1160,14 @@ public class Module_3_ProvideDirectory
 
     }
 
-    /*********************************************************
-     * Processing ping management handler
-     * 
+    /**
+     * *******************************************************
+     * Processing ping management handler.
+     *
      * @param channel - The channel for ping management processing
-     *********************************************************/
+     * *******************************************************
+     * @return the int
+     */
 
     public static int processPingManagementHandler(Channel channel)
     {
@@ -1244,13 +1259,15 @@ public class Module_3_ProvideDirectory
         return retval;
     }
 
-    /**************************************************************
-     * Sends a message buffer to the channel *
-     * 
+    /**
+     * ************************************************************
+     * Sends a message buffer to the channel *.
+     *
      * @param channel - the Channel to send the message buffer to *
      * @param msgBuf - the buffer to be sent *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     */
     public static int sendMessage(Channel channel, TransportBuffer msgBuf)
     {
         int retCode = 0;
@@ -1369,15 +1386,18 @@ public class Module_3_ProvideDirectory
         return retCode;
     }
 
-    /**************************************************************
-     * Processes a login request *
-     * 
+    /**
+     * ************************************************************
+     * Processes a login request *.
+     *
      * @param channel - the Channel of connection *
      * @param msg - the partially decoded message *
      * @param decIter - the decode iterator *
      * @param error - tracks error info *
      * @return status code *
-     **************************************************************/
+     * ************************************************************
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int processLoginRequest(Channel channel, Msg msg, DecodeIterator decIter, Error error) throws UnknownHostException
     {
         MsgKey requestKey = null;
@@ -1542,11 +1562,15 @@ public class Module_3_ProvideDirectory
         return TransportReturnCodes.SUCCESS;
     }
 
-    /**************************************************************
-     * Sends the login refresh response to channel *
-     * 
+    /**
+     * ************************************************************
+     * Sends the login refresh response to channel *.
+     *
      * @param channel - the Channel of connection *
-     **************************************************************/
+     * ************************************************************
+     * @return the int
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int sendLoginResponse(Channel channel) throws UnknownHostException
     {
         int retCode;
@@ -1830,11 +1854,13 @@ public class Module_3_ProvideDirectory
         return retCode;
     }
 
-    /**********************************************************************
-     * Sends the login request reject status message for a channel *
-     * 
+    /**
+     * ********************************************************************
+     * Sends the login request reject status message for a channel *.
+     *
      * @param streamId - the stream id to close the login for *
-     **********************************************************************/
+     * ********************************************************************
+     */
     public static void closeLoginStream(int streamId)
     {
         /* find original request information associated with streamId */
@@ -1846,14 +1872,16 @@ public class Module_3_ProvideDirectory
         }
     }
 
-    /**************************************************************
-     * Performs two time pass to obtain buffer *
-     * 
+    /**
+     * ************************************************************
+     * Performs two time pass to obtain buffer *.
+     *
      * @param channel - the Channel of connection *
      * @param size - size of requested buffer *
      * @param error - tracks error info *
      * @return obtained buffer *
-     **************************************************************/
+     * ************************************************************
+     */
     public static TransportBuffer upaGetBuffer(Channel channel, int size, Error error)
     {
         int retCode;
@@ -1916,14 +1944,17 @@ public class Module_3_ProvideDirectory
         return msgBuf;
     }
 
-    /**********************************************************************
-     * Sends the login request reject status message for a channel *
-     * 
+    /**
+     * ********************************************************************
+     * Sends the login request reject status message for a channel *.
+     *
      * @param channel - the Channel of connection *
      * @param streamId - the stream id of the login request reject status *
      * @param reason - the reason for the reject *
      * @return status code *
-     **********************************************************************/
+     * ********************************************************************
+     * @throws UnknownHostException the unknown host exception
+     */
     public static int sendLoginRequestRejectStatusMsg(Channel channel, int streamId, LoginRejectReason reason) throws UnknownHostException
     {
         int retCode;
@@ -2074,9 +2105,11 @@ public class Module_3_ProvideDirectory
         return retCode;
     }
 
-    /****************************************
+    /**
+     * **************************************
      * Clears the login request info values *
-     ****************************************/
+     * **************************************.
+     */
     public static void clearLoginRequestInfo()
     {
         loginRequestInfo_IsInUse = false;
@@ -2090,16 +2123,19 @@ public class Module_3_ProvideDirectory
         loginRequestInfo_Role = "Unknown";
     }
 
-    /************************************************************************************************************
+    /**
+     * **********************************************************************************************************
      * Processes a source directory request. This consists of decoding the
      * source directory request and calling * sendSourceDirectoryResponse() to
      * send the source directory response. *
-     * 
+     *
      * @param chnl - the Channel of connection *
      * @param dIter - The decode iterator *
      * @param msg - The partially decoded message *
      * @param maxMsgSize - The channel max message size *
-     ************************************************************************************************************/
+     * **********************************************************************************************************
+     * @return the int
+     */
     public static int processSourceDirectoryRequest(Channel chnl, DecodeIterator dIter, Msg msg, int maxMsgSize)
     {
 
@@ -2159,7 +2195,8 @@ public class Module_3_ProvideDirectory
         return TransportReturnCodes.SUCCESS;
     }
 
-    /************************************************************************************************************************************
+    /**
+     * **********************************************************************************************************************************
      * Send Source Directory response to a channel. This consists of getting a
      * message buffer, setting the source directory * response information,
      * encoding the source directory response, and sending the source directory
@@ -2167,14 +2204,16 @@ public class Module_3_ProvideDirectory
      * information about all available services in the system. * An OMM consumer
      * typically requests a Source Directory to retrieve information about
      * available services and their capabilities. *
-     * 
+     *
      * @param channel - the Channel of connection *
      * @param maxMsgSize - The channel max message size *
      * @param serviceName - The service name specified by the OMM interactive
      *            provider application (Optional to set) *
      * @param serviceId - the serviceId specified by the OMM interactive
      *            provider application (Optional to set) *
-     ************************************************************************************************************************************/
+     * **********************************************************************************************************************************
+     * @return the int
+     */
     public static int sendSourceDirectoryResponse(Channel channel, int maxMsgSize, String serviceName, int serviceId)
     {
         int retval;
@@ -2803,15 +2842,18 @@ public class Module_3_ProvideDirectory
         return retval;
     }
 
-    /***************************************************************************************************************
+    /**
+     * *************************************************************************************************************
      * Sends the source directory request reject status message for a channel.
-     * 
+     *
      * @param channel - the Channel of connection
      * @param streamId - The stream id of the source directory request reject
      *            status
      * @param reason - The reason for the reject
      * @param maxFragmentSize - max fragment size before fragmentation
-     ****************************************************************************************************************/
+     * **************************************************************************************************************
+     * @return the int
+     */
     public static int sendSrcDirectoryRequestRejectStatusMsg(Channel channel, int streamId, DirectoryRejectReason reason, int maxFragmentSize)
     {
 
@@ -2952,6 +2994,9 @@ public class Module_3_ProvideDirectory
         }
     }
 
+    /**
+     * Clear source directory req info.
+     */
     public static void clearSourceDirectoryReqInfo()
     {
         sourceDirectoryRequestInfo_StreamId = 0;

@@ -97,7 +97,12 @@ public class ConsPerfConfig
         CommandLine.addOption("busyRead", false, "If set, the application will continually read rather than using notification.");
     }
 	
-    /** Parses command-line arguments to fill in the application's configuration structures. */
+    /**
+     *  Parses command-line arguments to fill in the application's configuration structures.
+     *
+     * @param args the args
+     * @param maxThreads the max threads
+     */
 	public void init (String[] args, int maxThreads)
 	{
         try
@@ -328,37 +333,61 @@ public class ConsPerfConfig
 	}
 
 	/* APPLICATION configuration */
-    /** Time application runs before exiting. */
+    /**
+	 *  Time application runs before exiting.
+	 *
+	 * @return the int
+	 */
 	public int	steadyStateTime()
 	{
 		return _steadyStateTime;
 	}
 	
-	/** Main loop ticks per second. */
+	/**
+	 *  Main loop ticks per second.
+	 *
+	 * @return the int
+	 */
 	public int	ticksPerSec()
 	{
 		return _ticksPerSec;
 	}
 	
-	/** Number of threads that handle connections. */
+	/**
+	 *  Number of threads that handle connections.
+	 *
+	 * @return the int
+	 */
 	public int	threadCount()
 	{
 		return _threadCount;
 	}
 
-	/** File of names to use when requesting items. */
+	/**
+	 *  File of names to use when requesting items.
+	 *
+	 * @return the string
+	 */
 	public String itemFilename()
 	{
 		return _itemFilename;
 	}
 	
-	/** File of data to use for message payloads. */
+	/**
+	 *  File of data to use for message payloads.
+	 *
+	 * @return the string
+	 */
 	public String msgFilename()
 	{
 		return _msgFilename;
 	}
 
-	/** Whether to log update latency information to a file. */
+	/**
+	 *  Whether to log update latency information to a file.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean	logLatencyToFile()
 	{
 		_logLatencyToFile = (_latencyLogFilename.length() > 0 ? true : false);
@@ -366,194 +395,322 @@ public class ConsPerfConfig
 		return _logLatencyToFile;
 	}
 	
-	/** Name of the latency log file. */
+	/**
+	 *  Name of the latency log file.
+	 *
+	 * @return the string
+	 */
 	public String latencyLogFilename()
 	{
 		return _latencyLogFilename;
 	}
 	
-	/** Name of the summary log file. */
+	/**
+	 *  Name of the summary log file.
+	 *
+	 * @return the string
+	 */
 	public String summaryFilename()
 	{
 		return _summaryFilename;
 	}
 	
-	/** Name of the statistics log file. */
+	/**
+	 *  Name of the statistics log file.
+	 *
+	 * @return the string
+	 */
 	public String statsFilename()
 	{
 		return _statsFilename;
 	}
 	
-	/** Controls how often statistics are written. */
+	/**
+	 *  Controls how often statistics are written.
+	 *
+	 * @return the int
+	 */
 	public int	writeStatsInterval()
 	{
 		return _writeStatsInterval;
 	}
 	
-	/** Controls whether stats appear on the screen. */
+	/**
+	 *  Controls whether stats appear on the screen.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean displayStats()
 	{
 		return _displayStats;
 	}
 
-	/** Rate at which the consumer will send out item requests. */
+	/**
+	 *  Rate at which the consumer will send out item requests.
+	 *
+	 * @return the int
+	 */
 	public int itemRequestsPerSec()
 	{
 		return _itemRequestsPerSec;
 	}
 
 	/* CONNECTION configuration */
-	/** Type of connection. */
+	/**
+	 *  Type of connection.
+	 *
+	 * @return the int
+	 */
 	public int	connectionType()
 	{
 		return _connectionType;
 	}
 	
-	/** hostName, if using Channel.connect(). */
+	/**
+	 *  hostName, if using Channel.connect().
+	 *
+	 * @return the string
+	 */
 	public String hostName()
 	{
 		return _hostName;
 	}
 	
-	/** Port number. */
+	/**
+	 *  Port number.
+	 *
+	 * @return the string
+	 */
 	public String portNo()
 	{
 		return _portNo;
 	}
 	
-	/** Name of interface. */
+	/**
+	 *  Name of interface.
+	 *
+	 * @return the string
+	 */
 	public String interfaceName()
 	{
 		return _interfaceName;
 	}
 	
-	/** Guaranteed Output Buffers. */
+	/**
+	 *  Guaranteed Output Buffers.
+	 *
+	 * @return the int
+	 */
 	public int guaranteedOutputBuffers()
 	{
 		return _guaranteedOutputBuffers;
 	}
 	
-	/** Input Buffers. */
+	/**
+	 *  Input Buffers.
+	 *
+	 * @return the int
+	 */
 	public int numInputBuffers()
 	{
 		return _numInputBuffers;
 	}
 	
-	/** System Send Buffer Size */
+	/**
+	 *  System Send Buffer Size.
+	 *
+	 * @return the int
+	 */
 	public int sendBufSize()
 	{
 		return _sendBufSize;
 	}
 	
-	/** System Receive Buffer Size */
+	/**
+	 *  System Receive Buffer Size.
+	 *
+	 * @return the int
+	 */
 	public int recvBufSize()
 	{
 		return _recvBufSize;
 	}
 
-	/** Sets the point that causes UPA to automatically flush. */
+	/**
+	 *  Sets the point that causes UPA to automatically flush.
+	 *
+	 * @return the int
+	 */
 	public int highWaterMark()
 	{
 		return _highWaterMark;
 	}
 	
-	/** Enable/Disable Nagle's algorithm. */
+	/**
+	 *  Enable/Disable Nagle's algorithm.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean tcpNoDelay()
 	{
 		return _tcpNoDelay;
 	}
 
-	/** Whether to request all items as snapshots. */
+	/**
+	 *  Whether to request all items as snapshots.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean requestSnapshots()
 	{
 		return _requestSnapshots;
 	}
 
-	/** Username used when logging in. */
+	/**
+	 *  Username used when logging in.
+	 *
+	 * @return the string
+	 */
 	public String username()
 	{
 		return _username;
 	}
 	
-	/** Name of service to request items from. */
+	/**
+	 *  Name of service to request items from.
+	 *
+	 * @return the string
+	 */
 	public String serviceName()
 	{
 		return _serviceName;
 	}
 	
-	/** Number of items to request. */
+	/**
+	 *  Number of items to request.
+	 *
+	 * @return the int
+	 */
 	public int itemRequestCount()
 	{
 		return _itemRequestCount;
 	}
 	
-	/** Number of items common to all connections, if using multiple connections. */
+	/**
+	 *  Number of items common to all connections, if using multiple connections.
+	 *
+	 * @return the int
+	 */
 	public int commonItemCount()
 	{
 		return _commonItemCount;
 	}
 	
-	/** Number of posts to send per second. */
+	/**
+	 *  Number of posts to send per second.
+	 *
+	 * @return the int
+	 */
 	public int postsPerSec()
 	{
 		return _postsPerSec;
 	}
 	
-	/** Number of latency posts to send per second. */
+	/**
+	 *  Number of latency posts to send per second.
+	 *
+	 * @return the int
+	 */
 	public int latencyPostsPerSec()
 	{
 		return _latencyPostsPerSec;
 	}
 
-	/** Number of generic messages to send per second. */
+	/**
+	 *  Number of generic messages to send per second.
+	 *
+	 * @return the int
+	 */
 	public int genMsgsPerSec()
 	{
 		return _genMsgsPerSec;
 	}
 	
-	/** Number of latency generic messages to send per second. */
+	/**
+	 *  Number of latency generic messages to send per second.
+	 *
+	 * @return the int
+	 */
 	public int latencyGenMsgsPerSec()
 	{
 		return _latencyGenMsgsPerSec;
 	}
 	
-	/** Number of requests to send per tick */
+	/**
+	 *  Number of requests to send per tick.
+	 *
+	 * @return the int
+	 */
 	public int requestsPerTick()
 	{
 		return _requestsPerTick;
 	}
 	
-	/** The remainder of number of requests to send per tick */
+	/**
+	 *  The remainder of number of requests to send per tick.
+	 *
+	 * @return the int
+	 */
 	public int requestsPerTickRemainder()
 	{
 		return _requestsPerTickRemainder;
 	}
 	
-	/** At startup, prime the JVM to optimize code by requesting a snapshot of all items before opening the streaming items. */
+	/**
+	 *  At startup, prime the JVM to optimize code by requesting a snapshot of all items before opening the streaming items.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean primeJVM()
 	{
 		return _primeJVM;
 	}
 	
-	/** Converts configuration parameters to a string */
+	/**
+	 *  Converts configuration parameters to a string.
+	 *
+	 * @return the string
+	 */
 	public String toString()
 	{
 		return _configString;
 	}
 
-    /** Use the VA Reactor instead of the UPA Channel for sending and receiving. */
+    /**
+     *  Use the VA Reactor instead of the UPA Channel for sending and receiving.
+     *
+     * @return true, if successful
+     */
     public boolean useReactor()
     {
         return _useReactor;
     }
 
-    /** Use the VA Reactor watchlist instead of the UPA Channel for sending and receiving. */
+    /**
+     *  Use the VA Reactor watchlist instead of the UPA Channel for sending and receiving.
+     *
+     * @return true, if successful
+     */
     public boolean useWatchlist()
     {
         return _useWatchlist;
     }
     
-    /** If set, the application will continually read rather than using notification. */
+    /**
+     *  If set, the application will continually read rather than using notification.
+     *
+     * @return true, if successful
+     */
     public boolean busyRead()
     {
         return _busyRead;

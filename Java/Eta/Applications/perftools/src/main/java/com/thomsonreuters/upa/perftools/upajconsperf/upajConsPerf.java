@@ -28,7 +28,7 @@ import com.thomsonreuters.upa.perftools.common.XmlMsgData;
  * encoders and decoders in consuming Level I Market Price content directly
  * from an OMM provider or through the Thomson Reuters Enterprise Platform.
  * </p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * The consumer creates two types of threads:
  * <ul>
@@ -54,7 +54,7 @@ import com.thomsonreuters.upa.perftools.common.XmlMsgData;
  * <p>
  * This application uses XML Pull Parser (XPP), an open source XML parser library.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * The following configuration files are required:
  * <ul>
@@ -63,7 +63,7 @@ import com.thomsonreuters.upa.perftools.common.XmlMsgData;
  * <li>MsgData.xml, located in PerfTools (only required if posting or sending generic msgs)
  * </ul>
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * From the <i>Applications/PerfTools</i> directory run <i>ant</i> or <i>buildPerfTools.bat/ksh</i> script to
  * build performance examples.
@@ -74,7 +74,6 @@ import com.thomsonreuters.upa.perftools.common.XmlMsgData;
  *  com.thomsonreuters.upa.perftools.upajconsperf.upajConsPerf
  * <p> 
  * <i>-help</i> displays command line options, with a brief description of each option
- * <p>
  */
 public class upajConsPerf implements ShutdownCallback
 {

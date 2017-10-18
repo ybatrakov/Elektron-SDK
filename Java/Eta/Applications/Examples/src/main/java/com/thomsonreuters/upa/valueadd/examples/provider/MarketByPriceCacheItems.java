@@ -26,20 +26,21 @@ import com.thomsonreuters.upa.valueadd.examples.common.CacheInfo;
  */
 public class MarketByPriceCacheItems extends MarketByPriceItems
 {
+    
     /**
      * Encodes the market by price refresh. Returns success if encoding succeeds
      * or failure if encoding fails.
-     * 
+     *
      * @param itemReqInfo - The item request related info
-     * @param isSolicited - The response is solicited if set
      * @param msgBuf - The message buffer to encode the market price response
      *            into
+     * @param isSolicited - The response is solicited if set
      * @param serviceId - The service id of the market price response
      * @param dictionary - The dictionary used for encoding
+     * @param multiPartNo the multi part no
      * @param error - error in case of encoding failure
      * @param cacheInfo - cache info to determine if cache data
      * @param cacheEntry - cache entry where to retrieve or apply data from/to cache
-     * 
      * @return {@link CodecReturnCodes}
      */
     public int encodeRefresh(ItemRequestInfo itemReqInfo, TransportBuffer msgBuf, boolean isSolicited, int serviceId,
@@ -123,6 +124,20 @@ public class MarketByPriceCacheItems extends MarketByPriceItems
         return ret;
     }
     
+    /**
+     * Encode refresh from cache.
+     *
+     * @param itemReqInfo the item req info
+     * @param msgBuf the msg buf
+     * @param isSolicited the is solicited
+     * @param serviceId the service id
+     * @param dictionary the dictionary
+     * @param multiPartNo the multi part no
+     * @param error the error
+     * @param cacheInfo the cache info
+     * @param cacheEntry the cache entry
+     * @return the int
+     */
     public int encodeRefreshFromCache(ItemRequestInfo itemReqInfo, TransportBuffer msgBuf, boolean isSolicited, int serviceId,
     		DataDictionary dictionary, int multiPartNo, Error error, CacheInfo cacheInfo, PayloadEntry cacheEntry)
     {
@@ -209,16 +224,15 @@ public class MarketByPriceCacheItems extends MarketByPriceItems
     /**
      * Encodes the market by price update. Returns success if encoding succeeds
      * or failure if encoding fails.
-     * 
+     *
      * @param itemReqInfo - The item request related info
-     * @param isSolicited - The response is solicited if set
      * @param msgBuf - The message buffer to encode the market price response into
+     * @param isSolicited - The response is solicited if set
      * @param serviceId - The service id of the market price response
      * @param dictionary - The dictionary used for encoding
      * @param error - error in case of encoding failure
      * @param cacheInfo - cache info to determine if cache data
      * @param cacheEntry - cache entry where to retrieve or apply data from/to cache
-     * 
      * @return {@link CodecReturnCodes}
      */
     public int encodeUpdate(ItemRequestInfo itemReqInfo, TransportBuffer msgBuf, boolean isSolicited,

@@ -49,6 +49,11 @@ public class ChannelHandler
     
 	private Lock _channelLock = new ReentrantLock();
     
+    /**
+     * Instantiates a new channel handler.
+     *
+     * @param providerThread the provider thread
+     */
     public ChannelHandler(ProviderThread providerThread)
     {
         _activeChannelList = new ConcurrentLinkedQueue<>();
@@ -530,8 +535,8 @@ public class ChannelHandler
      * Requests that the ChannelHandler begin calling upa flush() for a channel.
      * Used when a call to upa write() indicates there is still data to be
      * written to the network.
-     * 
-     * @param clientChannelInfo
+     *
+     * @param clientChannelInfo the client channel info
      */
     public void requestFlush(ClientChannelInfo clientChannelInfo)
     {
@@ -547,6 +552,8 @@ public class ChannelHandler
     }
 
     /**
+     * Provider thread.
+     *
      * @return Provider thread for the channel handler
      */
     public ProviderThread providerThread()
@@ -555,6 +562,8 @@ public class ChannelHandler
     }
 
     /**
+     * Active channel list.
+     *
      * @return List of channels that are active.
      */
     public Queue<ClientChannelInfo> activeChannelList()
@@ -563,6 +572,8 @@ public class ChannelHandler
     }
 
     /**
+     * Initializing channel list.
+     *
      * @return List of initializing channels.
      */
     public Queue<ClientChannelInfo> initializingChannelList()
@@ -586,6 +597,11 @@ public class ChannelHandler
         return currentTime;
     }
     
+    /**
+     * Handler lock.
+     *
+     * @return the lock
+     */
     public Lock handlerLock()
     {
     	return _channelLock;

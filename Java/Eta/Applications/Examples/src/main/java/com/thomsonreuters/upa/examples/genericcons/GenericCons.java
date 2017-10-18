@@ -42,7 +42,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * a generic consumer and generic provider. It request files from a generic provider
  * and stores the file responses to disk.
  * </p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * This class is responsible for the following:
  * <ul>
@@ -62,11 +62,11 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * choices were made to favor simplicity and readability over performance. It is
  * not intended to be used for measuring performance.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * No special setup is required.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Change directory to the <i>Applications/Examples</i> directory and run <i>ant</i> to
  * build.
@@ -74,7 +74,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * java -cp ./bin;../../Libs/upaValueAdd.jar;../../Libs/upa.jar
  * com.thomsonreuters.upa.examples.genericcons.GenericCons [-h srvrHostName] [-p srvrPortNo]
  * [-i interfaceName] [-uname loginUserName] [-s serviceName] [-x] [-runtime runTime]
- * <p>
+ * </p>
  * <ul>
  * <li>-h Server host name. Default is <i>localhost</i>.
  * <li>-p Server port number. Default is <i>14002</i>.

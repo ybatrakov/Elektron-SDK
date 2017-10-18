@@ -63,6 +63,11 @@ abstract class MarketDataHandler
     
     protected GlobalFieldSetDefDb globalSetDefDb = null;
     
+    /**
+     * Instantiates a new market data handler.
+     *
+     * @param domainType the domain type
+     */
     public MarketDataHandler(int domainType)
     {
          this.domainType = domainType;
@@ -85,13 +90,11 @@ abstract class MarketDataHandler
     /**
      * Encodes and sends item requests for three market price domains
      * (MarketPrice, MarketByPrice, MarketByOrder).
-     * 
+     *
      * @param chnl - The channel to send a source directory request to
-     * 
      * @param item - Item name to send
-     * 
      * @param serviceInfo - RDM directory response information
-     * 
+     * @param error the error
      * @return success if item requests can be made, can be encoded and sent
      *         successfully. Failure if service does not support market price capability
      *         or failure for encoding/sending request.
@@ -165,12 +168,12 @@ abstract class MarketDataHandler
      * printing out the item name contained in the key, decoding the field list
      * and field entry, and calling decodeFieldEntry() to decode the field entry
      * data.
-     * 
+     *
      * @param msg - The partially decoded message
      * @param dIter - The decode iterator
      * @param item - The item we are working on
      * @param dictionary - Data dictionary
-     * 
+     * @param error the error
      * @return success if decoding succeeds, failure if it fails.
      */
     public int processResponse(Msg msg, DecodeIterator dIter, Item item, DataDictionary dictionary, Error error)
@@ -503,6 +506,11 @@ abstract class MarketDataHandler
         return CodecReturnCodes.SUCCESS;
     }
     
+    /**
+     * Sets the global set def db.
+     *
+     * @param setFieldSetDefDb the new global set def db
+     */
     public void setGlobalSetDefDb(GlobalFieldSetDefDb setFieldSetDefDb)
     {
         globalSetDefDb = setFieldSetDefDb;

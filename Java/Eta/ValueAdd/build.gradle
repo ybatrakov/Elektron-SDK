@@ -44,8 +44,14 @@ jar {
 		from sharedManifest 
 	}
 
+        destinationDir = file("../Libs/")
         baseName = 'upaValueAdd'
 }
+
+task cleanJar (type: Delete) {
+        delete "${jar.archivePath}"
+}
+clean.dependsOn cleanJar
 
 artifacts {
 	archives jar
@@ -58,5 +64,6 @@ tasks.withType (Test) {
 test {
         // set to tru to see the junit stdoutput
         testLogging.showStandardStreams = false
+        maxParallelForks = 1
 }
 

@@ -27,7 +27,7 @@ import com.thomsonreuters.upa.transport.TransportFactory;
  * <p>
  * This is a main class to run UPA EDF Consumer application.
  * </p>
- * <H2>Summary</H2>
+ * <em>Summary</em>
  * <p>
  * This class is responsible for the following:
  * <ul>
@@ -47,13 +47,13 @@ import com.thomsonreuters.upa.transport.TransportFactory;
  * slight decrease in performance compared to writing applications directly to
  * the UPA interfaces.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * The RDMFieldDictionary and enumtype.def files could be located in the
  * directory of execution or this application will request dictionary from
  * provider.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Change directory to the <i>Applications/Examples</i> directory and run <i>ant</i> to
  * build.
@@ -68,7 +68,7 @@ import com.thomsonreuters.upa.transport.TransportFactory;
  * [-setDefDictName globalSetDefDictionaryName]
  * [-runtime runTime] [-x]
  * 
- * <p>
+ * </p>
  * <ul>
  * <li>-mp Market Price domain item name. The user can
  * specify multiple -mp instances, where each occurrence is associated with a
@@ -135,6 +135,9 @@ public class EDFConsumer
     private PingHandler pingHandler;
     private EDFWatchList watchlist;
     
+    /**
+     * Instantiates a new EDF consumer.
+     */
     public EDFConsumer()
     {
         error = TransportFactory.createError();    // error information
@@ -148,6 +151,9 @@ public class EDFConsumer
         pingHandler = new PingHandler();
     }
 
+    /**
+     * Adds the command line args.
+     */
     public static void addCommandLineArgs()
     {
         CommandLine.programName("EDFConsumer");
@@ -214,6 +220,8 @@ public class EDFConsumer
     /**
      * Main loop that handles session initialization, registering into selector, 
      * reading, and processing inside of the sessions from their channels.
+     *
+     * @param args the args
      */
     public void run(String[] args)
     {
@@ -319,6 +327,11 @@ public class EDFConsumer
         gapRequestSession.uninitialize();
      }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args) 
     {
         EDFConsumer edfConsumer = new EDFConsumer();

@@ -113,6 +113,13 @@ public class ItemHandler
     private StatusMsg _statusMsg = (StatusMsg)CodecFactory.createMsg();
     private Qos _providerQos = CodecFactory.createQos();
 
+    /**
+     * Instantiates a new item handler.
+     *
+     * @param providerSession the provider session
+     * @param dictionaryHandler the dictionary handler
+     * @param loginHandler the login handler
+     */
     public ItemHandler(ProviderSession providerSession, ProviderDictionaryHandler dictionaryHandler, ProviderLoginHandler loginHandler)
     {
         _providerSession = providerSession;
@@ -158,10 +165,11 @@ public class ItemHandler
     /**
      * Processes an item request. This consists of storing the request
      * information, then calling sendItemResponse() to send the response.
-     * 
+     *
      * @param chnl - The channel of the response
      * @param msg - The partially decoded message
      * @param dIter - The decode iterator
+     * @param error the error
      * @return returns success if decoding of request message and sending of
      *         response message succeeds or failure if it fails.
      */
@@ -645,8 +653,10 @@ public class ItemHandler
      * Sends the item close status message(s) for a channel. This consists of
      * finding all request information for this channel and sending the close
      * status messages to the channel.
-     * 
+     *
      * @param channel - The channel to send close status message(s) to
+     * @param error the error
+     * @return the int
      */
     public int sendCloseStatusMsgs(Channel channel, Error error)
     {
@@ -1505,11 +1515,21 @@ public class ItemHandler
         _itemInfoWatchList.update();
     }
 
+    /**
+     * Service id.
+     *
+     * @return the int
+     */
     public int serviceId()
     {
         return _serviceId;
     }
 
+    /**
+     * Service id.
+     *
+     * @param serviceId the service id
+     */
     public void serviceId(int serviceId)
     {
         this._serviceId = serviceId;

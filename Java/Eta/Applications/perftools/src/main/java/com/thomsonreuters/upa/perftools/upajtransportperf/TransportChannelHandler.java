@@ -47,6 +47,12 @@ public class TransportChannelHandler
 
     private boolean _isShutdown;
 
+    /**
+     * Instantiates a new transport channel handler.
+     *
+     * @param shutdownCallback the shutdown callback
+     * @param error the error
+     */
     public TransportChannelHandler(ShutdownCallback shutdownCallback, Error error)
     {
         _activeChannelList = new LinkedList<>();
@@ -78,6 +84,8 @@ public class TransportChannelHandler
 
     /**
      * Cleans up a ChannelHandler.
+     *
+     * @param error the error
      */
     public void cleanup(Error error)
     {
@@ -477,6 +485,8 @@ public class TransportChannelHandler
 
     /**
      * Performs ping timeout checks for channels in this channel handler.
+     *
+     * @return the int
      */
     public int checkPings()
     {
@@ -584,8 +594,8 @@ public class TransportChannelHandler
      * Requests that the ChannelHandler begin calling upa flush() for a channel.
      * Used when a call to upa write() indicates there is still data to be
      * written to the network.
-     * 
-     * @param clientChannelInfo
+     *
+     * @param clientChannelInfo the client channel info
      */
     public void requestFlush(ClientChannelInfo clientChannelInfo)
     {
@@ -622,6 +632,8 @@ public class TransportChannelHandler
     }
 
     /**
+     * Transport thread.
+     *
      * @return Provider thread for the channel handler
      */
     public TransportThread transportThread()
@@ -630,6 +642,8 @@ public class TransportChannelHandler
     }
 
     /**
+     * Active channel list.
+     *
      * @return List of channels that are active.
      */
     public Queue<ClientChannelInfo> activeChannelList()
@@ -638,6 +652,8 @@ public class TransportChannelHandler
     }
 
     /**
+     * Initializing channel list.
+     *
      * @return List of initializing channels.
      */
     public Queue<ClientChannelInfo> initializingChannelList()
@@ -646,6 +662,8 @@ public class TransportChannelHandler
     }
 
     /**
+     * User spec.
+     *
      * @return Reference to application-specified data.
      */
     public Object userSpec()
@@ -654,7 +672,8 @@ public class TransportChannelHandler
     }
 
     /**
-     * 
+     * User spec.
+     *
      * @param userSpec Reference to application-specified data.
      */
     public void userSpec(Object userSpec)

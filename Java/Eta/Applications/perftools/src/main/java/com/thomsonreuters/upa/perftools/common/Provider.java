@@ -41,7 +41,10 @@ public class Provider
     private CountStat                _bufferSentCount;                   // Counts total buffers sent(used with
                                                                          // msgSentCount for packing statistics).
 
-    public Provider()
+    /**
+                                                                          * Instantiates a new provider.
+                                                                          */
+                                                                         public Provider()
     {
         _refreshCount = new CountStat();
         _updateCount = new CountStat();
@@ -62,9 +65,10 @@ public class Provider
     /**
      * Initializes provider statistics and creates specific number provider
      * threads as configured by the application.
-     * 
-     * @param providerType
-     * @param xmlMsgData
+     *
+     * @param providerType the provider type
+     * @param xmlMsgData the xml msg data
+     * @param summaryFileName the summary file name
      */
     public void init(ProviderType providerType, XmlMsgData xmlMsgData, String summaryFileName)
     {
@@ -508,6 +512,9 @@ public class Provider
     }
     
 
+    /**
+     * Prints the final stats.
+     */
     public void printFinalStats()
     {
     	PrintWriter printWriter = new PrintWriter(System.out);

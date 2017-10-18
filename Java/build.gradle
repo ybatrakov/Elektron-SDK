@@ -61,5 +61,6 @@ def setCommandLineArguments(commandLineArgs) {
 	// remove last "," add "]" and set the args 
 	return cla.substring(0, cla.lastIndexOf(',')) + "]"
 }
- 
 
+// disable creating empty Java.jar file 
+jar.enabled = false

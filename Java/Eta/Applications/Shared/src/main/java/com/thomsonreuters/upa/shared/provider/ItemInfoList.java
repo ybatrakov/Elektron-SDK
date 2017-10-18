@@ -25,6 +25,9 @@ public class ItemInfoList implements Iterable<ItemInfo>
     private static final int MAX_ITEM_LIST_SIZE = ProviderDirectoryHandler.OPEN_LIMIT * ProviderSession.NUM_CLIENT_SESSIONS;
     private List<ItemInfo> _itemInfoList = new ArrayList<ItemInfo>(MAX_ITEM_LIST_SIZE);
 
+    /**
+     * Instantiates a new item info list.
+     */
     public ItemInfoList()
     {
         for (int i = 0; i < MAX_ITEM_LIST_SIZE; i++)
@@ -35,9 +38,10 @@ public class ItemInfoList implements Iterable<ItemInfo>
 
     /**
      * Retrieves an item info given the item name and domain.
-     * 
+     *
      * @param name - Itemname to search iteminfo for
      * @param domainType - domain type to search iteminfo for
+     * @param isPrivateStream the is private stream
      * @return ItemInfo associated with itemName and domainType
      */
     public ItemInfo get(Buffer name, int domainType, boolean isPrivateStream)
@@ -55,10 +59,11 @@ public class ItemInfoList implements Iterable<ItemInfo>
 
     /**
      * Finds an item information associated with the item request.
-     * 
-     * @param channel
+     *
+     * @param channel the channel
      * @param itemName - Itemname to search iteminfo for
      * @param domainType - domain type to search iteminfo for
+     * @param isPrivateStream the is private stream
      * @return ItemInfo associated with itemName and domainType
      */
     public ItemInfo get(Channel channel, Buffer itemName, int domainType, boolean isPrivateStream)
@@ -117,6 +122,9 @@ public class ItemInfoList implements Iterable<ItemInfo>
         }
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Iterable#iterator()
+     */
     @Override
     public Iterator<ItemInfo> iterator()
     {
@@ -135,7 +143,7 @@ public class ItemInfoList implements Iterable<ItemInfo>
     }
 
     /**
-     * clears item information list
+     * clears item information list.
      */
     public void clear()
     {

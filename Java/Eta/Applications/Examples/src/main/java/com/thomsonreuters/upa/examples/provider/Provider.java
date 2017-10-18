@@ -84,13 +84,13 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * slight decrease in performance compared to writing applications directly to
  * the UPA interfaces.
  * <p>
- * <H2>Setup Environment</H2>
+ * <em>Setup Environment</em>
  * <p>
  * The RDMFieldDictionary and enumtype.def files must be located in the
  * directory of execution. If not available and adh supports dictionary requests,
  * the dictionary is down loaded from adh.
  * <p>
- * <H2>Running the application:</H2>
+ * <em>Running the application:</em>
  * <p>
  * Change directory to the <i>Applications/Examples</i> directory and run <i>ant</i> to
  * build.
@@ -98,7 +98,7 @@ import com.thomsonreuters.upa.transport.TransportReturnCodes;
  * java -cp ./bin;../../Libs/upaValueAdd.jar;../../Libs/upa.jar
  * com.thomsonreuters.upa.examples.provider.Provider [-p srvrPortNo] [-id
  * Serviceid] [-s serviceName] [-x] [-runtime runTime]
- * <p>
+ * </p>
  * <ul>
  * <li>-id Service id. Default is <i>1</i>.
  * <li>-p Server port number. Default is <i>14002</i>.

@@ -15,6 +15,9 @@ public class ValueStatistics
 	double	_sum;                 // Used in calculating variance.
 	double	_sumOfSquares;        // Used in calculating variance.
 	
+	/**
+	 * Instantiates a new value statistics.
+	 */
 	public ValueStatistics()
 	{
 		_maxValue = -Double.MAX_VALUE;
@@ -33,7 +36,11 @@ public class ValueStatistics
 		_sumOfSquares = 0;
 	}
 	
-	/** Recalculate stats based on new value. */
+	/**
+	 *  Recalculate stats based on new value.
+	 *
+	 * @param newValue the new value
+	 */
 	public void update(double newValue)
 	{
 		++_count;
@@ -54,7 +61,13 @@ public class ValueStatistics
 			(_sumOfSquares - _sum * _sum / _count) / (_count - 1) : 0;
 	}
 	
-	/** Print a line containing all calculated statistics. */
+	/**
+	 *  Print a line containing all calculated statistics.
+	 *
+	 * @param valueStatsName the value stats name
+	 * @param countUnitName the count unit name
+	 * @param displayThousandths the display thousandths
+	 */
 	public void print(String valueStatsName, String countUnitName, boolean displayThousandths)
 	{
 		String outputStr = displayThousandths ? 
@@ -71,61 +84,101 @@ public class ValueStatistics
 				_count);
 	}
 
-	/** Total number of samples. */
+	/**
+	 *  Total number of samples.
+	 *
+	 * @return the long
+	 */
 	public long count()
 	{
 		return _count;
 	}
 
-	/** Total number of samples. */
+	/**
+	 *  Total number of samples.
+	 *
+	 * @param count the count
+	 */
 	public void count(long count)
 	{
 		_count = count;
 	}
 
-	/** Current mean of samples. */
+	/**
+	 *  Current mean of samples.
+	 *
+	 * @return the double
+	 */
 	public double average()
 	{
 		return _average;
 	}
 
-	/** Current mean of samples. */
+	/**
+	 *  Current mean of samples.
+	 *
+	 * @param average the average
+	 */
 	public void average(double average)
 	{
 		_average = average;
 	}
 
-	/** Current variance of samples. */
+	/**
+	 *  Current variance of samples.
+	 *
+	 * @return the double
+	 */
 	public double variance()
 	{
 		return _variance;
 	}
 
-	/** Current variance of samples. */
+	/**
+	 *  Current variance of samples.
+	 *
+	 * @param variance the variance
+	 */
 	public void variance(double variance)
 	{
 		_variance = variance;
 	}
 
-	/** Highest sample value. */
+	/**
+	 *  Highest sample value.
+	 *
+	 * @return the double
+	 */
 	public double maxValue()
 	{
 		return _maxValue;
 	}
 
-	/** Highest sample value. */
+	/**
+	 *  Highest sample value.
+	 *
+	 * @param maxValue the max value
+	 */
 	public void maxValue(double maxValue)
 	{
 		_maxValue = maxValue;
 	}
 
-	/** Lowest sample value. */
+	/**
+	 *  Lowest sample value.
+	 *
+	 * @return the double
+	 */
 	public double minValue()
 	{
 		return _minValue;
 	}
 
-	/** Lowest sample value. */
+	/**
+	 *  Lowest sample value.
+	 *
+	 * @param minValue the min value
+	 */
 	public void minValue(double minValue)
 	{
 		_minValue = minValue;

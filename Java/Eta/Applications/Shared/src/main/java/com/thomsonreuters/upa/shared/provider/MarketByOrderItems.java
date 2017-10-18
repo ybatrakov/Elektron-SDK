@@ -36,6 +36,9 @@ public class MarketByOrderItems
     protected MarketByOrderUpdate _marketByOrderUpdate;
     protected EncodeIterator _encodeIter = CodecFactory.createEncodeIterator();
 
+    /**
+     * Instantiates a new market by order items.
+     */
     public MarketByOrderItems()
     {
         _marketByOrderList = new ArrayList<MarketByOrderItem>(MAX_MARKET_PRICE_ITEM_LIST_SIZE);
@@ -72,6 +75,9 @@ public class MarketByOrderItems
 
     /**
      * Gets storage for a market by order item from the list.
+     *
+     * @param itemName the item name
+     * @return the market by order item
      */
     public MarketByOrderItem get(String itemName)
     {
@@ -112,18 +118,18 @@ public class MarketByOrderItems
     /**
      * Encodes the market by order response. Returns success if encoding
      * succeeds or failure if encoding fails.
-     * 
+     *
      * @param channel - The channel to send a market by order response to
      * @param itemInfo - The item information
-     * @param isSolicited - The response is solicited if set
      * @param msgBuf - The message buffer to encode the market by order response
      *            into
+     * @param isSolicited - The response is solicited if set
      * @param streamId - The stream id of the market by order response
      * @param isStreaming - Flag for streaming or snapshot
+     * @param isPrivateStream the is private stream
      * @param serviceId - The service id of the market by order response
      * @param dictionary - The dictionary used for encoding
      * @param error - Error information in case of encoding failure
-     * 
      * @return {@link CodecReturnCodes}
      */
     public int encodeResponse(Channel channel, ItemInfo itemInfo, TransportBuffer msgBuf, boolean isSolicited, int streamId, boolean isStreaming, boolean isPrivateStream, int serviceId, DataDictionary dictionary, Error error)

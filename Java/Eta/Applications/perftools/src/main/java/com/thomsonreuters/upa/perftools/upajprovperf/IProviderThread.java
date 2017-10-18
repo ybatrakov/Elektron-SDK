@@ -118,6 +118,11 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
         _reactorChannnelInfo = ReactorFactory.createReactorChannelInfo();
     }
 
+    /**
+     * Instantiates a new i provider thread.
+     *
+     * @param xmlMsgData the xml msg data
+     */
     public IProviderThread(XmlMsgData xmlMsgData)
     {
         super(xmlMsgData);
@@ -125,6 +130,8 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
     
     /**
      * Handles newly accepted client channel.
+     *
+     * @param channel the channel
      */
     public void acceptNewChannel(Channel channel)
     {
@@ -135,6 +142,10 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
     
     /**
      * Handles a new reactor channel.
+     *
+     * @param server the server
+     * @param errorInfo the error info
+     * @return the int
      */
     public int acceptNewReactorChannel(Server server, ReactorErrorInfo errorInfo)
     {
@@ -174,6 +185,8 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
     
     /**
      * Number of client sessions currently connected.
+     *
+     * @return the int
      */
     public int connectionCount()
     {
@@ -184,6 +197,11 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
      * Process the channel active event for the interactive provider
      * application. This causes some additional channel configuration and a
      * print out of the channel configuration.
+     *
+     * @param channelHandler the channel handler
+     * @param clientChannelInfo the client channel info
+     * @param error the error
+     * @return the int
      */
     public int processActiveChannel(ChannelHandler channelHandler, ClientChannelInfo clientChannelInfo, Error error)
     {
@@ -247,6 +265,11 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
 
     /**
      * Method called by ChannelHandler when a channel is closed.
+     *
+     * @param channelHandler the channel handler
+     * @param clientChannelInfo the client channel info
+     * @param error the error
+     * @return the int
      */
     public int processInactiveChannel(ChannelHandler channelHandler, ClientChannelInfo clientChannelInfo, Error error)
     {
@@ -274,6 +297,12 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
 
     /**
      * Method called by ChannelHandler when UPA read() returns a buffer.
+     *
+     * @param channelHandler the channel handler
+     * @param clientChannelInfo the client channel info
+     * @param msgBuf the msg buf
+     * @param error the error
+     * @return the int
      */
     public int processMsg(ChannelHandler channelHandler, ClientChannelInfo clientChannelInfo, TransportBuffer msgBuf, Error error)
     {
@@ -594,6 +623,9 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
         _channelHandler.cleanup();
     }
   
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.reactor.ReactorChannelEventCallback#reactorChannelEventCallback(com.thomsonreuters.upa.valueadd.reactor.ReactorChannelEvent)
+     */
     @Override
     public int reactorChannelEventCallback(ReactorChannelEvent event)
     {
@@ -739,6 +771,9 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
         return ReactorCallbackReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.reactor.DefaultMsgCallback#defaultMsgCallback(com.thomsonreuters.upa.valueadd.reactor.ReactorMsgEvent)
+     */
     @Override
     public int defaultMsgCallback(ReactorMsgEvent event)
     {
@@ -771,6 +806,9 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
         return ReactorCallbackReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.reactor.RDMLoginMsgCallback#rdmLoginMsgCallback(com.thomsonreuters.upa.valueadd.reactor.RDMLoginMsgEvent)
+     */
     @Override
     public int rdmLoginMsgCallback(RDMLoginMsgEvent event)
     {
@@ -798,6 +836,9 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
         return ReactorCallbackReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.reactor.RDMDirectoryMsgCallback#rdmDirectoryMsgCallback(com.thomsonreuters.upa.valueadd.reactor.RDMDirectoryMsgEvent)
+     */
     @Override
     public int rdmDirectoryMsgCallback(RDMDirectoryMsgEvent event)
     {
@@ -826,6 +867,9 @@ public class IProviderThread extends ProviderThread implements ProviderCallback
         return ReactorCallbackReturnCodes.SUCCESS;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.reactor.RDMDictionaryMsgCallback#rdmDictionaryMsgCallback(com.thomsonreuters.upa.valueadd.reactor.RDMDictionaryMsgEvent)
+     */
     @Override
     public int rdmDictionaryMsgCallback(RDMDictionaryMsgEvent event)
     {

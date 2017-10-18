@@ -30,22 +30,40 @@ public class SymbolListRequest extends MsgBaseImpl
     private final static String eolChar = "\n";
     private final static String tabChar = "\t";
     
+    /**
+     * Instantiates a new symbol list request.
+     */
     public SymbolListRequest()
     {
         qos = CodecFactory.createQos();
         symbolListName = CodecFactory.createBuffer();
     }
 
+    /**
+     * Symbol list name.
+     *
+     * @return the buffer
+     */
     public Buffer symbolListName()
     {
         return symbolListName;
     }
 
+    /**
+     * Service id.
+     *
+     * @return the int
+     */
     public int serviceId()
     {
         return serviceId;
     }
 
+    /**
+     * Service id.
+     *
+     * @param serviceId the service id
+     */
     public void serviceId(int serviceId)
     {
         this.serviceId = serviceId;
@@ -64,7 +82,8 @@ public class SymbolListRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Qos.
+     *
      * @return Qos used by request
      */
     public Qos qos()
@@ -73,7 +92,8 @@ public class SymbolListRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Priority class.
+     *
      * @return priority class used by request
      */
     public int priorityClass()
@@ -82,10 +102,10 @@ public class SymbolListRequest extends MsgBaseImpl
     }
 
     /**
-     * 
-     * @param priorityClass
-     * @param priorityCount
-     * 
+     * Priority.
+     *
+     * @param priorityClass the priority class
+     * @param priorityCount the priority count
      */
     public void priority(int priorityClass, int priorityCount)
     {
@@ -94,7 +114,8 @@ public class SymbolListRequest extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Priority count.
+     *
      * @return priority count used by request
      */
     public int priorityCount()
@@ -219,12 +240,17 @@ public class SymbolListRequest extends MsgBaseImpl
     
     /**
      * Checks the presence of service id flag.
+     *
+     * @return true, if successful
      */
     public boolean checkHasServiceId()
     {
         return (flags & SymbolListRequestFlags.HAS_SERVICE_ID) != 0;
     }
     
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#toString()
+     */
     public String toString()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -266,12 +292,18 @@ public class SymbolListRequest extends MsgBaseImpl
         return stringBuf.toString();
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#decode(com.thomsonreuters.upa.codec.DecodeIterator, com.thomsonreuters.upa.codec.Msg)
+     */
     @Override
     public int decode(DecodeIterator dIter, Msg msg)
     {
         throw new UnsupportedOperationException();
     }
     
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#domainType()
+     */
     @Override
     public int domainType()
     {

@@ -35,7 +35,7 @@ public class PingHandler
     }
 
     /**
-     * Indicate that we received a message from the remote connection
+     * Indicate that we received a message from the remote connection.
      */
     public void receivedMsg()
     {
@@ -43,7 +43,7 @@ public class PingHandler
     }
 
     /**
-     * Indicate that we sent a message to remote connection
+     * Indicate that we sent a message to remote connection.
      */
     public void sentMsg()
     {
@@ -70,7 +70,6 @@ public class PingHandler
 
     /**
      * Handles the ping processing for a channel.
-     * <p>
      * <ol>
      * <li>Sends a ping to the remote (connection) if the next local ping time
      * has expired and a local message was not sent to the remote (connection).</li>

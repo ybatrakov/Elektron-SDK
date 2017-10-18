@@ -104,6 +104,11 @@ public class YieldCurveHandler
 	private int indentCount;
 	private String[] indents = {"", "    ", "        ", "            "};
 
+	/**
+	 * Instantiates a new yield curve handler.
+	 *
+	 * @param watchList the watch list
+	 */
 	public YieldCurveHandler(StreamIdWatchList watchList)
 	{
 		this(DomainTypes.YIELD_CURVE, watchList);
@@ -125,6 +130,8 @@ public class YieldCurveHandler
 	/**
 	 * Used to enable snapshot requesting. Send a set of
 	 * items as a snapshot request.
+	 *
+	 * @param snapshotRequested the snapshot requested
 	 */
 	public void snapshotRequest(boolean snapshotRequested)
 	{
@@ -172,23 +179,15 @@ public class YieldCurveHandler
 	}
 
 	/**
-	 * Encodes and sends item requests for yield curve domains
-	 * 
-	 * @param chnl
-	 *            - The channel to send a source directory request to
-	 * 
-	 * @param itemNames
-	 *            - List of item names
-	 * 
-	 * @param isPrivateStream
-	 *            - flag indicating if requested items are private stream or
+	 * Encodes and sends item requests for yield curve domains.
+	 *
+	 * @param chnl            - The channel to send a source directory request to
+	 * @param itemNames            - List of item names
+	 * @param isPrivateStream            - flag indicating if requested items are private stream or
 	 *            not.
-	 * 
-	 * @param loginInfo
-	 *            - RDM login information
-	 * @param serviceInfo
-	 *            - RDM directory response information
-	 * 
+	 * @param loginInfo            - RDM login information
+	 * @param serviceInfo            - RDM directory response information
+	 * @param error the error
 	 * @return success if item requests can be made, can be encoded and sent
 	 *         successfully. Failure if duplicate item request, service does not
 	 *         support market price capability or failure for encoding/sending
@@ -328,12 +327,11 @@ public class YieldCurveHandler
 	 * printing out the item name contained in the key, decoding the field list
 	 * and field entry, and calling decodeFieldEntry() to decode the field entry
 	 * data.
-	 * 
-	 * @param msg
-	 *            - The partially decoded message
-	 * @param dIter
-	 *            - The decode iterator
-	 * 
+	 *
+	 * @param msg            - The partially decoded message
+	 * @param dIter            - The decode iterator
+	 * @param dictionary the dictionary
+	 * @param error the error
 	 * @return success if decoding succeeds, failure if it fails.
 	 */
 	public int processResponse(Msg msg, DecodeIterator dIter, DataDictionary dictionary, Error error)
@@ -892,8 +890,10 @@ public class YieldCurveHandler
 
 	/**
 	 * Close all item streams.
-	 * 
+	 *
 	 * @param chnl The channel to send a item stream close to
+	 * @param error the error
+	 * @return the int
 	 */
 	public int closeStreams(ChannelSession chnl, Error error)
 	{

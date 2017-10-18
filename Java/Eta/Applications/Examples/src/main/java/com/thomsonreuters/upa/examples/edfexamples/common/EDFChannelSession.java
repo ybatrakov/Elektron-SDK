@@ -76,6 +76,9 @@ public class EDFChannelSession extends ChannelSession
     public static final int NUM_CLIENT_SESSIONS = 5;
     private boolean shouldRecoverConnection = true;
     
+    /**
+     * The Class ChannelInfo.
+     */
     public class ChannelInfo
     {
         private Selector selector;
@@ -85,31 +88,61 @@ public class EDFChannelSession extends ChannelSession
         private ResponseCallback callback;
         private GapInfo gapInfo = new GapInfo();
         
+        /**
+         * Read args.
+         *
+         * @return the read args
+         */
         public ReadArgs readArgs()
         {
             return readArgs;
         }
         
+        /**
+         * Channel.
+         *
+         * @return the channel
+         */
         public Channel channel()
         {
             return channel;
         }
         
+        /**
+         * Connect options.
+         *
+         * @return the connect options
+         */
         public ConnectOptions connectOptions()
         {
             return copts;
         }
         
+        /**
+         * Connect options.
+         *
+         * @param newCopts the new copts
+         */
         public void connectOptions(ConnectOptions newCopts)
         {
             copts = newCopts;
         }
         
+        /**
+         * Gap info.
+         *
+         * @return the gap info
+         */
         public GapInfo gapInfo()
         {
             return gapInfo;
         }
 
+        /**
+         * Gap info.
+         *
+         * @param newGapInfo the new gap info
+         */
         public void gapInfo(GapInfo newGapInfo)
         {
             newGapInfo.address.copy(gapInfo.address);
@@ -118,6 +151,11 @@ public class EDFChannelSession extends ChannelSession
             gapInfo.start = newGapInfo.start;
         }
         
+        /**
+         * Callback.
+         *
+         * @return the response callback
+         */
         public ResponseCallback callback()
         {
             return callback;
@@ -125,6 +163,9 @@ public class EDFChannelSession extends ChannelSession
 
     }
     
+    /**
+     * The Class GapInfo.
+     */
     /* Gap Info */
     public class GapInfo
     {
@@ -133,6 +174,9 @@ public class EDFChannelSession extends ChannelSession
         public Buffer address;
         public long port;
         
+        /**
+         * Instantiates a new gap info.
+         */
         public GapInfo()
         {
             start =0;
@@ -155,11 +199,19 @@ public class EDFChannelSession extends ChannelSession
     private DataDictionary dictionaryForXml;
     private WriteArgs writeArgs = TransportFactory.createWriteArgs();
     
+    /**
+     * Instantiates a new EDF channel session.
+     */
     public EDFChannelSession()
     {
         channelInfo.copts.clear();
     }
     
+    /**
+     * Instantiates a new EDF channel session.
+     *
+     * @param responseCallback the response callback
+     */
     public EDFChannelSession(ResponseCallback responseCallback)
     {
         channelInfo.copts.clear();
@@ -228,6 +280,9 @@ public class EDFChannelSession extends ChannelSession
         return Transport.initialize(initArgs, error);
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.examples.common.ChannelSession#flush(com.thomsonreuters.upa.transport.Error)
+     */
     public int flush(Error error)
     {
         if (channelState() == ChannelState.INACTIVE)
@@ -262,8 +317,8 @@ public class EDFChannelSession extends ChannelSession
     }
 
     /**
-     * Retrieves the {@link ConnectOptions} 
-     * 
+     * Retrieves the {@link ConnectOptions} .
+     *
      * @return {@link ConnectOptions}
      */
     public ConnectOptions getConnectOptions()
@@ -282,6 +337,8 @@ public class EDFChannelSession extends ChannelSession
     }
 
     /**
+     * Should recover connection.
+     *
      * @return true if connection recovery flag is set during channel connection
      *         failure.
      */
@@ -617,9 +674,9 @@ public class EDFChannelSession extends ChannelSession
     
     /**
      * Writes the content of the {@link TransportBuffer} to the UPA channelInfo.channel.
-     * 
-     * @param msgBuf
-     * @param error
+     *
+     * @param msgBuf the msg buf
+     * @param error the error
      * @return {@link TransportReturnCodes}
      * @see Channel#write(TransportBuffer, WriteArgs, Error)
      */
@@ -809,7 +866,8 @@ public class EDFChannelSession extends ChannelSession
     }
     
     /**
-     * 
+     * Channel info.
+     *
      * @return channelInfo
      */
     
@@ -821,8 +879,8 @@ public class EDFChannelSession extends ChannelSession
     /**
      * Allows the user to add specific channel Infos to this channel's list of ChannelInfo, as well as registers them to 
      * this channel's Selector.
-     * 
-     * @param chnlInfo
+     *
+     * @param chnlInfo the chnl info
      */
     public void addAndRegisterChannelInfo(ChannelInfo chnlInfo)
     {
@@ -879,11 +937,21 @@ public class EDFChannelSession extends ChannelSession
         channelInfo.copts.connectionType(connectionType);
     }
     
+    /**
+     * Select time.
+     *
+     * @return the long
+     */
     public long selectTime()
     {
         return selectTime;
     }
     
+    /**
+     * Channels.
+     *
+     * @return the list
+     */
     public List<ChannelInfo> channels()
     {
         return Channels;

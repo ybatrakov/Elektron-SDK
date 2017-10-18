@@ -10,6 +10,9 @@ public class CountStat
 	private long _currentValue;	// The current value. 
 	private long _prevValue;	// Value returned from the previous call to countStatGetChange. 
 	
+	/**
+	 * Inits the.
+	 */
 	public void init()
     {
 	    _currentValue = 0;
@@ -19,6 +22,8 @@ public class CountStat
     /**
      * Get the difference between the current count and that of the previous
      * call.
+     *
+     * @return the change
      */
 	public long getChange()
 	{
@@ -30,13 +35,21 @@ public class CountStat
 		return currentValue;
 	}
 	
-    /** Add to the count. */
+    /**
+     *  Add to the count.
+     *
+     * @param addend the addend
+     */
 	public void add(long addend)
 	{
 		_currentValue += addend;
 	}
 	
-    /** Get the current overall count. */
+    /**
+     *  Get the current overall count.
+     *
+     * @return the total
+     */
 	public long getTotal()
 	{
 		return _currentValue;

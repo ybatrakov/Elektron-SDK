@@ -75,6 +75,15 @@ public class TransportThread extends Thread
         _chnlInfo = TransportFactory.createChannelInfo();
     }
 
+    /**
+     * Instantiates a new transport thread.
+     *
+     * @param i the i
+     * @param sessionHandler the session handler
+     * @param processMsg the process msg
+     * @param shutdownCallback the shutdown callback
+     * @param error the error
+     */
     public TransportThread(int i, SessionHandler sessionHandler, ProcessMsg processMsg, ShutdownCallback shutdownCallback, Error error)
     {
         _msgsSent.init();
@@ -157,6 +166,11 @@ public class TransportThread extends Thread
         }
     }
     
+    /**
+     * Cleanup.
+     *
+     * @param error the error
+     */
     public void cleanup(Error error)
     {
         _channelHandler.cleanup(error);
@@ -167,6 +181,13 @@ public class TransportThread extends Thread
         }
     }
 
+    /**
+     * Process inactive channel.
+     *
+     * @param channelHandler the channel handler
+     * @param channelInfo the channel info
+     * @param error the error
+     */
     public void processInactiveChannel(TransportChannelHandler channelHandler, ClientChannelInfo channelInfo, Error error)
     {
         SessionHandler handler = (SessionHandler)channelHandler.userSpec();
@@ -200,11 +221,28 @@ public class TransportThread extends Thread
         _shutdownAck = true;
     }
 
+    /**
+     * Process msg.
+     *
+     * @param channelHandler the channel handler
+     * @param channelInfo the channel info
+     * @param msgBuffer the msg buffer
+     * @param error the error
+     * @return the int
+     */
     public int processMsg(TransportChannelHandler channelHandler, ClientChannelInfo channelInfo, TransportBuffer msgBuffer, Error error)
     {
         return _processMsg.processMsg(channelHandler, channelInfo, msgBuffer, error);
     }
 
+    /**
+     * Process active channel.
+     *
+     * @param channelHandler the channel handler
+     * @param channelInfo the channel info
+     * @param error the error
+     * @return the int
+     */
     public int processActiveChannel(TransportChannelHandler channelHandler, ClientChannelInfo channelInfo, Error error)
     {
         TransportSession session = (TransportSession)channelInfo.userSpec;
@@ -256,6 +294,9 @@ public class TransportThread extends Thread
         return TransportReturnCodes.SUCCESS;
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Thread#run()
+     */
     public void run()
     {
         long currentTime, nextTickTime;
@@ -573,7 +614,14 @@ public class TransportThread extends Thread
 
             
     
-    /** Submit a time record */
+    /**
+     *  Submit a time record.
+     *
+     * @param recordQueue the record queue
+     * @param startTime the start time
+     * @param endTime the end time
+     * @param ticks the ticks
+     */
     public void timeRecordSubmit(TimeRecordQueue recordQueue, long startTime, long endTime, long ticks)
     {
         TimeRecord record;
@@ -656,13 +704,21 @@ public class TransportThread extends Thread
         return _currentTicks;
     }
 
-    /** Signals thread to shutdown. */
+    /**
+     *  Signals thread to shutdown.
+     *
+     * @param value the value
+     */
     public void shutdown(boolean value)
     {
         _shutdown = value;
     }
 
-    /** Acknowledges thread is shutdown. */
+    /**
+     *  Acknowledges thread is shutdown.
+     *
+     * @return true, if successful
+     */
     public boolean shutdownAck()
     {
         return _shutdownAck;

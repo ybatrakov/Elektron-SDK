@@ -57,6 +57,9 @@ public class DirectoryHandler
     private DirectoryStatus directoryStatus = (DirectoryStatus)DirectoryMsgFactory.createMsg();
     private EncodeIterator encIter = CodecFactory.createEncodeIterator();
 
+    /**
+     * Instantiates a new directory handler.
+     */
     public DirectoryHandler()
     {
         serviceName = CodecFactory.createBuffer();
@@ -80,6 +83,8 @@ public class DirectoryHandler
     }
 
     /**
+     * Checks if is requested service up.
+     *
      * @return true if service requested by application is up, false if not.
      */
     public boolean isRequestedServiceUp()
@@ -88,6 +93,8 @@ public class DirectoryHandler
     }
 
     /**
+     * Service info.
+     *
      * @return service info associated with the service name requested by application.
      */
     public Service serviceInfo()
@@ -99,8 +106,10 @@ public class DirectoryHandler
      * Sends a source directory request to a channel. This consists of getting a
      * message buffer, encoding the source directory request, and sending the
      * source directory request to the server.
-     * 
+     *
      * @param chnl - The channel to send a source directory request to
+     * @param error the error
+     * @return the int
      */
     public int sendRequest(ChannelSession chnl, Error error)
     {
@@ -144,10 +153,13 @@ public class DirectoryHandler
      * msg class and decoding message into corresponding RDM directory
      * message. After decoding, service status state (up or down) is updated
      * from a refresh or update message for a requested service.
-     * 
+     *
      * @param chnl - The channel of the response msg - The partially decoded
      *            message
+     * @param msg the msg
      * @param dIter - The decode iterator
+     * @param error the error
+     * @return the int
      */
     public int processResponse(Channel chnl, Msg msg, DecodeIterator dIter, Error error)
     {
@@ -246,8 +258,10 @@ public class DirectoryHandler
 
     /**
      * Close the source directory stream.
-     * 
+     *
      * @param chnl - The channel to send a source directory close to
+     * @param error the error
+     * @return the int
      */
     public int closeStream(ChannelSession chnl, Error error)
     {

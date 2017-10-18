@@ -42,11 +42,17 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
     protected DateTime tempDateTime = CodecFactory.createDateTime(); 
     protected LocalFieldSetDefDb marketByOrderSetDefDb;
 
+    /**
+     * Instantiates a new market by order response base.
+     */
     protected MarketByOrderResponseBase()
     {
         setupMarketByOrderSetDefDb();
     }
 
+    /**
+     * Setup market by order set def db.
+     */
     protected void setupMarketByOrderSetDefDb()
     {
         FieldSetDefEntry[] fieldSetDefEntries = new FieldSetDefEntry[3];
@@ -74,6 +80,11 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
         marketByOrderSetDefDb.definitions()[0].entries(fieldSetDefEntries);
     }
 
+    /**
+     * Checks if is refresh type.
+     *
+     * @return true, if is refresh type
+     */
     protected boolean isRefreshType()
     {
         return false;
@@ -100,8 +111,8 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
     
     /**
      * Dictionary for encoding market by order refresh/update message.
-     * 
-     * @param dictionary
+     *
+     * @param dictionary the dictionary
      */
     public void dictionary(DataDictionary dictionary)
     {
@@ -109,6 +120,8 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
     }
 
     /**
+     * Item name.
+     *
      * @return item name
      */
     public Buffer itemName()
@@ -117,7 +130,8 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Market by order item.
+     *
      * @return market by order item data.
      */
     public MarketByOrderItem marketByOrderItem()
@@ -126,7 +140,8 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
     }
 
     /**
-     * 
+     * Market by order item.
+     *
      * @param itemData market by order item data
      */
     public void marketByOrderItem(MarketByOrderItem itemData)
@@ -205,15 +220,38 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
         return msg.encodeComplete(encodeIter, true);
     }
 
+    /**
+     * Encode msg.
+     *
+     * @return the msg
+     */
     public abstract Msg encodeMsg();
 
+    /**
+     * Encode summary data.
+     *
+     * @param encodeIter the encode iter
+     * @param dictionary the dictionary
+     * @param map the map
+     * @return the int
+     */
     protected int encodeSummaryData(EncodeIterator encodeIter, DataDictionary dictionary, Map map)
     {
         return CodecReturnCodes.SUCCESS;
     }
 
+    /**
+     * Encode map entries.
+     *
+     * @param encodeIter the encode iter
+     * @param dictionary the dictionary
+     * @return the int
+     */
     protected abstract int encodeMapEntries(EncodeIterator encodeIter, DataDictionary dictionary);
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBaseImpl#buildStringBuffer()
+     */
     public StringBuilder buildStringBuffer()
     {
         StringBuilder stringBuf = super.buildStringBuffer();
@@ -231,6 +269,9 @@ public abstract class MarketByOrderResponseBase extends MsgBaseImpl
         return stringBuf;
     }
 
+    /* (non-Javadoc)
+     * @see com.thomsonreuters.upa.valueadd.domainrep.rdm.MsgBase#decode(com.thomsonreuters.upa.codec.DecodeIterator, com.thomsonreuters.upa.codec.Msg)
+     */
     @Override
     public int decode(DecodeIterator dIter, Msg msg)
     {

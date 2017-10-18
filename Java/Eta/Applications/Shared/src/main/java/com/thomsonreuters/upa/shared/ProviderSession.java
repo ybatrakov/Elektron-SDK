@@ -143,6 +143,9 @@ public class ProviderSession
         return TransportReturnCodes.SUCCESS;
     }
 
+    /**
+     * Instantiates a new provider session.
+     */
     public ProviderSession()
     {
         for (int i = 0; i < CLIENT_SESSIONS_LIMIT; i++)
@@ -247,6 +250,11 @@ public class ProviderSession
 
     /**
      * Reads from a channel. chnl - The channel to be read from
+     *
+     * @param channel the channel
+     * @param error the error
+     * @param callback the callback
+     * @return the int
      */
     public int read(Channel channel, Error error, ReceivedMsgCallback callback)
     {   	
@@ -273,10 +281,10 @@ public class ProviderSession
     }
 
     /**
-     * flush for write file descriptor and active state
-     * 
-     * @param key
-     * @param error
+     * flush for write file descriptor and active state.
+     *
+     * @param key the key
+     * @param error the error
      */
     public void flush(SelectionKey key, Error error)
     {
@@ -597,8 +605,8 @@ public class ProviderSession
     }
 
     /**
-     * Retrieves the {@link BindOptions} 
-     * 
+     * Retrieves the {@link BindOptions} .
+     *
      * @return {@link BindOptions}
      */
     public BindOptions getBindOptions()
@@ -606,6 +614,12 @@ public class ProviderSession
         return _bindOptions;
     }
 
+    /**
+     * Removes the client session for channel.
+     *
+     * @param chnl the chnl
+     * @param error the error
+     */
     /*
      * Removes a client session for a channel. chnl - The channel to remove the
      * client session for
@@ -632,6 +646,12 @@ public class ProviderSession
         removeChannel(clientSessionInfo.clientChannel, error);
     }
 
+    /**
+     * Removes the inactive client session for channel.
+     *
+     * @param clientSessionInfo the client session info
+     * @param error the error
+     */
     /*
      * Removes a inactive client session for a channel. chnl -f  The channel to remove the
      * client session for
@@ -715,9 +735,10 @@ public class ProviderSession
 
     /**
      * Writes the content of the {@link TransportBuffer} to the UPA channel.
-     * 
-     * @param msgBuf
-     * @param error
+     *
+     * @param channel the channel
+     * @param msgBuf the msg buf
+     * @param error the error
      * @return {@link TransportReturnCodes}
      * @see Channel#write(TransportBuffer, WriteArgs, Error)
      */
@@ -877,6 +898,8 @@ public class ProviderSession
 
     /**
      * checks if a message has been sent to the client.
+     *
+     * @param channel the new msg sent
      */
     public void setMsgSent(Channel channel)
     {

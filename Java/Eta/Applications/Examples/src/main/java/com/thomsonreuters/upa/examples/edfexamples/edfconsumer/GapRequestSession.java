@@ -42,7 +42,10 @@ import com.thomsonreuters.upa.valueadd.domainrep.rdm.directory.Service.ServiceSe
 
 public class GapRequestSession implements ResponseCallback
 {
-    /* Session structure */
+    
+    /**
+     *  Session structure.
+     */
     public class GapRequestSessionState 
     {
         static final int GAPREQUEST_STATE_START = 1;
@@ -88,6 +91,9 @@ public class GapRequestSession implements ResponseCallback
     UInt gapEnd = CodecFactory.createUInt();
     TransportBuffer msgBuf;
 
+    /**
+     * Instantiates a new gap request session.
+     */
     public GapRequestSession()
     {
         channelInfo = TransportFactory.createChannelInfo();
@@ -108,8 +114,9 @@ public class GapRequestSession implements ResponseCallback
      * It is responsible for: Initializing command line options used by the
      * application. Parsing command line arguments. Initializing connection. Sending
      * login request. Initializing ping handler.
-     * 
-     * @param args
+     *
+     * @param args the args
+     * @param refDataSession the ref data session
      */
     public void init(String[] args, RefDataSession refDataSession)
     {
@@ -395,6 +402,14 @@ public class GapRequestSession implements ResponseCallback
 
     }
     
+    /**
+     * Send requests.
+     *
+     * @param tcpChnl the tcp chnl
+     * @param EDFChannel the EDF channel
+     * @param isRealGapDetected the is real gap detected
+     * @return the int
+     */
     public  int sendRequests(ChannelSession tcpChnl, EDFChannelSession EDFChannel, boolean isRealGapDetected)
     {
         int ret = 0;
@@ -603,6 +618,11 @@ public class GapRequestSession implements ResponseCallback
     }
     
     
+    /**
+     * Channel session.
+     *
+     * @return the EDF channel session
+     */
     public EDFChannelSession channelSession()
     {
         return channelSession;

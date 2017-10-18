@@ -73,6 +73,9 @@ public class PostHandler
     private StatusMsg statusMsg = (StatusMsg)CodecFactory.createMsg();
     private boolean offstreamPostSent = false;
 
+    /**
+     * Instantiates a new post handler.
+     */
     public PostHandler()
     {
         postWithMsg = true;
@@ -99,7 +102,9 @@ public class PostHandler
     }
 
     /**
-     * Enables offstream posting mode
+     * Enables offstream posting mode.
+     *
+     * @return true, if successful
      */
     public boolean enableOffstreamPost()
     {
@@ -107,7 +112,9 @@ public class PostHandler
     }
 
     /**
-     * Enables onstream posting mode
+     * Enables onstream posting mode.
+     *
+     * @return true, if successful
      */
     public boolean enableOnstreamPost()
     {
@@ -146,6 +153,10 @@ public class PostHandler
      * for the next post after this one. Additionally, the postWithMsg flag is
      * toggled so that posting alternates between posting with a full message as
      * payload or data as payload.
+     *
+     * @param chnl the chnl
+     * @param error the error
+     * @return the int
      */
     public int handlePosts(ChannelSession chnl, com.thomsonreuters.upa.transport.Error error)
     {
@@ -565,7 +576,10 @@ public class PostHandler
 
     /**
      * This function encodes and sends an off-stream post close status message.
-     * 
+     *
+     * @param channelSession the channel session
+     * @param error the error
+     * @return the int
      */
     public int closeOffStreamPost(ChannelSession channelSession, Error error)
     {
@@ -687,8 +701,8 @@ public class PostHandler
 
     /**
      * Stream Id for posting data.
-     * 
-     * @param streamId
+     *
+     * @param streamId the stream id
      */
     public void streamId(int streamId)
     {
@@ -717,8 +731,8 @@ public class PostHandler
 
     /**
      * Service id for posting msg.
-     * 
-     * @param serviceId
+     *
+     * @param serviceId the service id
      */
     public void serviceId(int serviceId)
     {
@@ -737,8 +751,8 @@ public class PostHandler
 
     /**
      * Data dictionary used for encoding posting data.
-     * 
-     * @param dictionary
+     *
+     * @param dictionary the dictionary
      */
     public void dictionary(DataDictionary dictionary)
     {
