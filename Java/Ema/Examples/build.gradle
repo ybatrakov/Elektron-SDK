@@ -32,6 +32,11 @@ task deleteDictionary( type: Delete ) {
 run.dependsOn copyDictionary
 clean.dependsOn deleteDictionary
 
+tasks.withType ( JavaExec ) {
+	// to enable the logger comment out the line below
+	// jvmArgs += "-Djava.util.logging.config.file=../Core/src/main/resources/logging.properties"
+}
+
 /* Automatically generates the tasks for all example applications */
 fileTree('.') {
 	include '**/*.java'
