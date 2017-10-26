@@ -22,11 +22,8 @@ elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   set_target_properties( ConsMod1a_static PROPERTIES PROJECT_LABEL "ConsMod1a_static (ETA)" )
   set_target_properties( ConsMod1a_shared PROPERTIES PROJECT_LABEL "ConsMod1a_shared (ETA)" )
 
-  target_link_libraries( ConsMod1a_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil )
+  target_link_libraries( ConsMod1a_static ${EXAMPLE_LIBRARIES} )
   target_link_libraries( ConsMod1a_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
-  target_link_libraries( ConsMod1a_static debug ${RSSL_VACACHE_DEBUG_STATIC} optimized ${RSSL_VACACHE_RELEASE_STATIC} )
-
-  target_link_libraries( ConsMod1a_shared ${EXAMPLE_LIBRARIES} librsslVA )
+  target_link_libraries( ConsMod1a_shared ${EXAMPLE_LIBRARIES} )
   target_link_libraries( ConsMod1a_shared debug ${RSSL_DEBUG_SHARED} optimized ${RSSL_RELEASE_SHARED} )
-  target_link_libraries( ConsMod1a_shared debug ${RSSL_VACACHE_DEBUG_SHARED} optimized ${RSSL_VACACHE_RELEASE_SHARED} )
 endif()
