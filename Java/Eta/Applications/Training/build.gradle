@@ -7,7 +7,7 @@ dependencies {
 mainClassName = 'com.thomsonreuters.upa.training.provider.Module_1a_Connect'
 
 task copyDictionary( type: Copy ) {
-	from '../../etc'
+	from '../../../etc'
 	into '.'
 }
 
