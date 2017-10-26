@@ -29,15 +29,17 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
       (${CMAKE_BUILD_TYPE} STREQUAL "DebugShared") )
     target_link_libraries( ConsPerf ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
   endif()
+
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   set_target_properties( ConsPerf_static PROPERTIES PROJECT_LABEL "ConsPerf_static (ETA)" )
   set_target_properties( ConsPerf_shared PROPERTIES PROJECT_LABEL "ConsPerf_shared (ETA)" )
 
-  target_link_libraries( ConsPerf_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil )
+  target_link_libraries( ConsPerf_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil libxml2_static psapi )
   target_link_libraries( ConsPerf_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
   target_link_libraries( ConsPerf_static debug ${RSSL_VACACHE_DEBUG_STATIC} optimized ${RSSL_VACACHE_RELEASE_STATIC} )
 
-  target_link_libraries( ConsPerf_shared ${EXAMPLE_LIBRARIES} librsslVA )
+  target_link_libraries( ConsPerf_shared ${EXAMPLE_LIBRARIES} librsslVA libxml2_static psapi )
   target_link_libraries( ConsPerf_shared debug ${RSSL_DEBUG_SHARED} optimized ${RSSL_RELEASE_SHARED} )
   target_link_libraries( ConsPerf_shared debug ${RSSL_VACACHE_DEBUG_SHARED} optimized ${RSSL_VACACHE_RELEASE_SHARED} )
+
 endif()
