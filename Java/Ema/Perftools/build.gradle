@@ -20,7 +20,7 @@ task createExtraRunApp(type: CreateStartScripts) {
 }
 
 task copyDictionary( type: Copy ) {
-	from '../etc'
+	from '../../etc'
 	into '.'
 }
 

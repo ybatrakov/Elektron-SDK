@@ -10,7 +10,7 @@ dependencies {
 mainClassName = 'com.thomsonreuters.upa.perftools.upajprovperf.upajProvPerf'
 
 task copyDictionary( type: Copy ) {
-	from '../../etc'
+	from '../../../etc'
 	into '.'
 }
 
@@ -38,6 +38,12 @@ task runConsPerf(type: JavaExec) {
 task runNIProvPerf(type: JavaExec) {
         dependsOn 'copyDictionary'
 	main = 'com.thomsonreuters.upa.perftools.upajniprovperf.upajNIProvPerf'
+	classpath = sourceSets.main.runtimeClasspath
+}
+
+task runTransportPerf(type: JavaExec) {
+        dependsOn 'copyDictionary'
+	main = 'com.thomsonreuters.upa.perftools.upajtransportperf.upajTransportPerf'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
