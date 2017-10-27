@@ -59,10 +59,6 @@ task cleanJavadocJar (type: Delete) {
 
 clean.dependsOn cleanJar, cleanJavadoc, cleanJavadocJar
 
-tasks.withType (Test) {
-        jvmArgs "-enableassertions"
-}
-
 test {
 	// exclude the utility class and the suite class
 	exclude '**/TestUtilities.class'

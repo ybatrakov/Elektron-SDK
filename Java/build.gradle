@@ -45,6 +45,13 @@ allprojects {
                 options.fork = true
                 options.incremental = true
         }
+
+	// to enable assertion for the run tasks execute gradlew with -P-ea i.e.
+	// ./gradlew -P-ea runProvider
+	tasks.withType ( JavaExec ) {
+	        if ( project.hasProperty("-ea") )
+        		jvmArgs "-enableassertions"
+	}
 }
 
 task wrapper( type: Wrapper ) {

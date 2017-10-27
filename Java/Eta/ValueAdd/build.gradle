@@ -57,10 +57,6 @@ artifacts {
 	archives jar
 }
 
-tasks.withType (Test) {
-        jvmArgs "-enableassertions"
-}
-
 test {
         // set to true to see the junit stdoutput
         testLogging.showStandardStreams = false
