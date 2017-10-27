@@ -35,6 +35,7 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
       ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR
       ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     add_library( XML2objects OBJECT ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
+    add_library( libxml2 STATIC ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
   else()
     add_library( libxml2 SHARED ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
     set_target_properties( libxml2 PROPERTIES DEFINE_SYMBOL "" ) # avoid -Dlibxml2_EXPORTS
