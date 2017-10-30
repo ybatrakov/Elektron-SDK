@@ -37,20 +37,12 @@ clean.dependsOn deleteDictionary
 task runProvider(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.examples.provider.Provider'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runConsumer(type: JavaExec) {
 	dependsOn 'copyDictionary'
-
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
 
 	main = 'com.thomsonreuters.upa.examples.consumer.Consumer'
 	classpath = sourceSets.main.runtimeClasspath
@@ -59,20 +51,12 @@ task runConsumer(type: JavaExec) {
 task runNIProvider(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.examples.niprovider.NIProvider'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runVAProvider(type: JavaExec) {
 	dependsOn 'copyDictionary'
-
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
 
 	main = 'com.thomsonreuters.upa.valueadd.examples.provider.Provider'
 	classpath = sourceSets.main.runtimeClasspath
@@ -81,20 +65,12 @@ task runVAProvider(type: JavaExec) {
 task runVAConsumer(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.valueadd.examples.consumer.Consumer'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runVANIProvider(type: JavaExec) {
 	dependsOn 'copyDictionary'
-
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
 
 	main = 'com.thomsonreuters.upa.valueadd.examples.niprovider.NIProvider'
 	classpath = sourceSets.main.runtimeClasspath
@@ -103,20 +79,12 @@ task runVANIProvider(type: JavaExec) {
 task runWatchlistConsumer(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.valueadd.examples.watchlistconsumer.WatchlistConsumer'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runQueueConsumer(type: JavaExec) {
 	dependsOn 'copyDictionary'
-
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
 
 	main = 'com.thomsonreuters.upa.valueadd.examples.queueconsumer.QueueConsumer'
 	classpath = sourceSets.main.runtimeClasspath
@@ -125,20 +93,12 @@ task runQueueConsumer(type: JavaExec) {
 task runGenericProv(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.examples.genericprov.GenericProv'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runGenericCons(type: JavaExec) {
 	dependsOn 'copyDictionary'
-
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
 
 	main = 'com.thomsonreuters.upa.examples.genericcons.GenericCons'
 	classpath = sourceSets.main.runtimeClasspath
@@ -147,20 +107,12 @@ task runGenericCons(type: JavaExec) {
 task runNewsViewer(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.examples.newsviewer.NewsViewer'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runAnsiPageExample(type: JavaExec) {
 	dependsOn 'copyDictionary'
-
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
 
 	main = 'com.thomsonreuters.upa.examples.ansipage.AnsiPageExample'
 	classpath = sourceSets.main.runtimeClasspath
@@ -169,10 +121,6 @@ task runAnsiPageExample(type: JavaExec) {
 task runCodecExample(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.examples.codec.CodecExample'
 	classpath = sourceSets.main.runtimeClasspath
 }
@@ -180,20 +128,12 @@ task runCodecExample(type: JavaExec) {
 task runEDFConsumer(type: JavaExec) {
 	dependsOn 'copyDictionary'
 
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
-
 	main = 'com.thomsonreuters.upa.examples.edfexamples.edfconsumer.EDFConsumer'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runAuthLockExample(type: JavaExec) {
 	dependsOn 'copyDictionary'
-
-	if ( project.hasProperty("commandLineArgs") ) {
-		args Eval.me( setCommandLineArguments(commandLineArgs) )
-	}
 
 	main = 'com.thomsonreuters.upa.examples.authlock.AuthLockExample'
 	classpath = sourceSets.main.runtimeClasspath

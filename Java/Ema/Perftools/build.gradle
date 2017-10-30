@@ -16,7 +16,6 @@ task createExtraRunApp(type: CreateStartScripts) {
 	mainClassName = 'com.thomsonreuters.ema.perftools.emajconsperf.emajConsPerf'
 	classpath = startScripts.classpath
 	outputDir = startScripts.outputDir
-	applicationName = 'myconsumer'
 }
 
 task copyDictionary( type: Copy ) {

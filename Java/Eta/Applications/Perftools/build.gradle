@@ -25,24 +25,28 @@ clean.dependsOn deleteDictionary
 
 task runProvPerf(type: JavaExec) {
         dependsOn 'copyDictionary'
+
 	main = 'com.thomsonreuters.upa.perftools.upajprovperf.upajProvPerf'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runConsPerf(type: JavaExec) {
         dependsOn 'copyDictionary'
+
 	main = 'com.thomsonreuters.upa.perftools.upajconsperf.upajConsPerf'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runNIProvPerf(type: JavaExec) {
         dependsOn 'copyDictionary'
+
 	main = 'com.thomsonreuters.upa.perftools.upajniprovperf.upajNIProvPerf'
 	classpath = sourceSets.main.runtimeClasspath
 }
 
 task runTransportPerf(type: JavaExec) {
         dependsOn 'copyDictionary'
+
 	main = 'com.thomsonreuters.upa.perftools.upajtransportperf.upajTransportPerf'
 	classpath = sourceSets.main.runtimeClasspath
 }

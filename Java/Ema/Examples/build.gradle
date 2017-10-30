@@ -73,11 +73,6 @@ fileTree('.') {
 
 		tasks.copyDictionary.execute()	
 
-		// gradle Ema:Examples:runiprovider301 -PcommandLineArgs="arg1 arg2 arg3 arg4"
-		if ( project.hasProperty("commandLineArgs") ) {
-			args Eval.me( setCommandLineArguments(commandLineArgs) )
-		}
-
 		main = exampleMainLocation
 		classpath = sourceSets.main.runtimeClasspath
 	}

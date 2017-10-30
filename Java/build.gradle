@@ -46,11 +46,15 @@ allprojects {
                 options.incremental = true
         }
 
-	// to enable assertion for the run tasks execute gradlew with -P-ea i.e.
-	// ./gradlew -P-ea runProvider
+	// set the jvmArgs and commandLineArgs for all applications
 	tasks.withType ( JavaExec ) {
-	        if ( project.hasProperty("-ea") )
-        		jvmArgs "-enableassertions"
+	        if ( project.hasProperty("vmArgs") ) {
+        	        jvmArgs Eval.me( buildArgsList( vmArgs ) )
+        	}
+
+	        if ( project.hasProperty("commandLineArgs") ) {
+        	        args Eval.me( buildArgsList( commandLineArgs ) )
+       		}
 	}
 }
 
@@ -58,10 +62,10 @@ task wrapper( type: Wrapper ) {
 	gradleVersion = '4.2.1'
 }
 
-// this method creates a command line arguments
-def setCommandLineArguments(commandLineArgs) {
+// this method creates a list of arguments that are used in setting the jvmArgs and commnadLineArgs
+def buildArgsList ( options ) {
 	// remove spaces 
-	def arguments = commandLineArgs.tokenize()
+	def arguments = options.tokenize()
 
 		// create a string that can be used by Eval 
 		def cla = "["
@@ -71,7 +75,7 @@ def setCommandLineArguments(commandLineArgs) {
 		}
 
 	// remove last "," add "]" and set the args 
-	return cla.substring(0, cla.lastIndexOf(',')) + "]"
+	return cla.substring( 0, cla.lastIndexOf(',') ) + "]"
 }
 
 // disable creating empty Java.jar file 
