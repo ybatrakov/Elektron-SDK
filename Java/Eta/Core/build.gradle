@@ -10,6 +10,12 @@ cobertura {
 
 }
 
+eclipse {
+        project {
+                name = 'ESDK-Eta-Src'
+        }
+}
+
 dependencies {
 
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.1.2'

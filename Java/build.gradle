@@ -5,12 +5,12 @@ buildscript {
         }
 
         dependencies {
-                classpath "net.saliman:gradle-cobertura-plugin:2.5.0"
+                classpath "net.saliman:gradle-cobertura-plugin:2.5.1"
         }
 }
 
 plugins {
-        id 'net.saliman.cobertura' version '2.5.0'
+        id 'net.saliman.cobertura' version '2.5.1'
 }
 
 apply plugin: 'net.saliman.cobertura'

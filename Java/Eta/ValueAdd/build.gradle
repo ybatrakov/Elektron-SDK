@@ -10,6 +10,12 @@ cobertura {
 
 }
 
+eclipse {
+        project {
+                name = 'ESDK-Eta-ValueAdd'
+        }
+}
+
 dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.1.2'
 	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.1.2'

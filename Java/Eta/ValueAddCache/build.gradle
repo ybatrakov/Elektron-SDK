@@ -4,6 +4,12 @@ def vendor = 'Thomson Reuters'
 
 def jenkinsBuild = System.getenv("BUILD_NUMBER") ?: "0"
 
+eclipse {
+        project {
+                name = 'ESDK-Eta-ValueAddCache'
+        }
+}
+
 dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.1.2'
 	compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.1.2'

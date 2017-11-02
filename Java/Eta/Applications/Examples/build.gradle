@@ -1,5 +1,11 @@
 apply plugin: 'application'
 
+eclipse {
+        project {
+                name = 'ESDK-Eta-Examples'
+        }
+}
+
 dependencies {
 	compile project(':Eta:AnsiPage')
 	compile project(':Eta:ValueAdd')

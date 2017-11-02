@@ -1,5 +1,11 @@
 apply plugin: 'application'
 
+eclipse {
+        project {
+                name = 'ESDK-Ema-Examples'
+        }
+}
+
 dependencies {
 	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
 

@@ -1,5 +1,11 @@
 apply plugin: 'application'
 
+eclipse {
+        project {
+                name = 'ESDK-Eta-Training'
+        }
+}
+
 dependencies {
 	compile project(':Eta:Applications:Shared')
 }
