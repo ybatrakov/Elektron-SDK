@@ -1,3 +1,30 @@
+buildscript {
+        repositories {
+                jcenter()
+        }
+
+        dependencies {
+                classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+        }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+dependencies {
+        compile project(':Ema:Core')
+        compile project(':Eta:Core')
+        compile project(':Eta:ValueAdd')
+        compile project(':Eta:ValueAddCache')
+        compile project(':Eta:AnsiPage')
+        compile project(':Eta:Applications:Shared')
+}
+
+shadowJar {
+        baseName = 'ESDK'
+}
+
+
 // disable creating empty Ema.jar file 
 jar.enabled = false
 

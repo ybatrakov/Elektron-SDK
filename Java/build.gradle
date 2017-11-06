@@ -16,14 +16,12 @@ plugins {
 apply plugin: 'net.saliman.cobertura'
 
 subprojects {
-
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 
 	repositories {
 	    mavenCentral()
 	}
-
 }
 
 allprojects {
