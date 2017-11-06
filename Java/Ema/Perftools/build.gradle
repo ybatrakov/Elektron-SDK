@@ -18,6 +18,13 @@ dependencies {
 
 mainClassName = 'com.thomsonreuters.ema.perftools.emajconsperf.emajConsPerf'
 
+task runEmaConsPerf(type: JavaExec) {
+        dependsOn 'copyDictionary'
+
+        main = 'com.thomsonreuters.ema.perftools.emajconsperf.emajConsPerf'
+        classpath = sourceSets.main.runtimeClasspath
+}
+
 task createExtraRunApp(type: CreateStartScripts) {
 	mainClassName = 'com.thomsonreuters.ema.perftools.emajconsperf.emajConsPerf'
 	classpath = startScripts.classpath

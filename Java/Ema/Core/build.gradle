@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'com.github.johnrengelman.shadow'
 
 shadowJar {
-	baseName = 'Ema-all'
+	baseName = 'Ema'
 }
 
 def package1 = 'emaj3.1.0.L1.all.rrg'
