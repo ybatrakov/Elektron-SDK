@@ -280,7 +280,7 @@ public class DictionaryJunit
         
         // load field dictionary
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
         
         /* set-up message */
         msg.msgClass(MsgClasses.REFRESH);
@@ -334,7 +334,7 @@ public class DictionaryJunit
 
         // load enumType dictionary
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../etc/enumtype.def", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../../etc/enumtype.def", error));
         
         /* set-up message */
         msg.clear();
@@ -409,7 +409,7 @@ public class DictionaryJunit
         
         // load field dictionary
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
         
         /* set-up message */
         msg.msgClass(MsgClasses.REFRESH);
@@ -486,7 +486,7 @@ public class DictionaryJunit
         
         // load field dictionary
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
         
         /* set-up message */
         msg.msgClass(MsgClasses.REFRESH);
@@ -582,7 +582,7 @@ public class DictionaryJunit
 
         // load enumType dictionary
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../etc/enumtype.def", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../../etc/enumtype.def", error));
         
         /* set-up message */
         msg.clear();
@@ -697,8 +697,8 @@ public class DictionaryJunit
         
         // load field and enumType dictionaries
         dictionary.clear();
-		assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../etc/enumtype.def", error));
+		assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../../etc/enumtype.def", error));
 		
         /* set-up message */
         msg.msgClass(MsgClasses.REFRESH);
@@ -773,8 +773,8 @@ public class DictionaryJunit
         
         // load field and enumType dictionaries
         dictionary.clear();
-		assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../etc/enumtype.def", error));
+		assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../../etc/enumtype.def", error));
         /* set-up message */
         msg.msgClass(MsgClasses.REFRESH);
     	msg.applyRefreshComplete();
@@ -837,8 +837,8 @@ public class DictionaryJunit
         
         // load field and enumType dictionaries
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../etc/enumtype.def", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../../etc/enumtype.def", error));
 		
         /* set-up message */
         msg.msgClass(MsgClasses.REFRESH);
@@ -906,8 +906,8 @@ public class DictionaryJunit
         
         // load field and enumType dictionaries
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../etc/enumtype.def", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../../etc/enumtype.def", error));
 		
         /* set-up message */
         msg.msgClass(MsgClasses.REFRESH);
@@ -994,8 +994,8 @@ public class DictionaryJunit
         
         // load field and enumType dictionaries
         dictionary.clear();
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../etc/RDMFieldDictionary", error));
-        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../etc/enumtype.def", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadFieldDictionary("../../etc/RDMFieldDictionary", error));
+        assertEquals(CodecReturnCodes.SUCCESS, dictionary.loadEnumTypeDictionary("../../etc/enumtype.def", error));
 		
         /* set-up message */
         msg.clear();
