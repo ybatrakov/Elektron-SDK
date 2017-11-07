@@ -13,6 +13,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 
 dependencies {
         compile project(':Ema:Core')
+        compile project(':Ema:Examples')
         compile project(':Eta:Core')
         compile project(':Eta:ValueAdd')
         compile project(':Eta:ValueAddCache')
