@@ -23,7 +23,7 @@ import com.thomsonreuters.upa.transport.Ripc.CompressionTypes;
 
 public class TransportLockJunit
 {
-    String DEFAULT_PORT_NUMBER = "15000";
+    String DEFAULT_PORT_NUMBER = "15200";
 
     enum RunningState
     {
