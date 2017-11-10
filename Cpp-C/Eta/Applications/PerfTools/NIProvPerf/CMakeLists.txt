@@ -31,8 +31,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( NIProvPerf ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( NIProvPerf_static PROPERTIES PROJECT_LABEL "NIProvPerf_static (ETA)" )
-  set_target_properties( NIProvPerf_shared PROPERTIES PROJECT_LABEL "NIProvPerf_shared (ETA)" )
 
   target_link_libraries( NIProvPerf_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil libxml2_static psapi )
   target_link_libraries( NIProvPerf_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

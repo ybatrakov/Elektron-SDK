@@ -30,8 +30,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( VAQueueConsumer ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( VAQueueConsumer_static PROPERTIES PROJECT_LABEL "VAQueueConsumer_static (ETA)" )
-  set_target_properties( VAQueueConsumer_shared PROPERTIES PROJECT_LABEL "VAQueueConsumer_shared (ETA)" )
 
   target_link_libraries( VAQueueConsumer_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil )
   target_link_libraries( VAQueueConsumer_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

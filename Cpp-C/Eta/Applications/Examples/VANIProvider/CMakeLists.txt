@@ -34,8 +34,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   endif()
 
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( VANIProvider_static PROPERTIES PROJECT_LABEL "VANIProvider_static (ETA)" )
-  set_target_properties( VANIProvider_shared PROPERTIES PROJECT_LABEL "VANIProvider_shared (ETA)" )
 
   target_link_libraries( VANIProvider_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil )
   target_link_libraries( VANIProvider_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

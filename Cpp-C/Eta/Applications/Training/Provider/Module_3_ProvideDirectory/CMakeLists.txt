@@ -19,8 +19,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( ProvMod3 ${RSSL} ${SYSTEM_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( ProvMod3_static PROPERTIES PROJECT_LABEL "ProvMod4_static (ETA)" )
-  set_target_properties( ProvMod3_shared PROPERTIES PROJECT_LABEL "ProvMod4_shared (ETA)" )
 
   target_link_libraries( ProvMod3_static ${EXAMPLE_LIBRARIES} )
   target_link_libraries( ProvMod3_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

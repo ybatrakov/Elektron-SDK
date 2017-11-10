@@ -19,8 +19,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( NIProvMod5 ${RSSL} ${SYSTEM_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( NIProvMod5_static PROPERTIES PROJECT_LABEL "NIProvMod5_static (ETA)" )
-  set_target_properties( NIProvMod5_shared PROPERTIES PROJECT_LABEL "NIProvMod5_shared (ETA)" )
 
   target_link_libraries( NIProvMod5_static ${EXAMPLE_LIBRARIES} )
   target_link_libraries( NIProvMod5_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
