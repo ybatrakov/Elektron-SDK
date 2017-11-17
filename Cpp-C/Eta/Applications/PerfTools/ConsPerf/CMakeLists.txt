@@ -31,8 +31,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   endif()
 
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( ConsPerf_static PROPERTIES PROJECT_LABEL "ConsPerf_static (ETA)" )
-  set_target_properties( ConsPerf_shared PROPERTIES PROJECT_LABEL "ConsPerf_shared (ETA)" )
 
   target_link_libraries( ConsPerf_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil libxml2_static psapi )
   target_link_libraries( ConsPerf_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

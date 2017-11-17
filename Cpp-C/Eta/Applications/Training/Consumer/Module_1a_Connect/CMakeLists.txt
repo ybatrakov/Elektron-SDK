@@ -19,8 +19,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( ConsMod1a ${RSSL} ${SYSTEM_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( ConsMod1a_static PROPERTIES PROJECT_LABEL "ConsMod1a_static (ETA)" )
-  set_target_properties( ConsMod1a_shared PROPERTIES PROJECT_LABEL "ConsMod1a_shared (ETA)" )
 
   target_link_libraries( ConsMod1a_static ${EXAMPLE_LIBRARIES} )
   target_link_libraries( ConsMod1a_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

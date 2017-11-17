@@ -34,8 +34,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   endif()
 
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( VAConsumer_static PROPERTIES PROJECT_LABEL "VAConsumer_static (ETA)" )
-  set_target_properties( VAConsumer_shared PROPERTIES PROJECT_LABEL "VAConsumer_shared (ETA)" )
 
   target_link_libraries( VAConsumer_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil )
   target_link_libraries( VAConsumer_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

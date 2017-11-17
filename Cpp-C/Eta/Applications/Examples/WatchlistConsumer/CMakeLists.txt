@@ -30,8 +30,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( WatchlistConsumer ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( WatchlistConsumer_static PROPERTIES PROJECT_LABEL "WatchlistConsumer_static (ETA)" )
-  set_target_properties( WatchlistConsumer_shared PROPERTIES PROJECT_LABEL "WatchlistConsumer_shared (ETA)" )
 
   target_link_libraries( WatchlistConsumer_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil )
   target_link_libraries( WatchlistConsumer_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

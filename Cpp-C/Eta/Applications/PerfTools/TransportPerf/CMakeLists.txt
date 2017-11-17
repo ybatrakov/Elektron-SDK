@@ -28,8 +28,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( TransportPerf ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( TransportPerf_static PROPERTIES PROJECT_LABEL "TransportPerf_static (ETA)" )
-  set_target_properties( TransportPerf_shared PROPERTIES PROJECT_LABEL "TransportPerf_shared (ETA)" )
 
   target_link_libraries( TransportPerf_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil psapi )
   target_link_libraries( TransportPerf_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

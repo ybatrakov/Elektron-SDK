@@ -22,8 +22,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   target_link_libraries( Consumer ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} )
 
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( Consumer_static PROPERTIES PROJECT_LABEL "Consumer_static (ETA)" )
-  set_target_properties( Consumer_shared PROPERTIES PROJECT_LABEL "Consumer_shared (ETA)" )
   target_link_libraries( Consumer_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
   target_link_libraries( Consumer_static ${EXAMPLE_LIBRARIES} )
   target_link_libraries( Consumer_shared debug ${RSSL_DEBUG_SHARED} optimized ${RSSL_RELEASE_SHARED} )

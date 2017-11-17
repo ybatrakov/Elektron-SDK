@@ -29,8 +29,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   endif()
 
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( EDFConsumer_static PROPERTIES PROJECT_LABEL "EDFConsumer_static (ETA)" )
-  set_target_properties( EDFConsumer_shared PROPERTIES PROJECT_LABEL "EDFConsumer_shared (ETA)" )
   target_link_libraries( EDFConsumer_static librsslRDM librsslVAUtil )
   target_link_libraries( EDFConsumer_shared librsslVA )
   target_link_libraries( EDFConsumer_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )

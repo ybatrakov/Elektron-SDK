@@ -31,8 +31,6 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
     target_link_libraries( ProvPerf ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
   endif()
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set_target_properties( ProvPerf_static PROPERTIES PROJECT_LABEL "ProvPerf_static (ETA)" )
-  set_target_properties( ProvPerf_shared PROPERTIES PROJECT_LABEL "ProvPerf_shared (ETA)" )
 
   target_link_libraries( ProvPerf_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil libxml2_static psapi )
   target_link_libraries( ProvPerf_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
