@@ -25,6 +25,14 @@ shadowJar {
         baseName = 'ESDK'
 }
 
+task coberturaTestFatJar (type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+        baseName = 'ESDK'
+	classifier = 'coberturaTestFatJar'
+	from ('Core/build/instrumented_classes')
+	from ('../Eta/Core/build/instrumented_classes')
+	from ('../Eta/ValueAdd/build/instrumented_classes')
+	configurations = [project.configurations.testRuntime]
+}
 
 // disable creating empty Ema.jar file 
 jar.enabled = false
