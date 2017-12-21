@@ -8,7 +8,7 @@ if( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   set( "CMAKE_C_FLAGS_RELEASE_MD" "/MD  /D NDEBUG /D _CRT_SECURE_NO_WARNINGS" )
   set( "CMAKE_C_FLAGS_DEBUG_MDD" "${CMAKE_C_FLAGS} /MDd /D _CRT_SECURE_NO_WARNINGS" )
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DHAVE_CONFIG_H -DLIBXML_THREAD_ENABLED -D_POSIX_PTHREAD_SEMANTICS" )
+  set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -DHAVE_CONFIG_H -DLIBXML_THREAD_ENABLED -D_POSIX_PTHREAD_SEMANTICS" )
 endif()
 
 set( Libxml2SrcFiles
@@ -31,17 +31,9 @@ set( Libxml2HeaderFiles
 include_directories( include )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     add_library( XML2objects OBJECT ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
     add_library( libxml2 STATIC ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
-  else()
-    add_library( libxml2 SHARED ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
-    set_target_properties( libxml2 PROPERTIES DEFINE_SYMBOL "" ) # avoid -Dlibxml2_EXPORTS
-    set_target_properties( libxml2 PROPERTIES PREFIX "" )
-  endif()
-
+	set_target_properties( libxml2 PROPERTIES PREFIX "" OUTPUT_NAME libxml2 )
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   add_library( libxml2_static STATIC ${Libxml2SrcFiles} ${Libxml2HeaderFiles} )
 endif()

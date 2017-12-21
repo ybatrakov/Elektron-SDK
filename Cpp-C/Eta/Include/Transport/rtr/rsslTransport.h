@@ -19,7 +19,11 @@ extern "C" {
  * @brief Socket Identifier Type
  */
 #ifdef _WIN32
-typedef RsslUInt32 RsslSocket;
+	#ifdef _WIN64
+		typedef RsslUInt64 RsslSocket;
+	#else
+		typedef RsslUInt32 RsslSocket;
+	#endif
 #else
 typedef RsslInt32 RsslSocket;
 #endif
@@ -62,7 +66,7 @@ typedef enum {
 	RSSL_HIGH_WATER_MARK			= 3, /*!< (3) Channel: Used to set the upper buffer usage threshold for this channel*/
 	RSSL_SYSTEM_READ_BUFFERS		= 4, /*!< (4) Channel: Used to change the number of system read buffers (SO_RCVBUF) for this channel */
 	RSSL_SYSTEM_WRITE_BUFFERS		= 5, /*!< (5) Channel: Used to change the number of system write buffers (SO_SNDBUF) for this channel */
-	                                     /*!< (6) Reserved */
+	RSSL_DEBUG_FLAGS				= 6, /*!< (6) Channel: Used to turn on debug flags for this channel  */
 	RSSL_PRIORITY_FLUSH_ORDER		= 7, /*!< (7) Channel: Used to set the priority flush order for this channel */
 	RSSL_SERVER_NUM_POOL_BUFFERS	= 8, /*!< (8) Server: Used to increase or decrease the number of server shared pool buffers */
 	RSSL_COMPRESSION_THRESHOLD		= 9, /*!< (9) Channel: When compression is on, this value is the smallest size packet that will be compressed (default is 30 bytes) */
@@ -83,6 +87,11 @@ typedef enum {
 	RSSL_CONN_TYPE_ENCRYPTED		= 1,  /*!< (1) Channel is encrypted */								
 	RSSL_CONN_TYPE_HTTP				= 2,  /*!< (2) Channel is an HTTP connection based tunneling type */
 	RSSL_CONN_TYPE_UNIDIR_SHMEM		= 3,  /*!< (3) Channel is using a shared memory connection */
+	// Start TR_INTERNAL_SRC
+	/* @cond */
+	RSSL_CONN_TYPE_EXT_LINE_SOCKET  = 5,   /* (Not in doxygen) (5) Channel is using an extended line socket transport */	
+	/* @endcond */
+	// End TR_INTERNAL_SRC
 	RSSL_CONN_TYPE_RELIABLE_MCAST	= 4,   /*!< (4) Channel is a reliable multicast based connection. This can be on a unified/mesh network where send and receive networks are the same or a segmented network where send and receive networks are different */
 	RSSL_CONN_TYPE_SEQ_MCAST		= 6    /*!< (6) Channel is an unreliable, sequenced multicast connection for reading from an Elektron Direct Feed system. This is a client-only, read-only transport. This transport is supported on Linux only. */
 } RsslConnectionTypes;
@@ -205,12 +214,14 @@ typedef struct
 {
 	RsslLockingTypes rsslLocking;			/*!< Lock method used for the RSSL API */
 	rsslJITOpts		 jitOpts;				/*!< openSSL JIT options */
+	void*			 initConfig;			/*!< private config init */			
+	size_t			 initConfigSize;		/*!< private size of config init */			
 }RsslInitializeExOpts;
 
 /**
  * @brief Static initializer for RsslInitializeExOpts
  */
-#define RSSL_INIT_INITIALIZE_EX_OPTS { RSSL_LOCK_NONE, RSSL_INIT_SSL_LIB_JIT_OPTS }
+#define RSSL_INIT_INITIALIZE_EX_OPTS { RSSL_LOCK_NONE, RSSL_INIT_SSL_LIB_JIT_OPTS, NULL, 0 }
 
 /**
  * @brief Initializes the RSSL API and all internal members
@@ -389,6 +400,13 @@ typedef struct {
 
 typedef enum {
 	RSSL_MCAST_NO_FLAGS				= 0x00, /*!< @brief None. */
+// Start TR_INTERNAL_SRC
+	/* @cond */
+	RSSL_MCAST_FT_GROUP				= 0x02,
+	RSSL_MCAST_SEQNUM				= 0x04,
+	RSSL_MCAST_PING_TIMEOUT			= 0x08,
+	/* @endcond */
+// End TR_INTERNAL_SRC
 	RSSL_MCAST_FILTERING_ON			= 0x01  /*!< @brief Enables hash-based filtering of incoming messages. */
 } RsslMCastFlags;
 
@@ -472,6 +490,23 @@ typedef struct {
 #define RSSL_INIT_ENCRYPTION_OPTS { RSSL_ENC_TLSV1 | RSSL_ENC_TLSV1_1 | RSSL_ENC_TLSV1_2}
 
 
+// Start TR_INTERNAL_SRC
+#ifndef TR_EXTERNAL_SRC
+/* @cond */
+/* Not in doxygen
+ *	brief Options used for configuring Extended Line specific transport options (::RSSL_CONN_TYPE_EXTENDED_LINE).
+ *	see rsslConnect
+ *	see RsslConnectOptions
+ */
+typedef struct {
+	RsslUInt32		numConnections;			/* (not in doxygen) Number of concurrent Extended Line connections to be established */
+} RsslELOpts;
+
+#define RSSL_INIT_EL_OPTS {20}
+
+/* @endcond */
+#endif
+// End TR_INTERNAL_SRC
 
 /**
  * @brief Options used for configuring a unified/fully connected mesh network.
@@ -546,6 +581,13 @@ typedef struct {
 	RsslProxyOpts		proxyOpts;
 	char*				componentVersion;		/*!< @brief User defined component version information*/
 	RsslEncryptionOpts  encryptionOpts;
+	// Start TR_INTERNAL_SRC
+#ifndef TR_EXTERNAL_SRC
+	/* @cond */
+	RsslELOpts			extLineOptions;			/* (Not in doxygen) Extended Line specific options */
+	/* @endcond */
+#endif
+	// End TR_INTERNAL_SRC
 
 } RsslConnectOptions;
 
@@ -556,6 +598,14 @@ typedef struct {
 #define RSSL_INIT_CONNECT_OPTS { 0, 0, 0, RSSL_CONN_TYPE_SOCKET, RSSL_INIT_CONNECTION_INFO, RSSL_COMP_NONE, RSSL_FALSE, RSSL_FALSE, 60, 50, 10, 0, 0, 0, 0, 0, 0, RSSL_INIT_TCP_OPTS, RSSL_INIT_MCAST_OPTS, RSSL_INIT_SHMEM_OPTS, RSSL_INIT_SEQ_MCAST_OPTS, RSSL_INIT_PROXY_OPTS, 0, RSSL_INIT_ENCRYPTION_OPTS }
 
 
+// Start TR_INTERNAL_SRC
+/* @cond */
+#if defined RSSL_INIT_CONNECT_OPTS
+#undef RSSL_INIT_CONNECT_OPTS
+#define RSSL_INIT_CONNECT_OPTS { 0, 0, 0, RSSL_CONN_TYPE_SOCKET, RSSL_INIT_CONNECTION_INFO, RSSL_COMP_NONE, RSSL_FALSE, RSSL_FALSE, 60, 50, 10, 0, 0, 0, 0, 0, 0, RSSL_INIT_TCP_OPTS, RSSL_INIT_MCAST_OPTS, RSSL_INIT_SHMEM_OPTS, RSSL_INIT_SEQ_MCAST_OPTS, RSSL_INIT_PROXY_OPTS, 0, RSSL_INIT_ENCRYPTION_OPTS, {20} }
+#endif
+/* @endcond */
+// End TR_INTERNAL_SRC
 
 
 /**
@@ -618,6 +668,13 @@ RTR_C_INLINE void rsslClearConnectOpts(RsslConnectOptions *opts)
 	opts->proxyOpts.proxyPort = 0;
 	opts->componentVersion = NULL;
 	opts->encryptionOpts.encryptionProtocolFlags = RSSL_ENC_TLSV1 | RSSL_ENC_TLSV1_1 | RSSL_ENC_TLSV1_2;
+    // Start TR_INTERNAL_SRC
+#ifndef TR_EXTERNAL_SRC
+	/* @cond */
+	opts->extLineOptions.numConnections = 20;
+	/* @endcond */
+#endif
+	// End TR_INTERNAL_SRC
 }
 
 /**
@@ -1274,6 +1331,11 @@ typedef enum {
 	RSSL_WRITE_IN_DIRECT_SOCKET_WRITEN    = 0x02,	/*!< @deprecated DEPRECATED: (0x02) Write will attempt to pass the data directly to the transport, avoiding the queuing.  If anything is currently queued, data will be queued.  This option will increase CPU use but may decrease latency */
 	RSSL_WRITE_IN_DIRECT_SOCKET_WRITE    = 0x02,	/*!< (0x02) Write will attempt to pass the data directly to the transport, avoiding the queuing.  If anything is currently queued, data will be queued.  This option will increase CPU use but may decrease latency */
 	RSSL_WRITE_IN_SEQNUM				 = 0x04,	/*!< (0x04) indicates that the writer wants to attach a sequence number to this message */
+// Start TR_INTERNAL_SRC
+	/* @cond */
+	RSSL_WRITE_IN_HASHID				 = 0x08,	/*!< (0x08) indicates that the writer wants use a non-zero hash ID */
+	/* @endcond */
+// End TR_INTERNAL_SRC
 	RSSL_WRITE_IN_RETRANSMIT             = 0x10  	/*!< (0x10) indicates that this message is a retransmission of previous content. This requires a user supplied sequence number to indicate which packet is being retransmitted*/
 } RsslWriteFlagsIn;
 
@@ -1284,10 +1346,19 @@ typedef struct {
 	   RsslUInt32                        writeInFlags;   /*!< writeInFlags Flags for writing the buffer (RsslWriteInFlags) */
 	   RsslWritePriorities				 rsslPriority;   /*!< rsslPriority Priority to flush the message (high, medium, or low) */
 	   RsslUInt32						 seqNum;		 /*!< specifies the sequence number of the message  */
+// Start TR_INTERNAL_SRC
+   		/* @cond */
+	   RsslUInt32						 hashId;		 /*!< specifies the hash ID to use when writing */
+		/* @endcond */
+// End TR_INTERNAL_SRC
 
 } RsslWriteInArgs;
 
 #define RSSL_INIT_WRITE_IN_ARGS {RSSL_WRITE_IN_NO_FLAGS, RSSL_HIGH_PRIORITY}
+// Start TR_INTERNAL_SRC
+#undef RSSL_INIT_WRITE_IN_ARGS
+#define RSSL_INIT_WRITE_IN_ARGS {RSSL_WRITE_IN_NO_FLAGS, RSSL_HIGH_PRIORITY, 0, 0}
+// End TR_INTERNAL_SRC
 /**
  * @brief RsslWriteFlags passed into the rsslWriteEx function call
  * @see rsslWriteEx
@@ -1579,11 +1650,56 @@ RSSL_API RsslUInt32 rsslCalculateHexDumpOutputSize(const RsslBuffer *bufferToHex
  */
 RSSL_API RsslRet rsslBufferToHexDump(const RsslBuffer* bufferToHexDump, RsslBuffer* hexDumpOutput, RsslUInt32 valuesPerLine, RsslError *error);
 
+/**
+* @brief RSSL debug flags used for setting RsslDebugFlags Flags for the RSSL_DEBUG_FLAGS IOCtl code
+* @see RsslIoctlCodes
+*/
 
+typedef enum {
+	RSSL_DEBUG_IPC_DUMP_IN = 0x0001, /*!<(0x0001) Dump incoming IPC messages as they are recieved from the network */
+	RSSL_DEBUG_IPC_DUMP_OUT = 0x0002, /*!<(0x0002) Dump outgoing IPC messages as they are written to the network */
+	RSSL_DEBUG_IPC_DUMP_COMP = 0x0004, /*!<(0x0004) If compression is enabled, dump compressed IPC message */
+	RSSL_DEBUG_IPC_DUMP_INIT = 0x0008, /*!<(0x0008) Dump channel IPC initialization messages */
+	RSSL_DEBUG_RSSL_DUMP_IN = 0x0010, /*!<(0x0010) Dump incoming RSSL messages as they are recieved from the transport */
+	RSSL_DEBUG_RSSL_DUMP_OUT = 0x0020, /*!<(0x0020) Dump outgoing RSSL messages as they are passed to the transport */
+} RsslDebugFlags;
 
+/**
+* @brief Sets the debug functions for RSSL
+*
+* Typical use:<BR>
+* This function takes function pointers as arguments.  Internally,
+* when recieving or sending data, we call these functions and pass
+* them the message as a char*.  This allows the application to perform
+* whatever type of tracing or debugging is desired.
+* After setting the functions with this call, the debug flags must be
+* turned on via the rsslIoctl interface (RSSL_DEBUG_FLAGS).
+* The dump functions are global, the debug flags are per RsslChannel.
+* @param *dumpIpcIn Function pointer to the incoming IPC message debug function
+* @param *dumpIpcOut Function pointer to the outgoing IPC message debug function
+* @param *dumpRsslIn Function pointer to the incoming RSSL message debug function
+* @param *dumpRsslOut Function pointer to the outgoing RSSL message debug function
+* @param error	Rssl Error, to be populated in event of an error
+* @return RsslRet RSSL return value
+* @see RsslDebugFlags
+* @see rsslIoctl
+*/
+RSSL_API RsslRet rsslSetDebugFunctions(
+	void(*dumpIpcIn)(const char *functionName, char *buffer, RsslUInt32 length, RsslUInt64 opaque),
+	void(*dumpIpcOut)(const char *functionName, char *buffer, RsslUInt32 length, RsslUInt64 opaque),
+	void(*dumpRsslIn)(const char *functionName, char *buffer, RsslUInt32 length, RsslSocket socketId),
+	void(*dumpRsslOut)(const char *functionName, char *buffer, RsslUInt32 length, RsslSocket socketId),
+	RsslError *error);
 /**
  *	@}
  */ 
+
+#define RSSL_IGNORE_CERT_REVOCATION 254 /* (254) Channel: must be used prior to any calls to InitChannel.  
+										 	     If value of 0 is passed in, this will unset the 
+												 SECURITYH_FLAG_IGNORE_REVOCATION flag for WinInet; 
+												 other values passed in will set/enable this flag 
+												 to ignore certificate revocation */
+
 
 #ifdef __cplusplus
 };

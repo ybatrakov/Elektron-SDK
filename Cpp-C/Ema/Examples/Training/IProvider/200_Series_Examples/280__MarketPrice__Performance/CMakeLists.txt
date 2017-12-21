@@ -1,15 +1,16 @@
 cmake_minimum_required (VERSION 3.8)
 
-if (WIN32)
-  set( STATIC_EXT "_static" )
-  add_executable( IProvider280_shared IProvider.cpp )
-endif()
-
-add_executable( IProvider280${STATIC_EXT} IProvider.cpp )
+add_executable( IProvider280_static IProvider.cpp )
+add_executable( IProvider280_shared IProvider.cpp )
 
 if (WIN32)
   target_link_libraries( IProvider280_static ${EXAMPLE_STATIC_LIBRARIES} )
   target_link_libraries( IProvider280_shared ${EXAMPLE_SHARED_LIBRARIES} )
 else()
-  target_link_libraries( IProvider280 ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} )
+    target_link_libraries( IProvider280_static ${EXAMPLE_LIBRARIES_STATIC} ${SYSTEM_LIBRARIES} )
+	set_target_properties( IProvider280_static PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR} )
+	set_target_properties( IProvider280_static PROPERTIES OUTPUT_NAME IProvider280 )
+    target_link_libraries( IProvider280_shared ${EXAMPLE_LIBRARIES_SHARED} ${SYSTEM_LIBRARIES} )
+	set_target_properties( IProvider280_shared PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR}/Shared )
+	set_target_properties( IProvider280_shared PROPERTIES OUTPUT_NAME IProvider280 )
 endif()

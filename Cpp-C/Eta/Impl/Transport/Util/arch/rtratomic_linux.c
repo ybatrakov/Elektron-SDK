@@ -1,0 +1,1 @@
+/* Moved into rtratomic header file */

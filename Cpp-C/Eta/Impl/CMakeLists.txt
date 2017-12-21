@@ -1,23 +1,5 @@
 cmake_minimum_required (VERSION 3.8)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ETA_LIBS_OUTPUT_DIR} )
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ETA_LIBS_OUTPUT_DIR} )
-set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ETA_LIBS_OUTPUT_DIR} )
-
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /D WIN32_LEAN_AND_MEAN /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /Zc:wchar_t- /Gm- /O2 /Ob2 /Ot /wd\"4290\" /Gy /WX- /Gd /Oi /EHsc /nologo" )
-  set( "CMAKE_C_FLAGS_RELEASE_MD" "/MD  /D NDEBUG" )
-  set( CMAKE_C_FLAGS_DEBUG_MDD "/MDd /Zi" )
-elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  set( CMAKE_C_FLAGS "-m64 -D_SVID_SOURCE=1 -DCOMPILE_64BITS -DLinux -Dx86_Linux_4X -Dx86_Linux_5X -DLinuxVersion=5 -D_iso_stdcpp_ -D_BSD_SOURCE=1 -D_POSIX_SOURCE=1 -D_POSIX_C_SOURCE=199506L -D_XOPEN_SOURCE=500 -D_REENTRANT -DDEV_POS_THR -D_POSIX_PTHREAD_SEMANTICS -D_GNU_SOURCE" )
-  set( "CMAKE_C_FLAGS_OPTIMIZEDSTATIC" "-O3 -DNDEBUG" )
-  set( "CMAKE_C_FLAGS_OPTIMIZEDASSERTSTATIC" "-O3 -DNDEBUG" )
-  set( "CMAKE_C_FLAGS_OPTIMIZEDSHARED" "-O3 -DNDEBUG" )
-  set( "CMAKE_C_FLAGS_OPTIMIZEDASSERTSHARED" "-O3 -DNDEBUG" )
-  set( "CMAKE_C_FLAGS_DEBUGSTATIC" "-ggdb3" )
-  set( "CMAKE_C_FLAGS_DEBUGSHARED" "-ggdb3" )
-endif()
-
 include_directories(
   ${ETA_HOME}/Include/Codec
   ${ETA_HOME}/Include/RDM
@@ -29,6 +11,8 @@ include_directories(
 add_subdirectory( RDM )
 add_subdirectory( Reactor )
 add_subdirectory( Util )
+
+add_subdirectory( Codec )
 
 # use these for rsslVA only
 include_directories(
@@ -77,14 +61,12 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   add_library( librsslVA SHARED ${rsslVASrcFiles} )
   #  for shared libraries, the .lib and .exp files go to ARCHIVE; the .dll files go to RUNTIME
   target_compile_options( librsslVA PUBLIC "/D RSSL_VA_EXPORTS" )
-  target_link_libraries( librsslVA debug ${RSSL_DEBUG_SHARED} )
-  target_link_libraries( librsslVA optimized ${RSSL_RELEASE_SHARED} )
+  target_link_libraries( librsslVA debug librssl_shared )
+  target_link_libraries( librsslVA optimized librssl_shared )
   target_link_libraries( librsslVA wininet.lib ws2_32.lib )
+
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  if ( (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedShared") OR
-      (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertShared") OR
-      (${CMAKE_BUILD_TYPE} STREQUAL "DebugShared") )
-    add_library( librsslVA SHARED ${rsslVASrcFiles} )
-    set_target_properties( librsslVA PROPERTIES PREFIX "" )
-  endif()
+  add_library( librsslVA_shared SHARED ${rsslVASrcFiles} )
+  set_target_properties( librsslVA_shared PROPERTIES OUTPUT_NAME "rsslVA" )
+  set_target_properties( librsslVA_shared PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${ETA_LIBS_OUTPUT_DIR}/${SHARED_PATH}" )
 endif()

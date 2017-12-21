@@ -18,14 +18,12 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
 
   set( CMAKE_FIND_LIBRARY_PREFIXES "lib" )
 
-  find_library( RSSL_DEBUG_SHARED rssl HINTS ${BINARY_PACK_LOCATION}/Debug_MDd/Shared )
-  find_library( RSSL_RELEASE_SHARED rssl HINTS ${BINARY_PACK_LOCATION}/Release_MD/Shared )
   find_library( RSSLVACACHE_DEBUG_SHARED rsslVACache HINTS ${BINARY_PACK_LOCATION}/Debug_MDd/Shared )
   find_library( RSSLVACACHE_RELEASE_SHARED rsslVACache HINTS ${BINARY_PACK_LOCATION}/Release_MD/Shared )
 
   # fail if libraries not found
   set( MISSING_LIBRARIES "" )
-  foreach( lib RSSL_DEBUG_SHARED RSSL_RELEASE_SHARED RSSLVACACHE_DEBUG_SHARED RSSLVACACHE_RELEASE_SHARED )
+  foreach( lib RSSLVACACHE_DEBUG_SHARED RSSLVACACHE_RELEASE_SHARED )
     if ( NOT ${lib} )
       set( MISSING_LIBRARIES "${MISSING_LIBRARIES} ${lib}" )
       message( STATUS "library ${lib} NOT FOUND" )
@@ -46,27 +44,23 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
 
   add_library( libema_static ${EMA_HOME}/Src/Access/Impl/EmaStaticCombined.cpp )
   target_compile_options( libema_static PUBLIC "/D __EMA_STATIC_BUILD__" )
-  add_dependencies( libema_static librsslRDM librsslReactor librsslVAUtil libxml2_static )
+  add_dependencies( libema_static librsslRDM librsslReactor librsslVAUtil libxml2_static librssl_static )
   add_custom_command ( TARGET libema_static POST_BUILD COMMAND
     COMMAND
-    ( ${_vs_bin_path}/lib.exe /IGNORE:4006 /OUT:$<TARGET_FILE:libema_static> /LTCG $<TARGET_FILE:libema_only_static> /LIBPATH:${ETA_LIBS_OUTPUT_DIR}/$(Configuration) librsslRDM.lib librsslReactor.lib librsslVAUtil.lib libxml2_static.lib /LIBPATH:${BINARY_PACK_LOCATION}/$(Configuration) librssl.lib librsslVACache.lib )
+    ( ${_vs_bin_path}/lib.exe /IGNORE:4006 /OUT:$<TARGET_FILE:libema_static> /LTCG $<TARGET_FILE:libema_only_static> /LIBPATH:${ETA_LIBS_OUTPUT_DIR}/$(Configuration) librsslRDM.lib librsslReactor.lib librsslVAUtil.lib librssl_static.lib libxml2_static.lib /LIBPATH:${BINARY_PACK_LOCATION}/$(Configuration) librsslVACache.lib )
   )
 
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic") OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
-    add_library ( libema STATIC ${EmaSrcFiles} ${EmaHeaderFiles} $<TARGET_OBJECTS:RDMobjects>
-      $<TARGET_OBJECTS:ReactorObjects> $<TARGET_OBJECTS:VAUtilObjects> $<TARGET_OBJECTS:XML2objects>
+  add_library ( libema_static STATIC ${EmaSrcFiles} ${EmaHeaderFiles} $<TARGET_OBJECTS:RDMobjects>
+    $<TARGET_OBJECTS:ReactorObjects> $<TARGET_OBJECTS:VAUtilObjects> $<TARGET_OBJECTS:XML2objects>
     )
-  elseif ( (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedShared") OR
-      (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertShared") OR
-      (${CMAKE_BUILD_TYPE} STREQUAL "DebugShared") )
-    add_library ( libema SHARED ${EmaSrcFiles} ${EmaHeaderFiles} )
-    target_link_libraries( libema librsslVA ${RSSL} libxml2 )
-    set_target_properties( libema PROPERTIES DEFINE_SYMBOL "" ) # avoid -Dlibema_EXPORTS
-  endif()
-  set_target_properties( libema PROPERTIES PREFIX "" )
+  set_target_properties ( libema_static PROPERTIES PREFIX "" OUTPUT_NAME "libema" )
+  add_library ( libema_shared SHARED ${EmaSrcFiles} ${EmaHeaderFiles} )
+  target_link_libraries( libema_shared librsslVA_shared librssl_shared libxml2 )
+  set_target_properties( libema_shared PROPERTIES PREFIX "" OUTPUT_NAME "libema" )
+  set_target_properties( libema_shared PROPERTIES DEFINE_SYMBOL "" ) # avoid -Dlibema_EXPORTS
+  set_target_properties( libema_shared PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${EMA_LIBS_OUTPUT_DIR}/${SHARED_PATH}" )
+	
 
   if ( MISSING_LIBRARIES )
     message( FATAL_ERROR "one or more necessary libraries [${MISSING_LIBRARIES}] were not found" )

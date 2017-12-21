@@ -1,0 +1,94 @@
+set( rsslLibrarySrcFiles
+  ${RSSL_TRANSPORT_HOME}/ripccomp.c
+  ${RSSL_TRANSPORT_HOME}/ripchttp.c
+  ${RSSL_TRANSPORT_HOME}/ripcssldh.c
+  ${RSSL_TRANSPORT_HOME}/ripcsslutils.c
+  ${RSSL_TRANSPORT_HOME}/ripcutils.c
+  ${RSSL_TRANSPORT_HOME}/rsslImpl.c
+  ${RSSL_TRANSPORT_HOME}/rsslSeqMcastTransportImpl.c
+  ${RSSL_TRANSPORT_HOME}/rsslSocketTransportImpl.c
+  ${RSSL_TRANSPORT_HOME}/rsslUniShMemTransportImpl.c
+  ${RSSL_TRANSPORT_HOME}/shmemtrans.c
+
+  ${RSSL_CODEC_HOME}/arrayDecoder.c
+  ${RSSL_CODEC_HOME}/arrayEncoder.c
+  ${RSSL_CODEC_HOME}/codes.c
+  ${RSSL_CODEC_HOME}/dataDictionary.c
+  ${RSSL_CODEC_HOME}/dataTypes.c
+  ${RSSL_CODEC_HOME}/dataUtils.c
+  ${RSSL_CODEC_HOME}/dtime.c
+  ${RSSL_CODEC_HOME}/elemListDecoder.c
+  ${RSSL_CODEC_HOME}/elemListEncoder.c
+  ${RSSL_CODEC_HOME}/fieldListDecoder.c
+  ${RSSL_CODEC_HOME}/fieldListEncoder.c
+  ${RSSL_CODEC_HOME}/filterListDecoder.c
+  ${RSSL_CODEC_HOME}/filterListEncoder.c
+  ${RSSL_CODEC_HOME}/mapDecoder.c
+  ${RSSL_CODEC_HOME}/mapEncoder.c
+  ${RSSL_CODEC_HOME}/numeric.c
+  ${RSSL_CODEC_HOME}/primitiveDecoders.c
+  ${RSSL_CODEC_HOME}/primitiveEncoders.c
+  ${RSSL_CODEC_HOME}/rsslCharSet.c
+  ${RSSL_CODEC_HOME}/rsslcnvtab.c
+  ${RSSL_CODEC_HOME}/rsslRmtes.c
+  ${RSSL_CODEC_HOME}/rwfConvert.c
+  ${RSSL_CODEC_HOME}/seriesDecoder.c
+  ${RSSL_CODEC_HOME}/seriesEncoder.c
+  ${RSSL_CODEC_HOME}/setDictionary.c
+  ${RSSL_CODEC_HOME}/state.c
+  ${RSSL_CODEC_HOME}/vectorDecoder.c
+  ${RSSL_CODEC_HOME}/vectorEncoder.c
+
+  ${RSSL_CODEC_HOME}/messageDecoders.c
+  ${RSSL_CODEC_HOME}/messageEncoders.c
+  ${RSSL_CODEC_HOME}/msgs.c
+
+  ${RSSL_CODEC_HOME}/decodeRoutines.c
+  ${RSSL_CODEC_HOME}/dictionary.c
+  ${RSSL_CODEC_HOME}/fieldListDefs.c
+  ${RSSL_CODEC_HOME}/fileUtil.c
+  ${RSSL_CODEC_HOME}/xmlDomainDump.c
+  ${RSSL_CODEC_HOME}/xmlDump.c
+  ${RSSL_CODEC_HOME}/xmlMsgDump.c
+  
+  ${RSSL_TRANSPORT_HOME}/Util/cutildfltcbuffer.c
+  ${RSSL_TRANSPORT_HOME}/Util/cutilsmplcbuffer.c
+  ${RSSL_TRANSPORT_HOME}/Util/fail.c
+  ${RSSL_TRANSPORT_HOME}/Util/gettime.c
+  ${RSSL_TRANSPORT_HOME}/Util/hasht.c
+  ${RSSL_TRANSPORT_HOME}/Util/intqtool.c
+  ${RSSL_TRANSPORT_HOME}/Util/platmem.c
+  ${RSSL_TRANSPORT_HOME}/Util/primenum.c
+  ${RSSL_TRANSPORT_HOME}/Util/qctool.c
+  ${RSSL_TRANSPORT_HOME}/Util/qtool.c
+  ${RSSL_TRANSPORT_HOME}/Util/rthashfuncs.c
+  ${RSSL_TRANSPORT_HOME}/Util/rtrhexdump.c
+  ${RSSL_TRANSPORT_HOME}/Util/rtrsig.c
+  ${RSSL_TRANSPORT_HOME}/Util/rtrthrd.c
+  ${RSSL_TRANSPORT_HOME}/Util/shmem.c
+  ${RSSL_TRANSPORT_HOME}/Util/shmemcirbuf.c
+  ${RSSL_TRANSPORT_HOME}/Util/shmemqueue.c
+  ${RSSL_TRANSPORT_HOME}/Util/socket.c
+  ${RSSL_TRANSPORT_HOME}/Util/tr_sha_1.c
+  ${RSSL_TRANSPORT_HOME}/Util/tr_sl1_64.c
+
+  ${LZ4_HOME}/lz4.c
+
+  ${ZLIB_HOME}/adler32.c
+  ${ZLIB_HOME}/compress.c
+  ${ZLIB_HOME}/crc32.c
+  ${ZLIB_HOME}/deflate.c
+  ${ZLIB_HOME}/gzio.c
+  ${ZLIB_HOME}/infback.c
+  ${ZLIB_HOME}/inffast.c
+  ${ZLIB_HOME}/inflate.c
+  ${ZLIB_HOME}/inftrees.c
+  ${ZLIB_HOME}/trees.c
+  ${ZLIB_HOME}/uncompr.c
+  ${ZLIB_HOME}/zutil.c
+)
+
+if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+  set( rsslLibrarySrcFiles ${rsslLibrarySrcFiles} ${RSSL_TRANSPORT_HOME}/ripcinetutils.c )
+endif()
+

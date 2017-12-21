@@ -8,14 +8,9 @@ set( RDMSrcFiles
   )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     add_library( RDMobjects OBJECT ${RDMSrcFiles} )
     add_library( librsslRDM STATIC ${RDMSrcFiles} )
     set_target_properties( librsslRDM PROPERTIES PREFIX "" )
-  endif()
-
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   add_library( librsslRDM STATIC ${RDMSrcFiles} )
   add_custom_command (

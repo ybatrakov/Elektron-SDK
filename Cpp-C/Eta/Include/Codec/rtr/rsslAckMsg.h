@@ -1,4 +1,10 @@
-
+/*|-----------------------------------------------------------------------------
+ *|            This source code is provided under the Apache 2.0 license      --
+ *|  and is provided AS IS with no warranty or guarantee of fit for purpose.  --
+ *|                See the project's LICENSE.md for details.                  --
+ *|           Copyright Thomson Reuters 2018. All rights reserved.            --
+ *|-----------------------------------------------------------------------------
+ */
 
 #ifndef __RSSL_ACKMSG_H_
 #define __RSSL_ACKMSG_H_
@@ -14,7 +20,6 @@ extern "C" {
  * @addtogroup AckMsgStruct
  * @{
  */
-
 
 
 /** 
@@ -53,7 +58,6 @@ RTR_C_ALWAYS_INLINE void rsslClearAckMsg(RsslAckMsg *pAckMsg)
 }
 
 
-
 /** 
  * @brief The Acknowledgement Message flags (AKMF = AckMsg Flag)
  * @see RsslAckMsg, RsslMsg
@@ -68,7 +72,6 @@ typedef enum {
 	RSSL_AKMF_HAS_NAK_CODE			= 0x20,		/*!< (0x20) Indicates that this RsslAckMsg has a NAK Code, contained in \ref RsslAckMsg::nakCode.  See \ref RsslNakCodes. */
 	RSSL_AKMF_QUALIFIED_STREAM		= 0x40		/*!< (0x40) Indicates that this RsslAckMsg acknowledges the establishment of a qualified stream request. */
 } RsslAckFlags;
-
 
 /** 
  * @brief The Ack Message nakCodes, used to indicate a reason for a negative acknowledgment (NAKC = Nak Code)

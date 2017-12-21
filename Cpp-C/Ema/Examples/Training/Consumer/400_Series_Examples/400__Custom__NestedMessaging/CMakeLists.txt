@@ -1,15 +1,16 @@
 cmake_minimum_required (VERSION 3.8)
 
-if (WIN32)
-  set( STATIC_EXT "_static" )
-  add_executable( Consumer400_shared Consumer.cpp )
-endif()
-
-add_executable( Consumer400${STATIC_EXT} Consumer.cpp )
+add_executable( Consumer400_static Consumer.cpp )
+add_executable( Consumer400_shared Consumer.cpp )
 
 if (WIN32)
   target_link_libraries( Consumer400_static ${EXAMPLE_STATIC_LIBRARIES} )
   target_link_libraries( Consumer400_shared ${EXAMPLE_SHARED_LIBRARIES} )
 else()
-  target_link_libraries( Consumer400 ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} )
+    target_link_libraries( Consumer400_static ${EXAMPLE_LIBRARIES_STATIC} ${SYSTEM_LIBRARIES} )
+	set_target_properties( Consumer400_static PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR} )
+	set_target_properties( Consumer400_static PROPERTIES OUTPUT_NAME Consumer400 )
+    target_link_libraries( Consumer400_shared ${EXAMPLE_LIBRARIES_SHARED} ${SYSTEM_LIBRARIES} )
+	set_target_properties( Consumer400_shared PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR}/Shared )
+	set_target_properties( Consumer400_shared PROPERTIES OUTPUT_NAME Consumer400 )
 endif()

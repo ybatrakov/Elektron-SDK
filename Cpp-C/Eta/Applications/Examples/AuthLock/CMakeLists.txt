@@ -2,10 +2,8 @@ cmake_minimum_required (VERSION 3.8)
 
 set( SOURCE_FILES rsslAuthLock.c )
 
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  add_executable( authlock_shared ${SOURCE_FILES} )
-endif()
-add_executable( authlock${STATIC_EXT} ${SOURCE_FILES} )
+
+add_executable( authlock ${SOURCE_FILES} )
 
 include_directories( ${ETA_HOME}/Utils/Dacs/Include )
 
@@ -26,6 +24,5 @@ elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   if ( NOT DACS_RELEASE )
     message( FATAL_ERROR "DACS_RELEASE not found" )
   endif()
-  target_link_libraries( authlock_static debug ${DACS_DEBUG} optimized ${DACS_RELEASE} )
-  target_link_libraries( authlock_shared debug ${DACS_DEBUG} optimized ${DACS_RELEASE} )
+  target_link_libraries( authlock debug ${DACS_DEBUG} optimized ${DACS_RELEASE} )
 endif()

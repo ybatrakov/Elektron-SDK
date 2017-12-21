@@ -1,15 +1,16 @@
 cmake_minimum_required (VERSION 3.8)
 
-if (WIN32)
-  set( STATIC_EXT "_static" )
-  add_executable( Consumer102_shared Consumer.cpp )
-endif()
-
-add_executable( Consumer102${STATIC_EXT} Consumer.cpp )
+add_executable( Consumer102_static Consumer.cpp )
+add_executable( Consumer102_shared Consumer.cpp )
 
 if (WIN32)
   target_link_libraries( Consumer102_static ${EXAMPLE_STATIC_LIBRARIES} )
   target_link_libraries( Consumer102_shared ${EXAMPLE_SHARED_LIBRARIES} )
 else()
-  target_link_libraries( Consumer102 ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} )
+    target_link_libraries( Consumer102_static ${EXAMPLE_LIBRARIES_STATIC} ${SYSTEM_LIBRARIES} )
+	set_target_properties( Consumer102_static PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR} )
+	set_target_properties( Consumer102_static PROPERTIES OUTPUT_NAME Consumer102 )
+    target_link_libraries( Consumer102_shared ${EXAMPLE_LIBRARIES_SHARED} ${SYSTEM_LIBRARIES} )
+	set_target_properties( Consumer102_shared PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR}/Shared )
+	set_target_properties( Consumer102_shared PROPERTIES OUTPUT_NAME Consumer102 )
 endif()

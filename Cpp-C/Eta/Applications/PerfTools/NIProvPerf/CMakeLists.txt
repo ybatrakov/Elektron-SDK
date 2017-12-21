@@ -14,29 +14,23 @@ include_directories(
   ../ProvPerf
   )
 
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  add_executable( NIProvPerf_shared ${SOURCE_FILES} )
-endif()
-add_executable( NIProvPerf${STATIC_EXT} ${SOURCE_FILES} )
+add_executable( NIProvPerf_shared ${SOURCE_FILES} )
+add_executable( NIProvPerf_static ${SOURCE_FILES} )
 
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  set(OTHER_LIBRARIES ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} libxml2 )
-  if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
-    target_link_libraries( NIProvPerf librsslReactor librsslRDM librsslVAUtil ${OTHER_LIBRARIES} )
-  elseif ( (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedShared") OR
-      (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertShared") OR
-      (${CMAKE_BUILD_TYPE} STREQUAL "DebugShared") )
-    target_link_libraries( NIProvPerf ${RSSLVACACHE_SHARED} librsslVA ${OTHER_LIBRARIES} )
-  endif()
+  set(OTHER_LIBRARIES ${SYSTEM_LIBRARIES} libxml2 )
+  target_link_libraries( NIProvPerf_static librsslReactor librsslRDM librsslVAUtil ${EXAMPLE_LIBRARIES_STATIC} ${OTHER_LIBRARIES} )
+  	set_target_properties( NIProvPerf_static PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${ETA_EXAMPLES_OUTPUT_DIR} )
+	set_target_properties( NIProvPerf_static PROPERTIES OUTPUT_NAME NIProvPerf )
+  target_link_libraries( NIProvPerf_shared ${RSSLVACACHE_SHARED} librsslVA_shared ${EXAMPLE_LIBRARIES_SHARED} ${OTHER_LIBRARIES} )
+  set_target_properties( NIProvPerf_shared PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${ETA_EXAMPLES_OUTPUT_DIR}/Shared )
+  set_target_properties( NIProvPerf_shared PROPERTIES OUTPUT_NAME NIProvPerf )
+
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
 
-  target_link_libraries( NIProvPerf_static ${EXAMPLE_LIBRARIES} librsslReactor librsslRDM librsslVAUtil libxml2_static psapi )
-  target_link_libraries( NIProvPerf_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
+  target_link_libraries( NIProvPerf_static ${EXAMPLE_STATIC_LIBRARIES} librsslReactor librsslRDM librsslVAUtil libxml2_static psapi )
   target_link_libraries( NIProvPerf_static debug ${RSSL_VACACHE_DEBUG_STATIC} optimized ${RSSL_VACACHE_RELEASE_STATIC} )
 
-  target_link_libraries( NIProvPerf_shared ${EXAMPLE_LIBRARIES} librsslVA  libxml2_static psapi )
-  target_link_libraries( NIProvPerf_shared debug ${RSSL_DEBUG_SHARED} optimized ${RSSL_RELEASE_SHARED} )
+  target_link_libraries( NIProvPerf_shared ${EXAMPLE_SHAED_LIBRARIES} librsslVA  libxml2_static psapi )
   target_link_libraries( NIProvPerf_shared debug ${RSSL_VACACHE_DEBUG_SHARED} optimized ${RSSL_VACACHE_RELEASE_SHARED} )
 endif()

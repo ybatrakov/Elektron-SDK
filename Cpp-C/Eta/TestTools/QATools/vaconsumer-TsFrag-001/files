@@ -1,4 +1,0 @@
-# file,location
-rsslConsumer.c,Applications/Examples/VAConsumer
-simpleTunnelMsgHandler.c,Applications/Examples/VACommon
-tunnelStreamHandler.c,Applications/Examples/VACommon

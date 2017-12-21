@@ -2,17 +2,28 @@ cmake_minimum_required (VERSION 3.8)
 
 project (ESDK)
 
+set( SHARED_PATH "Shared" )
+set( ETA_VERSION "eta3.1.0.L1" )
+
+
 # set allowed build types for windows and linux; also select default for Linux
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
 
+  find_package(OpenSSL REQUIRED)
+  if ( ${OpenSSL_FOUND} )
+    message( STATUS "OpenSSL_FOUND: ${OpenSSL_FOUND}" )
+  else()
+    message( FATAL_ERROR "could not locate openSSL development environment" )
+  endif()
+
   # default for Linux if build type not specified by user
   if ( NOT CMAKE_BUILD_TYPE )
-    set( CMAKE_BUILD_TYPE "OptimizedStatic" )
+    set( CMAKE_BUILD_TYPE "Optimized" )
   endif()
   message( STATUS "incoming CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}" )
 
   # allowed build types for Linux
-  set ( "CMAKE_CONFIGURATION_TYPES" "OptimizedStatic" "OptimizedShared" "OptimizedAssertStatic" "OptimizedAssertShared" "DebugShared" "DebugStatic" )
+  set ( "CMAKE_CONFIGURATION_TYPES" "Optimized" "Debug")
   if ( NOT ${CMAKE_BUILD_TYPE} IN_LIST CMAKE_CONFIGURATION_TYPES )
     message( FATAL_ERROR " invalid build type [${CMAKE_BUILD_TYPE}]; allowed build types are ${CMAKE_CONFIGURATION_TYPES}" )
   endif()
@@ -25,6 +36,44 @@ elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
 else()
   message( FATAL_ERROR "unsupported CMAKE_SYSTEM_NAME [${CMAKE_SYSTEM_NAME}]" )
 endif()
+
+# build flags
+if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
+
+  # flags for C
+  set( CMAKE_C_FLAGS "-m64 -D_SVID_SOURCE=1 -DCOMPILE_64BITS -DLinux -DLINUX -Dx86_Linux_4X -Dx86_Linux_5X -Dx86_Linux_6X -DLinuxVersion=7 -D_iso_stdcpp_ -D_BSD_SOURCE=1 -D_POSIX_SOURCE=1 -D_POSIX_C_SOURCE=199506L -D_XOPEN_SOURCE=500 -D_REENTRANT -DDEV_POS_THR -D_POSIX_PTHREAD_SEMANTICS -D_GNU_SOURCE" )
+  set( "CMAKE_C_FLAGS_OPTIMIZED" "-fPIC -O3 -DNDEBUG" )
+  set( "CMAKE_C_FLAGS_DEBUGSHARED" "-fPIC -ggdb3" )
+
+  # flags for C++
+  set( CMAKE_CXX_FLAGS "-DLinux  -D__EMA_COPY_ON_SET__ -Wno-ctor-dtor-privacy -Wno-deprecated -std=c++0x -pthread" )
+  if ( ${CMAKE_BUILD_TYPE} STREQUAL "Optimized" )
+    set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNDEBUG -O3 -fPIC -fbuiltin" )
+  elseif ( ${CMAKE_BUILD_TYPE} STREQUAL "Debug" )
+    set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -ggdb3" )
+  endif()
+
+elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+    # flags for C
+    set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /D _WIN32 /D WIN32_LEAN_AND_MEAN /D _WIN32_WINNT=0x0501 /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /Zc:wchar_t- /Gm- /O2 /Ob2 /Ot /wd\"4290\" /Gy /WX- /Gd /Oi /EHsc /nologo" )
+  set( "CMAKE_C_FLAGS_RELEASE_MD" "/MD  /D NDEBUG" )
+  set( CMAKE_C_FLAGS_DEBUG_MDD "/MDd /Zi" )
+
+  # flags for C++
+    set( CMAKE_CXX_FLAGS "/MP /GS /W3 /Zc:wchar_t- /Z7 /Gm- /fp:precise /D WIN32 /D _WIN32_WINNT=0x0501 /D _LIB /D _iso_stdcpp_ /D _WIN32 /D WIN32_LEAN_AND_MEAN /D x86_WindowsNT_5X /D _CRT_SECURE_NO_WARNINGS /D _MBCS /WX- /Zc:forScope /Gd /Oi /EHsc /nologo /D LIBXML_STATIC /D COMPILE_64BITS" )
+
+  set( "CMAKE_CXX_FLAGS_DEBUG_MDD" "${CMAKE_CXX_FLAGS} /Od /RTC1 /MDd " )
+  set( "CMAKE_CXX_FLAGS_DEBUG_MDD_SHARED" "${CMAKE_CXX_FLAGS_DEBUG_MDD} /Gy- /Zi /D _WINDLL /openmp- " )
+
+  set( "CMAKE_CXX_FLAGS_RELEASE_MD" "${CMAKE_CXX_FLAGS} /MD /O2 /Ob2 /Ot /D NDEBUG" )
+  set( "CMAKE_CXX_FLAGS_RELEASE_MD_STATIC" "${CMAKE_CXX_FLAGS_RELEASE_MD} /GF /Gy" )
+  set( "CMAKE_CXX_FLAGS_RELEASE_MD_SHARED" "${CMAKE_CXX_FLAGS_RELEASE_MD} /GL /GR" )
+
+  set( "CMAKE_SHARED_LINKER_FLAGS_DEBUG_MDD" "${CMAKE_SHARED_LINKER_FLAGS}" )
+  set( "CMAKE_SHARED_LINKER_FLAGS_RELEASE_MD" "${CMAKE_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" )
+
+endif()
+# end build flags
 
 # no RPATH for Linux
 set( CMAKE_SKIP_RPATH TRUE )
@@ -109,69 +158,47 @@ endif()
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
   string( REGEX MATCH "^.*/(.+)" UNUSED ${BINARY_PACK_LOCATION} )
   set( OS_COMPILER ${CMAKE_MATCH_1} )
-  if ( CMAKE_BUILD_TYPE STREQUAL "OptimizedStatic" )
+  message( STATUS "OS_COMPILER: ${OS_COMPILER}" )
+  message( STATUS "BINARY_PACK_LOCATION: ${BINARY_PACK_LOCATION}" )
+  if ( CMAKE_BUILD_TYPE STREQUAL "Optimized" )
     set( TYPE "Optimized" )
-  elseif ( CMAKE_BUILD_TYPE STREQUAL "OptimizedAssertStatic" )
-    set( TYPE "Optimized_Assert" )
-  elseif ( CMAKE_BUILD_TYPE STREQUAL "OptimizedShared" )
-    set(  TYPE "Optimized/Shared" )
-  elseif ( CMAKE_BUILD_TYPE STREQUAL "OptimizedAssertShared" )
-    set(  TYPE "Optimized_Assert/Shared" )
-  elseif ( CMAKE_BUILD_TYPE STREQUAL "DebugStatic" )
+  elseif ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
     set(  TYPE "Debug" )
-  elseif ( CMAKE_BUILD_TYPE STREQUAL "DebugShared" )
-    set(  TYPE "Debug/Shared" )
   endif()
-  SET( ETA_LIBS_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Eta/Libs/${OS_COMPILER}/${TYPE}" )
-  SET( ETA_EXAMPLES_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Eta/Executables/${OS_COMPILER}/${TYPE}" )
-  SET( EMA_LIBS_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Ema/Libs/${OS_COMPILER}/${TYPE}" )
-  SET( EMA_EXAMPLES_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Ema/Executables/${OS_COMPILER}/${TYPE}" )
-  message( STATUS "ETA_LIBS_OUTPUT_DIR: ${ETA_LIBS_OUTPUT_DIR}" )
-  message( STATUS "ETA_EXAMPLES_OUTPUT_DIR: ${ETA_EXAMPLES_OUTPUT_DIR}" )
-  message( STATUS "EMA_LIBS_OUTPUT_DIR: ${EMA_LIBS_OUTPUT_DIR}" )
-  message( STATUS "EMA_EXAMPLES_OUTPUT_DIR: ${EMA_EXAMPLES_OUTPUT_DIR}" )
+  SET( ETA_LIBS_OUTPUT_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/Eta/Libs/${OS_COMPILER}/${TYPE}" )
+  SET( ETA_EXAMPLES_OUTPUT_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/Eta/Executables/${OS_COMPILER}/${TYPE}" )
+  SET( EMA_LIBS_OUTPUT_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/Ema/Libs/${OS_COMPILER}/${TYPE}" )
+  SET( EMA_EXAMPLES_OUTPUT_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/Ema/Executables/${OS_COMPILER}/${TYPE}" )
 
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  SET( ETA_LIBS_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Eta/Libs/${VSSTR}" )
-  SET( EMA_LIBS_OUTPUT_DIR  "${CMAKE_HOME_DIRECTORY}/Ema/Libs/${VSSTR}" )
-  SET( EMA_EXAMPLES_OUTPUT_DIR "${CMAKE_HOME_DIRECTORY}/Ema/Executables/${VSSTR}" )
-  SET( ETA_EXAMPLES_OUTPUT_DIR "${CMAKE_HOME_DIRECTORY}/Eta/Executables/${VSSTR}" )
+  SET( ETA_LIBS_OUTPUT_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/Eta/Libs/${VSSTR}" )
+  SET( EMA_LIBS_OUTPUT_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/Ema/Libs/${VSSTR}" )
+  SET( EMA_EXAMPLES_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Ema/Executables/${VSSTR}" )
+  SET( ETA_EXAMPLES_OUTPUT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Eta/Executables/${VSSTR}" )
 endif()
 
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  set( BINARY_PACK_SEARCH_PATH ${BINARY_PACK_LOCATION}/Optimized )
-  message( STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}" )
-  string( REGEX MATCH "OptimizedAssert.*" ASSERT ${CMAKE_BUILD_TYPE} )
-  if ( ASSERT )
-    set( BINARY_PACK_SEARCH_PATH ${BINARY_PACK_SEARCH_PATH}_Assert )
-  endif()
 
-  string( REGEX MATCH ".*Shared" SHARED ${CMAKE_BUILD_TYPE} )
-  if ( SHARED )
-    set( BINARY_PACK_SEARCH_PATH ${BINARY_PACK_SEARCH_PATH}/Shared )
-  endif()
+  # run LinuxSoLink from the binary pack so optimized builds will succeed
+	unset( LNKCMDPATH CACHE )
+	find_file( LNKCMDPATH name "LinuxSoLink" PATHS "${CMAKE_CURRENT_SOURCE_DIR}/../Elektron-SDK-BinaryPack/Cpp-C/Eta" NO_DEFAULT_PATH )
+	if ( LNKCMDPATH )
+	  get_filename_component( LNKCMDDIR ${LNKCMDPATH} DIRECTORY )
+	  execute_process( COMMAND ${LNKCMDPATH} WORKING_DIRECTORY ${LNKCMDDIR} RESULT_VARIABLE result OUTPUT_QUIET ERROR_QUIET )
+	  if ( result )
+	message( FATAL_ERROR "script (${LNKCMDPATH}) that creates shared library links failed" )
+	  endif()
+	else()
+	  message( FATAL_ERROR "LinuxSoLink not found; cannot run script to create shared library links" )
+	endif()
+
   message( STATUS "BINARY_PACK_SEARCH_PATH ${BINARY_PACK_SEARCH_PATH}" )
 
-  find_library( RSSL_VACACHE rsslVACache HINTS ${BINARY_PACK_SEARCH_PATH} )
-  find_library( RSSL rssl HINTS ${BINARY_PACK_SEARCH_PATH} )
-
-  if ( SHARED )
-    # run LinuxSoLink from the binary pack so optimized builds will succeed
-    unset( LNKCMDPATH CACHE )
-    find_file( LNKCMDPATH name "LinuxSoLink" PATHS "${CMAKE_HOME_DIRECTORY}/../Elektron-SDK-BinaryPack/Cpp-C/Eta" NO_DEFAULT_PATH )
-    if ( LNKCMDPATH )
-      get_filename_component( LNKCMDDIR ${LNKCMDPATH} DIRECTORY )
-      execute_process( COMMAND ${LNKCMDPATH} WORKING_DIRECTORY ${LNKCMDDIR} RESULT_VARIABLE result OUTPUT_QUIET ERROR_QUIET )
-      if ( result )
-	message( FATAL_ERROR "script (${LNKCMDPATH}) that creates shared library links failed" )
-      endif()
-    else()
-      message( FATAL_ERROR "LinuxSoLink not found; cannot run script to create shared library links" )
-    endif()
-  endif()
-
+  find_library( RSSL_VACACHE_SHARED rsslVACache HINTS ${BINARY_PACK_LOCATION}/Optimized/Shared )
+  find_library( RSSL_VACACHE_STATIC rsslVACache HINTS ${BINARY_PACK_LOCATION}/Optimized )
+  
   set( MISSING_LIBRARIES "" )
-  foreach( lib RSSL RSSL_VACACHE )
+  foreach( lib RSSL_VACACHE_STATIC RSSL_VACACHE_SHARED )
     if ( NOT ${lib} )
       set( MISSING_LIBRARIES "${MISSING_LIBRARIES} ${lib}" )
       message( STATUS "library ${lib} NOT FOUND" )

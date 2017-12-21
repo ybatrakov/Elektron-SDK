@@ -30,16 +30,14 @@ set(EmaCppConsPerfFilesFiles
   "../Common/XmlItemParser.h"
 )
 
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  set( STATIC_EXT "_static" )
-endif()
-
-add_executable( EmaCppConsPerf${STATIC_EXT} ${EmaCppConsPerfSrcFiles} )
+add_executable( EmaCppConsPerf_static ${EmaCppConsPerfSrcFiles} )
 
 include_directories( "${ETA_HOME}/Utils/Libxml2/include" )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   target_link_libraries( EmaCppConsPerf_static ${EXAMPLE_STATIC_LIBRARIES} psapi.lib )
 else()
-  target_link_libraries( EmaCppConsPerf ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} )
+  target_link_libraries( EmaCppConsPerf_static ${EXAMPLE_LIBRARIES_STATIC} ${SYSTEM_LIBRARIES} )
+  	set_target_properties( EmaCppConsPerf_static PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${EMA_EXAMPLES_OUTPUT_DIR} )
+	set_target_properties( EmaCppConsPerf_static PROPERTIES OUTPUT_NAME EmaCppConsPerf )
 endif()

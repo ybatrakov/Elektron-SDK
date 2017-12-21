@@ -13,18 +13,20 @@ include_directories(
   ${ETA_HOME}/Include/Transport  ${ETA_HOME}/Include/Codec  ../Common
   )
 
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  add_executable( Consumer_shared ${SOURCE_FILES} )
-endif()
-add_executable( Consumer${STATIC_EXT} ${SOURCE_FILES} )
+add_executable( Consumer_shared ${SOURCE_FILES} )
+add_executable( Consumer_static ${SOURCE_FILES} )
 
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  target_link_libraries( Consumer ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} )
+  target_link_libraries( Consumer_static ${EXAMPLE_LIBRARIES_STATIC} ${SYSTEM_LIBRARIES} )
+  set_target_properties( Consumer_static PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${ETA_EXAMPLES_OUTPUT_DIR} )
+  set_target_properties( Consumer_static PROPERTIES OUTPUT_NAME Consumer )
+  target_link_libraries( Consumer_shared ${EXAMPLE_LIBRARIES_SHARED} ${SYSTEM_LIBRARIES} )
+  set_target_properties( Consumer_shared PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${ETA_EXAMPLES_OUTPUT_DIR}/Shared )
+  set_target_properties( Consumer_shared PROPERTIES OUTPUT_NAME Consumer )
 
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  target_link_libraries( Consumer_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
-  target_link_libraries( Consumer_static ${EXAMPLE_LIBRARIES} )
-  target_link_libraries( Consumer_shared debug ${RSSL_DEBUG_SHARED} optimized ${RSSL_RELEASE_SHARED} )
-  target_link_libraries( Consumer_shared ${EXAMPLE_LIBRARIES} )
+  set_target_properties( Consumer_static PROPERTIES PROJECT_LABEL "Consumer_static (ETA)" )
+  set_target_properties( Consumer_shared PROPERTIES PROJECT_LABEL "Consumer_shared (ETA)" )
+  target_link_libraries( Consumer_static ${EXAMPLE_STATIC_LIBRARIES} )
+  target_link_libraries( Consumer_shared ${EXAMPLE_SHARED_LIBRARIES} )
 endif()
-

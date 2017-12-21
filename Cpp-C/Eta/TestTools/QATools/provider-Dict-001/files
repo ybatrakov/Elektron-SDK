@@ -1,5 +1,0 @@
-#file,location
-rsslDirectoryHandler.c,Applications/Examples/Provider
-rsslDictionaryProvider.c,Applications/Examples/Common
-,Applications/Examples/Common
-

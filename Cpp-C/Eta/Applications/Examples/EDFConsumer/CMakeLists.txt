@@ -12,25 +12,20 @@ include_directories(
   ${ETA_HOME}/Include/Util  ../Common
   )
 
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-  add_executable( EDFConsumer_shared ${SOURCE_FILES} )
-endif()
-add_executable( EDFConsumer${STATIC_EXT} ${SOURCE_FILES} )
+add_executable( EDFConsumer_shared ${SOURCE_FILES} )
+add_executable( EDFConsumer_static ${SOURCE_FILES} )
 
 if( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  target_link_libraries( EDFConsumer ${EXAMPLE_LIBRARIES} ${SYSTEM_LIBRARIES} ${EXAMPLE_LIBRARIES} )
-  if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
-    # library order matters
-    target_link_libraries( EDFConsumer librsslRDM librsslVAUtil )
-  elseif ( (${CMAKE_BUILD_TYPE} STREQUAL "OptimizedShared") OR
-      (${CMAKE_BUILD_TYPE} STREQUAL "DebugShared") )
-    target_link_libraries( EDFConsumer ${EXAMPLE_LIBRARIES} librsslVA ${SYSTEM_LIBRARIES} )
-  endif()
+  target_link_libraries( EDFConsumer_static librsslRDM librsslVAUtil ${EXAMPLE_LIBRARIES_STATIC} ${SYSTEM_LIBRARIES} ${EXAMPLE_LIBRARIES} )
+  set_target_properties( EDFConsumer_static PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${ETA_EXAMPLES_OUTPUT_DIR} )
+  set_target_properties( EDFConsumer_static PROPERTIES OUTPUT_NAME EDFConsumer )
+  target_link_libraries( EDFConsumer_shared ${EXAMPLE_LIBRARIES_SHARED} librsslVA ${SYSTEM_LIBRARIES} )
+  set_target_properties( EDFConsumer_shared PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${ETA_EXAMPLES_OUTPUT_DIR}/Shared )
+  set_target_properties( EDFConsumer_shared PROPERTIES OUTPUT_NAME EDFConsumer )
 
 elseif( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   target_link_libraries( EDFConsumer_static librsslRDM librsslVAUtil )
   target_link_libraries( EDFConsumer_shared librsslVA )
   target_link_libraries( EDFConsumer_static debug ${RSSL_DEBUG_STATIC} optimized ${RSSL_RELEASE_STATIC} )
-  target_link_libraries( EDFConsumer_static ${EXAMPLE_LIBRARIES} )
+  target_link_libraries( EDFConsumer_static ${EXAMPLE_STATIC_LIBRARIES} )
 endif()

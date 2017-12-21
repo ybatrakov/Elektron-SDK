@@ -34,14 +34,9 @@ include_directories(
   )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
-  if ( ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "OptimizedAssertStatic" ) OR
-      ( ${CMAKE_BUILD_TYPE} STREQUAL "DebugStatic") )
     add_library( ReactorObjects OBJECT ${ReactorSrcFiles} )
     add_library( librsslReactor STATIC ${ReactorSrcFiles} )
     set_target_properties( librsslReactor PROPERTIES PREFIX "" )
-  endif()
-
 elseif ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
   add_library( librsslReactor STATIC ${ReactorSrcFiles} )
   if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Linux" )
