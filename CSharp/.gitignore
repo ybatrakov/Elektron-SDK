@@ -1,6 +1,7 @@
 netcoreapp2.0
 netstandard2.0
 obj/
+bin/
 .vs/
 packages/
 *.user
@@ -11,6 +12,3 @@ packages/
 /ESDK.Samples/Simple/ETA.Consummer.Testbed/NLog-Trace.txt
 /ETA.Consummer.Testbed/NLog-Trace.txt
 NLog-Trace.txt
-/ETA.Consumer.Testbed.Framework/bin/Debug
-/ESDK/bin/Debug/netstandard2.0
-/ESDK.Common/bin/Debug/netstandard2.0

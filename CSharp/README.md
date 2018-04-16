@@ -1,13 +1,14 @@
 # Elektron Transport API .NET Edition
 
-This is a proof of concept ETA .NET to provide pure .NET solution using the C# language for transport layer on consumer side to complement with
-current offering with Java and C languages for ESDK API. This ESDK supports TCP/IP connectivity on consumer side, buffer management(such as read, write)
-to read/write message from/to transport adapter. The public interfaces of ETA .NET Edition should have look and feel as same as Java or C Edition
-unless there is any C# language features which provides greater experience for .NET developers.
+This is a proof of concept ETA .NET to provide pure .NET solution using the C# language for transport layer on consumer side. This complements the
+current offering with Java and C languages for ESDK API. This ESDK supports TCP/IP connectivity on consumer side, buffer management (such as read, write)
+to read/write message from/to transport adapter. The public interfaces of ETA .NET Edition should have a similar look and feel as Java or C Edition
+unless there is any C# language features which provide greater experience for .NET developers.
 
 # Software requirements
-- .NET Standard 2.0 framework(inclused with VS2017) for the transport and codec library. This is Microsoft strategic .NET framework going forward. The ETA .NET edition is able
-to run on support platforms for this framework.
+- Visual Studio 2017
+- .NET Standard 2.0 framework for the transport and codec library. This is Microsoft strategic .NET framework going forward. 
+The ETA .NET edition is able to run on support platforms for this framework.
 - xUnit 2.3.1 or higher for unit testing.
 - Microsoft.Extensions.Logging 2.0.0 or higher framework for logging
 - .NET Core 2.0 for the ETA.Net.Consumer example.
@@ -35,6 +36,6 @@ Navigate to `ESDK.Eta.Net.Consumer', to access the Consumer example. Open and bu
 	- Message Compression
 
 # Notes:
-- This package contains APIs that are subject to proprietary and opens source licenses.  Please make sure to read the README.md files within each package for clarification.
+- This package contains APIs that are subject to proprietary and opens source licenses. Please make sure to read the README.md files within each package for clarification.
 - Please make sure to review the LICENSE.md file.
-- This ETA .NET is proof of concept for .NET framework implementation of Elektron Transport API and is not fully support. 
+- This ETA .NET is proof of concept for .NET framework implementation of Elektron Transport API and is not fully supported. 
