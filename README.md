@@ -1,6 +1,8 @@
 # Preview Branch
 
-This preview branch includes open source code and demonstrates new build methodology for ETA Cpp.
+This preview branch includes open source code and demonstrates new build methodology for ETA Cpp. 
+
+This preview branch includes ETA .NET Proof of Concept in the CSharp directory.
 
 Multicast functionality has been separated. It will later be available in the Binary Pack.
 For Linux the openssl-devel package is required. To install on Oracle and RedHat Linux: 'yum install openssl-devel.x86_64'

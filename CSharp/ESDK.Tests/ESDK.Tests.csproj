@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <RootNamespace>ThomsonReuters.Eta.Tests</RootNamespace>
+
+    <ApplicationIcon />
+
+    <OutputType>Library</OutputType>
+
+    <StartupObject />
+
+    <SignAssembly>true</SignAssembly>
+
+    <AssemblyOriginatorKeyFile>namekeys.snk</AssemblyOriginatorKeyFile>
+
+    <AssemblyName>ESDK.Tests</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1705;CS8002</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1705;CS8002</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="NLog.config" />
+    <None Remove="TransportTests.cs~RF7062466.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="connections.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="EtaLogger.Tests.cs" />
+    <None Include="NLog.Logger.Tests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.TraceSource" Version="2.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-rc2" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.categories" Version="2.0.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ESDK.Codec\ESDK.Codec.csproj" />
+    <ProjectReference Include="..\ESDK.Common\ESDK.Common.csproj" />
+    <ProjectReference Include="..\ESDK.Eta.Net.Consumer\ETA.Net.Consumer.csproj" />
+    <ProjectReference Include="..\ESDK\ESDK.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,55 @@
+/*|-----------------------------------------------------------------------------
+ *|            This source code is provided under the Apache 2.0 license      --
+ *|  and is provided AS IS with no warranty or guarantee of fit for purpose.  --
+ *|                See the project's LICENSE.md for details.                  --
+ *|           Copyright Thomson Reuters 2018. All rights reserved.            --
+ *|-----------------------------------------------------------------------------
+ */
+
+{
+  "Application": "EtaConsumer",
+  "Connections": "MarketFeed",
+  "Environment": "Debug",
+  "LogLevel": "Information",
+  "LogToConsole": true,
+  "LogToFile": false,
+  "GlobalLocking": true,
+  "MaxMessageLength": "8192",
+  "PingInterval": 60,
+  "Blocking": true,
+  "ItemList" : "JPY=,TRI.N,SPY.P",
+  "Environments": {
+    "Debug": {
+      "Connections": [
+        {
+          "ConnectionName": "MarketFeed",
+          "ServerAddress": "localhost",
+          "ServerPort": "14002",
+          "UserName": "trep1",
+          "ServiceId": "957",
+          "Handler": "ThomsonReuters.Eta.Net.Consumer.DecodingBufferParser"
+        },
+        {
+          "ConnectionName": "MarketFeed2",
+          "ServerAddress": "localhost",
+          "ServerPort": "15001",
+          "UserName": "username",
+          "ServiceId": "957",
+          "Handler": "ThomsonReuters.Eta.Net.Consumer.DecodingBufferParser"
+        }
+      ]
+    },
+    "Release": {
+      "Connections": [
+        {
+          "ConnectionName": "MarketFeed3",
+          "ServerAddress": "localhost",
+          "ServerPort": "14002",
+          "UserName": "trep1",
+          "ServiceId": "957",
+          "Handler": "ThomsonReuters.Eta.Net.Consumer.MarketPriceHandler"
+        }
+      ]
+    }
+  }
+}
