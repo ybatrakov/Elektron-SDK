@@ -5,12 +5,12 @@
  *|           Copyright Thomson Reuters 2018. All rights reserved.            --
  *|-----------------------------------------------------------------------------
  */
- 
+
 #ifndef __ripcssljit_h
 #define __ripcssljit_h
- 
+
 #ifndef WIN32
- 
+
 #define USE_SOCKETS
 #include <openssl/bio.h>
 #include <openssl/err.h>
@@ -96,7 +96,7 @@ typedef struct
 	void (*ctx_set_tmp_dh_callback)(SSL_CTX*, dhVerifyCallback);	/* SSL_CTX_set_tmp_dh_callback */
 	void* (*ctx_set_ex_data)(SSL_CTX*, int, void*);		/* SSL_CTX_set_ex_data */
 	void (*ctx_free)(SSL_CTX*);												/* SSL_CTX_free */
-	long (*ctx_ctrl)(SSL_CTX*, int, long, void*);							/* SSL_CTX_ctrl */
+	long (*ctx_set_options)(SSL_CTX*, long);							/* SSL_CTX_set_options */
 }ripcSSLCTXApiFuncs;
 
 #define INIT_SSL_CTX_FUNCS {0,0,0,0,0,0,0,0,0,0,0,0,0}
@@ -118,8 +118,10 @@ typedef struct
 	const char* (*verify_cert_error_string)(long);	/* X509_verify_cert_error_string */
 	DH* (*read_bio_dhparams)(BIO*, DH**, pem_password_cb*, void*); /* PEM_read_bio_DHparams */
 	DH* (*dh_new)();							/* DH_new */
+	int (*dh_set_pqg)(DH *dh, BIGNUM *p, BIGNUM *q, BIGNUM *g); /* DH_set0_pqg */
 	BIGNUM* (*bin2bn)(const unsigned char*, int, BIGNUM*);	/* BN_bin2bn */
 	void (*dh_free)(DH*);						/* DH_free */
+	void (*bn_free)(BIGNUM*);					/* BN_free */
 	void (*rand_seed)(const void*, int);		/* RAND_seed */
 	void (*err_free_strings)(void);				/* ERR_free_strings */
 	void (*err_remove_state)(int);				/* ERR_remove_state */
@@ -128,7 +130,7 @@ typedef struct
 	void (*evp_cleanup)(void);					/* EVP_cleanup */
 }ripcCryptoApiFuncs;
 
-#define INIT_CRYPTO_API_FUNCS {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+#define INIT_CRYPTO_API_FUNCS {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 
 typedef struct
 {
@@ -143,4 +145,3 @@ typedef struct
 
 #endif
 #endif
-

@@ -38,18 +38,25 @@ static void* cryptoHandle = 0;
 #endif
 
 #ifdef LINUX
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
 static char* defaultSslLibName = "libssl.so.10";
 static char* defaultCryptoLibName = "libcrypto.so.10";
-#endif
+#else  /* OPENSSL_VERSION_NUMBER */
+static char* defaultSslLibName = "libssl.so.1.1";
+static char* defaultCryptoLibName = "libcrypto.so.1.1";
+
+#define SSL_ST_OK TLS_ST_OK /* SSL_ST_OK Deprecated in OpenSSL 1.1 */
+#endif /* OPENSSL_VERSION_NUMBER */
+#endif /* LINUX */
 
 RsslInt32 ripcInitializeSSL(char* libsslName, char* libcryptoName)
 {
 	char* sslLib;
 	char* cryptoLib;
 	RsslInt32 retVal;
-	
+
 	ripcTransportFuncs SSLfuncs;
-	ripcSSLFuncs funcs; 
+	ripcSSLFuncs funcs;
 
 	supportedProtocols = RIPC_PROTO_SSL_NONE;
 
@@ -57,7 +64,7 @@ RsslInt32 ripcInitializeSSL(char* libsslName, char* libcryptoName)
 		sslLib = defaultSslLibName;
 	else
 		sslLib = libsslName;
-		
+
 	if(libcryptoName == NULL)
 		cryptoLib = defaultCryptoLibName;
 	else
@@ -66,206 +73,214 @@ RsslInt32 ripcInitializeSSL(char* libsslName, char* libcryptoName)
 	{
 		if((sslHandle = RIPC_DLOPEN(sslLib)) == 0)
 			return -1;
-		
+
 		if((sslFuncs.library_init = RIPC_DLSYM(sslHandle, "SSL_library_init")) == 0)
 			goto sslLoadError;
-		
+
 		if((sslFuncs.load_error_strings = RIPC_DLSYM(sslHandle, "SSL_load_error_strings")) == 0)
 			goto sslLoadError;
-				
+
 		if((sslFuncs.get_ex_data = RIPC_DLSYM(sslHandle, "SSL_get_ex_data")) == 0)
 			goto sslLoadError;
-		
+
 		if((sslFuncs.TLSv1_client_method = RIPC_DLSYM(sslHandle, "TLSv1_client_method")) == 0)
 			goto sslLoadError;
 		else
 			supportedProtocols |= RIPC_PROTO_SSL_TLS_V1;
-			
+
 		if((sslFuncs.TLSv1_1_client_method = RIPC_DLSYM(sslHandle, "TLSv1_1_client_method")) == 0)
 			goto sslLoadError;
 		else
 			supportedProtocols |= RIPC_PROTO_SSL_TLS_V1_1;
-		
+
 		if((sslFuncs.TLSv1_2_client_method = RIPC_DLSYM(sslHandle, "TLSv1_2_client_method")) == 0)
 			goto sslLoadError;
 		else
 			supportedProtocols |= RIPC_PROTO_SSL_TLS_V1_2;
-			
+
 		if((sslFuncs.ssl_read = RIPC_DLSYM(sslHandle, "SSL_read")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.get_error = RIPC_DLSYM(sslHandle, "SSL_get_error")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.ssl_write = RIPC_DLSYM(sslHandle, "SSL_write")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.set_shutdown = RIPC_DLSYM(sslHandle, "SSL_set_shutdown")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.ssl_accept = RIPC_DLSYM(sslHandle, "SSL_accept")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.get_verify_result = RIPC_DLSYM(sslHandle, "SSL_get_verify_result")) == 0)
 			goto sslLoadError;
-			
-		if((sslFuncs.ssl_state = RIPC_DLSYM(sslHandle, "SSL_state")) == 0)
+
+		if((sslFuncs.ssl_state = RIPC_DLSYM(sslHandle, "SSL_get_state")) == 0)
 			goto sslLoadError;
-		
+
 		if((sslFuncs.ssl_connect = RIPC_DLSYM(sslHandle, "SSL_connect")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.ssl_new = RIPC_DLSYM(sslHandle, "SSL_new")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.ssl_clear = RIPC_DLSYM(sslHandle, "SSL_clear")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.set_cipher_list = RIPC_DLSYM(sslHandle, "SSL_set_cipher_list")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.set_bio = RIPC_DLSYM(sslHandle, "SSL_set_bio")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.ctrl = RIPC_DLSYM(sslHandle, "SSL_ctrl")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.set_connect_state = RIPC_DLSYM(sslHandle, "SSL_set_connect_state")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.set_ex_data = RIPC_DLSYM(sslHandle, "SSL_set_ex_data")) == 0)
 			goto sslLoadError;
-		
+
 		if((sslFuncs.set_accept_state = RIPC_DLSYM(sslHandle, "SSL_set_accept_state")) == 0)
 			goto sslLoadError;
-			
+
 		if((sslFuncs.ssl_free = RIPC_DLSYM(sslHandle, "SSL_free")) == 0)
 			goto sslLoadError;
-			
+
 		if((ctxFuncs.ctx_new = RIPC_DLSYM(sslHandle, "SSL_CTX_new")) == 0)
 			goto sslLoadError;
-		
+
 		if((ctxFuncs.ctx_set_quiet_shutdown = RIPC_DLSYM(sslHandle, "SSL_CTX_set_quiet_shutdown")) == 0)
 			goto sslLoadError;
-			
+
 		if((ctxFuncs.ctx_set_cipher_list = RIPC_DLSYM(sslHandle, "SSL_CTX_set_cipher_list")) == 0)
 			goto sslLoadError;
-			
+
 		if((ctxFuncs.ctx_load_verify_location = RIPC_DLSYM(sslHandle, "SSL_CTX_load_verify_locations")) == 0)
 			goto sslLoadError;
-			
+
 		if((ctxFuncs.ctx_set_default_verify_paths = RIPC_DLSYM(sslHandle, "SSL_CTX_set_default_verify_paths")) == 0)
 			goto sslLoadError;
-		
+
 		if((ctxFuncs.ctx_use_cert_chain_file = RIPC_DLSYM(sslHandle, "SSL_CTX_use_certificate_chain_file")) == 0)
 			goto sslLoadError;
-			
+
 		if((ctxFuncs.ctx_use_privatekey_file = RIPC_DLSYM(sslHandle, "SSL_CTX_use_PrivateKey_file")) == 0)
 			goto sslLoadError;
 
 		if((ctxFuncs.ctx_set_verify = RIPC_DLSYM(sslHandle, "SSL_CTX_set_verify")) == 0)
 			goto sslLoadError;
-			
-		if((ctxFuncs.ctx_ctrl = RIPC_DLSYM(sslHandle, "SSL_CTX_ctrl")) == 0)
+
+		if((ctxFuncs.ctx_set_options = RIPC_DLSYM(sslHandle, "SSL_CTX_set_options")) == 0)
 			goto sslLoadError;
-			
+
 		if((ctxFuncs.ctx_set_tmp_dh_callback = RIPC_DLSYM(sslHandle, "SSL_CTX_set_tmp_dh_callback")) == 0)
 			goto sslLoadError;
-			
+
 		if((ctxFuncs.ctx_free = RIPC_DLSYM(sslHandle, "SSL_CTX_free")) == 0)
 			goto sslLoadError;
-		
+
 		if((ctxFuncs.ctx_set_ex_data = RIPC_DLSYM(sslHandle, "SSL_CTX_set_ex_data")) == 0)
 			goto sslLoadError;
 	}
-	
+
 	if(cryptoHandle == 0)
 	{
 		if((cryptoHandle = RIPC_DLOPEN(cryptoLib)) == 0)
 			return -1;
-		
+
 		if((sslFuncs.load_crypto_strings = RIPC_DLSYM(cryptoHandle, "ERR_load_crypto_strings")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.err_free_strings = RIPC_DLSYM(cryptoHandle, "ERR_free_strings")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.v3_add_standard_extensions = RIPC_DLSYM(cryptoHandle, "X509V3_add_standard_extensions")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.thread_id = RIPC_DLSYM(cryptoHandle, "CRYPTO_thread_id")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.get_error_line_data = RIPC_DLSYM(cryptoHandle, "ERR_get_error_line_data")) == 0)
 			goto cryptoLoadError;
-		
+
 		if((cryptoFuncs.error_string_n = RIPC_DLSYM(cryptoHandle, "ERR_error_string_n")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.read_bio_dhparams = RIPC_DLSYM(cryptoHandle, "PEM_read_bio_DHparams")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.rand_seed = RIPC_DLSYM(cryptoHandle, "RAND_seed")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.dh_free = RIPC_DLSYM(cryptoHandle, "DH_free")) == 0)
 			goto cryptoLoadError;
-			
+
+		if((cryptoFuncs.bn_free = RIPC_DLSYM(cryptoHandle, "BN_free")) == 0)
+			goto cryptoLoadError;
+
 		if((cryptoFuncs.dh_new = RIPC_DLSYM(cryptoHandle, "DH_new")) == 0)
 			goto cryptoLoadError;
-			
+
+#if OPENSSL_VERSION_NUMBER >= 0x10100000L
+		if((cryptoFuncs.dh_set_pqg = RIPC_DLSYM(cryptoHandle, "DH_set0_pqg")) == 0)
+			goto cryptoLoadError;
+#endif
+
 		if((cryptoFuncs.bin2bn = RIPC_DLSYM(cryptoHandle, "BN_bin2bn")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.X509_get_ex_data = RIPC_DLSYM(cryptoHandle, "X509_STORE_CTX_get_ex_data")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.get_current_cert = RIPC_DLSYM(cryptoHandle, "X509_STORE_CTX_get_current_cert")) == 0)
 			goto cryptoLoadError;
-		
+
 		if((cryptoFuncs.get_error_depth = RIPC_DLSYM(cryptoHandle, "X509_STORE_CTX_get_error_depth")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.get_error = RIPC_DLSYM(cryptoHandle, "X509_STORE_CTX_get_error")) == 0)
 			goto cryptoLoadError;
-		
+
 		if((cryptoFuncs.verify_cert_error_string = RIPC_DLSYM(cryptoHandle, "X509_verify_cert_error_string")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.name_oneline = RIPC_DLSYM(cryptoHandle, "X509_NAME_oneline")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.get_issuer_name = RIPC_DLSYM(cryptoHandle, "X509_get_issuer_name")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.get_subject_name = RIPC_DLSYM(cryptoHandle, "X509_get_subject_name")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.err_remove_state = RIPC_DLSYM(cryptoHandle, "ERR_remove_state")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.engine_cleanup = RIPC_DLSYM(cryptoHandle, "ENGINE_cleanup")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.crypto_cleanup_all_ex_data = RIPC_DLSYM(cryptoHandle, "CRYPTO_cleanup_all_ex_data")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((cryptoFuncs.evp_cleanup = RIPC_DLSYM(cryptoHandle, "EVP_cleanup")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((bioFuncs.new_file = RIPC_DLSYM(cryptoHandle, "BIO_new_file")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((bioFuncs.bio_free = RIPC_DLSYM(cryptoHandle, "BIO_free")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((bioFuncs.sock_should_retry = RIPC_DLSYM(cryptoHandle, "BIO_sock_should_retry")) == 0)
 			goto cryptoLoadError;
-			
+
 		if((bioFuncs.new_socket = RIPC_DLSYM(cryptoHandle, "BIO_new_socket")) == 0)
 			goto cryptoLoadError;
 	}
-		
+
 	SSLfuncs.bindSrvr = 0;
 	SSLfuncs.newSrvrConnection = ripcNewSSLSocket; //should be used after accept is called on the server side
 	SSLfuncs.connectSocket = ipcConnectSocket;
@@ -295,7 +310,7 @@ RsslInt32 ripcInitializeSSL(char* libsslName, char* libcryptoName)
 		if(retVal == 0)
 			goto cryptoLoadError;
 	}
-	
+
 	if((supportedProtocols & RIPC_PROTO_SSL_TLS_V1_1) != 0)
 	{
 		SSLfuncs.newClientConnection = ripcSSLConnectTLSv11; // calls SSL connect on client side
@@ -304,7 +319,7 @@ RsslInt32 ripcInitializeSSL(char* libsslName, char* libcryptoName)
 		if(retVal == 0)
 			goto cryptoLoadError;
 	}
-	
+
 	if((supportedProtocols & RIPC_PROTO_SSL_TLS_V1_2) != 0)
 	{
 		SSLfuncs.newClientConnection = ripcSSLConnectTLSv12; // calls SSL connect on client side
@@ -313,19 +328,19 @@ RsslInt32 ripcInitializeSSL(char* libsslName, char* libcryptoName)
 		if(retVal == 0)
 			goto cryptoLoadError;
 	}
-	
+
 	funcs.newSSLServer = (void*)ripcInitializeSSLServer;
 	funcs.freeSSLServer = ripcReleaseSSLServer;
 
 	retVal = ipcSetSSLFuncs(&funcs);
-	
+
 	(*(sslFuncs.library_init))();
 
 	(*(sslFuncs.load_error_strings))();
 	(*(sslFuncs.load_crypto_strings))();
 
 	(*(cryptoFuncs.v3_add_standard_extensions))();
-	
+
 	return 1;
 
 cryptoLoadError:
@@ -340,7 +355,7 @@ sslLoadError:
 		RIPC_DLCLOSE(sslHandle);
 		sslHandle = 0;
 	}
-	
+
 	sslFuncs.initialized = 0;
 	ctxFuncs.initialized = 0;
 	cryptoFuncs.initialized = 0;
@@ -366,7 +381,7 @@ void ripcUninitializeSSL(void)
 		RIPC_DLCLOSE(sslHandle);
 		sslHandle = 0;
 	}
-	
+
 	sslFuncs.initialized = 0;
 	ctxFuncs.initialized = 0;
 	cryptoFuncs.initialized = 0;
@@ -390,7 +405,7 @@ void ripcSSLErrors(RsslError *error, RsslInt32 initPos)
 		(*(cryptoFuncs.error_string_n))(l,buf,1024 - strlen(buf));
 		if ((strlen(buf) + strlen(file) + cUrl + 30 ) > MAX_RSSL_ERROR_TEXT)
 			break;
-		
+
 		snprintf(error->text + cUrl, MAX_RSSL_ERROR_TEXT,  "%u:%s:%s:%d:\n", es, buf, file, line);
 		cUrl = strlen(error->text);
 	}
@@ -420,7 +435,7 @@ ripcSSLProtocolFlags ripcRemoveHighestSSLVersionFlag(ripcSSLProtocolFlags protoF
 }
 
 // this is a temporary diffie-hellman callback that allows us
-// to use ephemeral diffie-hellman (EDH) for key exchange.  
+// to use ephemeral diffie-hellman (EDH) for key exchange.
 static DH *ripcDHCallback(SSL *ssl, RsslInt32 is_export, RsslInt32 keylength)
 {
 	DH *ret = 0;
@@ -433,7 +448,7 @@ static DH *ripcDHCallback(SSL *ssl, RsslInt32 is_export, RsslInt32 keylength)
 	case 512:
 			ret = (DH*)sess->server->keys[RIPC_SSL_DH512].key;
 		break;
-	
+
 	case 1024:
 			ret = (DH*)sess->server->keys[RIPC_SSL_DH1024].key;
 		break;
@@ -513,8 +528,8 @@ ripcSSLSession *ripcSSLNewSession(RsslSocket fd, char* name, ripcSSLServer *serv
 	session->ctx = 0;
 	session->connection = 0;
 	session->clientConnState = SSL_INITIALIZING;
-	
-	/* we only need to initialize the connect opts for client side configs - if its 
+
+	/* we only need to initialize the connect opts for client side configs - if its
 	   a server side channel, just point it to the servers config */
 	if (server == 0)
 	{
@@ -533,7 +548,7 @@ ripcSSLSession *ripcSSLNewSession(RsslSocket fd, char* name, ripcSSLServer *serv
 		session->config.key_file = session->server->config.key_file;
 		session->config.cipher = session->server->config.cipher;
 		session->config.verifyDepth = session->server->config.verifyDepth;
-		session->config.verifyLevel = session->server->config.verifyLevel;		
+		session->config.verifyLevel = session->server->config.verifyLevel;
 	}
 
 	return session;
@@ -645,7 +660,7 @@ RsslInt32 ripcInitKeys(ripcSSLServer *server, RsslError *error)
 		}
 		server->keys[RIPC_SSL_DH2048].key = (void*)dh;
 	}
-	else // no key passed in, using default keys from ripcssldh.c file 
+	else // no key passed in, using default keys from ripcssldh.c file
 	{
 		/* set up diffie-hellman temp keys for EDH */
 		if ((dh = ripcSSLDHGetTmpParam(512, &bioFuncs, &cryptoFuncs)) == NULL)
@@ -741,8 +756,8 @@ SSL_CTX* ripcSSLSetupCTX(RsslInt32 user, ripcSSLProtocolFlags version, ripcSSLCo
 		}
 		break;
 	}
-		
-	
+
+
 	/* Turn off SSLv2 and SSLv3, since both are insecure.  See:
 		https://www.openssl.org/~bodo/ssl-poodle.pdf
 	*/
@@ -759,7 +774,7 @@ SSL_CTX* ripcSSLSetupCTX(RsslInt32 user, ripcSSLProtocolFlags version, ripcSSLCo
 		goto ripcsetupctxend;
 	}
 
-	// need to get CAFILE or CADIR from config 
+	// need to get CAFILE or CADIR from config
 	if (config->CAfile || config->CApath)
 	{
 		if ((retVal = (*(ctxFuncs.ctx_load_verify_location))(ctx, config->CAfile, config->CApath)) != 1)
@@ -780,7 +795,7 @@ SSL_CTX* ripcSSLSetupCTX(RsslInt32 user, ripcSSLProtocolFlags version, ripcSSLCo
 			goto ripcsetupctxend;
 		}
 	}
-	
+
 	/* need to get CERTFILE from config */
 	if (config->cert_file)
 	{
@@ -818,8 +833,8 @@ SSL_CTX* ripcSSLSetupCTX(RsslInt32 user, ripcSSLProtocolFlags version, ripcSSLCo
 	/* need to get CERTFILE from config */
 	(*(ctxFuncs.ctx_set_verify))(ctx, perm, verify_callback);
 
-	(*(ctxFuncs.ctx_ctrl))(ctx, SSL_CTRL_OPTIONS, opts,NULL);
-	
+	(*(ctxFuncs.ctx_set_options))(ctx, opts);
+
 	(*(ctxFuncs.ctx_set_tmp_dh_callback))(ctx, ripcDHCallback);
 
 	return ctx;
@@ -893,7 +908,7 @@ RsslInt32 ripcSSLWrite( void *sslSess, char *buf, RsslInt32 len, ripcRWFlags fla
 	while (totalOut < len)
 	{
 		numBytes = (*(sslFuncs.ssl_write))(sess->connection, (buf + totalOut), (len - totalOut));
-	
+
 		switch ((*(sslFuncs.get_error))(sess->connection, numBytes))
 		{
 			case SSL_ERROR_NONE:
@@ -925,7 +940,7 @@ RsslInt32 ripcSSLWrite( void *sslSess, char *buf, RsslInt32 len, ripcRWFlags fla
 			break;
 		}
 	}
-	
+
 	return totalOut;
 }
 
@@ -1002,7 +1017,7 @@ RsslInt32 ripcSSLAccept(void *session, ripcSessInProg *inPr, RsslError *error)
 	{
 		/* set internal state before to cover error returns */
 		/* put this into the second byte; standard handshake gets first byte; top two are unused for now */
-		inPr->intConnState = (sess->clientConnState << 8);  
+		inPr->intConnState = (sess->clientConnState << 8);
 		/* Make sure to reset this if we change state before returning */
 
 		/* should be client side */
@@ -1026,7 +1041,7 @@ RsslInt32 ripcSSLAccept(void *session, ripcSessInProg *inPr, RsslError *error)
 			else
 			{
 				sess->clientConnState = SSL_ACTIVE;
-				inPr->intConnState = (sess->clientConnState << 8);  
+				inPr->intConnState = (sess->clientConnState << 8);
 				return 1;
 			}
 		}
@@ -1065,8 +1080,8 @@ void *ripcSSLConnectInt(RsslSocket fd, RsslInt32 SSLProtocolVersion, RsslInt32 *
 	(*(sslFuncs.set_bio))(sess->connection, sess->bio, sess->bio);
 	(*(sslFuncs.set_connect_state))(sess->connection);
 
-	
-	(*(sslFuncs.set_ex_data))(sess->connection, 0, sess);  // Set the user spec pointer for this connection 
+
+	(*(sslFuncs.set_ex_data))(sess->connection, 0, sess);  // Set the user spec pointer for this connection
 
 	if ((retVal = (*(sslFuncs.ssl_connect))(sess->connection)) <= 0)
 	{
@@ -1124,7 +1139,7 @@ void *ripcNewSSLSocket(void *server, RsslSocket fd, RsslInt32 *initComplete,void
 	ripcSSLSession *newsess = (ripcSSLSession*)ripcSSLNewSession(fd, 0, server, error);
 	ripcSSLServer *srvr = (ripcSSLServer*)server;
 
-	
+
 	if (newsess == 0)
 	{
 		_rsslSetError(error, NULL, RSSL_RET_FAILURE, 0);
@@ -1137,7 +1152,7 @@ void *ripcNewSSLSocket(void *server, RsslSocket fd, RsslInt32 *initComplete,void
 	ripcSSLRandSeed();
 
 	newsess->connection = (*(sslFuncs.ssl_new))(srvr->ctx);
-	
+
 	(*(sslFuncs.ssl_clear))(newsess->connection);
 
 	if ((*(sslFuncs.set_cipher_list))(newsess->connection, CIPHER_LIST) < 1)
@@ -1165,7 +1180,7 @@ RsslInt32 ripcReleaseSSLServer(void* srvr, RsslError *error)
 	if (srvr)
 	{
 		ripcSSLServer *server=(ripcSSLServer*)srvr;
-		
+
 		if (server->ctx)
 			(*(ctxFuncs.ctx_free))(server->ctx);
 
@@ -1189,11 +1204,11 @@ RsslInt32 ripcReleaseSSLSession(void* session, RsslError *error)
 			sess->ctx = 0;
 		}
 
-		// if the server exists, the config is just pointing to the server 
+		// if the server exists, the config is just pointing to the server
 		// if it doesnt, we need to clean up the memory we point to
 		if (sess->server)
 		{
-			// just reset pointers 
+			// just reset pointers
 			sess->config.CAfile = 0;
 			sess->config.CApath = 0;
 			sess->config.cert_file = 0;
@@ -1207,7 +1222,7 @@ RsslInt32 ripcReleaseSSLSession(void* session, RsslError *error)
 		}
 		else
 			ripcFreeSSLConnectOpts(&sess->config);
-		
+
 		sess->server = 0;
 
 		/* release the SSL* */
@@ -1248,7 +1263,7 @@ ripcSSLServer *ripcInitializeSSLServer(RsslSocket fd, char* name, RsslError  *er
 
 	(*(ctxFuncs.ctx_set_ex_data))(server->ctx, 0, server);
 
-	/* not setting the cache size - right now that will allow 20000 sessions 
+	/* not setting the cache size - right now that will allow 20000 sessions
 	   - this is extreme, need a better idea of actual number of sessions to allow */
 
 	return server;
@@ -1294,7 +1309,7 @@ RsslInt32 verify_callback(RsslInt32 ok, X509_STORE_CTX *store)
 		err == X509_V_ERR_CERT_UNTRUSTED ||
 		err == X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE)
 	{
-		if (sess->config.verifyLevel == ripcSSLRequireCA) 
+		if (sess->config.verifyLevel == ripcSSLRequireCA)
 		{
 			if (!((*(cryptoFuncs.name_oneline))((*(cryptoFuncs.get_issuer_name))(cert), data, 256)))
 			{
